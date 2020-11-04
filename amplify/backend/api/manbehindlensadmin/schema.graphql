@@ -1,0 +1,67 @@
+type Album 
+@model 
+@auth(rules: [
+  {allow: owner},
+  {allow: private, provider: iam}
+]) {
+    id: ID!
+    name: String!
+    description: String
+    photos: [Photo] @connection(keyName: "byAlbum", fields: ["id"])
+    createdAt: AWSDateTime
+    updatedAt: AWSDateTime
+
+}
+
+type Photo 
+@model 
+@key(name: "byAlbum", fields: ["albumId"], queryField: "listPhotosByAlbum")
+@auth(rules: [
+  {allow: owner},
+  {allow: private, provider: iam}
+]) {
+    id: ID!
+    albumId: ID!
+    album: Album @connection(fields: ["albumId"])
+    bucket: String!
+    fullsize: PhotoS3Info!
+    thumbnail: PhotoS3Info!
+    exifcamera: String
+    exiflens: String
+    featured: Boolean!
+    createdAt: AWSDateTime
+    updatedAt: AWSDateTime
+}
+
+type PhotoS3Info {
+    key: String!
+    width: Int!
+    height: Int!
+}
+
+input CreatePhotoInput {
+	id: ID
+    owner: String
+	albumId: ID!
+	bucket: String!
+	fullsize: PhotoS3InfoInput!
+	thumbnail: PhotoS3InfoInput!
+  exifcamera: String
+  exiflens: String
+  featured: Boolean!
+
+
+}
+
+input PhotoS3InfoInput {
+	key: String!
+	width: Int!
+	height: Int!
+}
+
+
+type Query {
+  echo(msg: String): String @function(name: "publish-${env}")
+}
+
+

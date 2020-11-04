@@ -1,0 +1,26 @@
+{
+    "master": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-manbehindlensadmin-master-210410-authRole",
+            "UnauthRoleArn": "arn:aws:iam::670275281716:role/amplify-manbehindlensadmin-master-210410-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::670275281716:role/amplify-manbehindlensadmin-master-210410-authRole",
+            "Region": "eu-west-1",
+            "DeploymentBucketName": "amplify-manbehindlensadmin-master-210410-deployment",
+            "UnauthRoleName": "amplify-manbehindlensadmin-master-210410-unauthRole",
+            "StackName": "amplify-manbehindlensadmin-master-210410",
+            "StackId": "arn:aws:cloudformation:eu-west-1:670275281716:stack/amplify-manbehindlensadmin-master-210410/e97b6740-1ed8-11eb-951c-0691e94aedb8",
+            "AmplifyAppId": "d1m9q6c21ueivr"
+        },
+        "categories": {
+            "auth": {
+                "manbehindlensadmin84970f75": {}
+            },
+            "hosting": {
+                "amplifyhosting": {
+                    "appId": "d1m9q6c21ueivr",
+                    "type": "cicd"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "api": {
+      "manbehindlensadmin": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": [
+    {
+      "type": "ExternalLayer",
+      "arn": "arn:aws:lambda:eu-west-1:670275281716:layer:Sharp:1"
+    }
+  ]
+}
