@@ -516,12 +516,14 @@ const AlbumsList = () => {
       const PhotoItems = (props) => {
         return (props.photos.map(photo => {
 
+          console.log(photo.thumbnail.key);
+          console.log('resized/' + photo.thumbnail.key.replace(/.+resized\//, ''));
           if(photo.featured && photo.featured===true){
             return (
               <Card color="green" title="Images">
               <S3Image 
                 key={photo.thumbnail.key} 
-                imgKey={'resized/' + photo.thumbnail.key.replace(/.+resized\//, '')}
+                imgKey={photo.thumbnail.key}
                 level="private"
                 theme={{
                   photoImg: { maxWidth: "100%", maxHeight: "100%", borderRadius: "3px 3px 0px  0px" }

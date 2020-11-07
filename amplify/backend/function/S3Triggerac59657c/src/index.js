@@ -83,8 +83,12 @@ async function storePhotoInfo(item) {
   return result
   }
 
-function thumbnailKey(keyPrefix, filename) {
+/*function thumbnailKey(keyPrefix, filename) {
 	return `${keyPrefix}/resized/${filename}`;
+}*/
+
+function thumbnailKey(keyPrefix, filename) {
+	return `public/resized/${filename}`;
 }
 
 function fullsizeKey(keyPrefix, filename) {
@@ -99,7 +103,8 @@ async function resize(photoBody, bucketName, key) {
   const keyPrefix = key.substr(0, key.indexOf('/upload/'))
   const originalPhotoName = key.substr(key.lastIndexOf('/') + 1)
   const originalPhotoDimensions = await Sharp(photoBody).metadata();
-  
+  console.log('keyPrefix='+keyPrefix);
+  console.log('originalPhotoName='+originalPhotoName);
   const thumbnail = await makeThumbnail(photoBody);
 
   //TODO add more sizes
