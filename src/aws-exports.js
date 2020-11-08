@@ -3,15 +3,15 @@
 
 const awsmobile = {
     "aws_project_region": "eu-west-1",
-    "aws_cognito_identity_pool_id": "eu-west-1:9f8b3d1c-e2af-40b8-b1df-9e3deccbd967",
+    "aws_cognito_identity_pool_id": "eu-west-1:049d3714-1030-4907-8e78-90e0312f4342",
     "aws_cognito_region": "eu-west-1",
-    "aws_user_pools_id": "eu-west-1_QL6tV9Ugo",
-    "aws_user_pools_web_client_id": "78eg952fablje8bb4osunoe3rc",
+    "aws_user_pools_id": "eu-west-1_se0huPOUc",
+    "aws_user_pools_web_client_id": "25louegkcjt94lgsjsmbageps4",
     "oauth": {},
-    "aws_appsync_graphqlEndpoint": "https://du37ikslcfclhflyfl55lgzfqy.appsync-api.eu-west-1.amazonaws.com/graphql",
+    "aws_appsync_graphqlEndpoint": "https://a6b24gc5gvecnjkphf4zy2legq.appsync-api.eu-west-1.amazonaws.com/graphql",
     "aws_appsync_region": "eu-west-1",
     "aws_appsync_authenticationType": "AMAZON_COGNITO_USER_POOLS",
-    "aws_user_files_s3_bucket": "manbehindlensadmin04e7c5da0c7f4c2bba8333430d5b4210410-master",
+    "aws_user_files_s3_bucket": "manbehindlensadmin04e7c5da0c7f4c2bba8333430d5b494239-prod",
     "aws_user_files_s3_bucket_region": "eu-west-1"
 };
 

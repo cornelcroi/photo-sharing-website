@@ -1,3 +1,5 @@
+
+
 import React, {useState, useEffect} from 'react';
 
 import Amplify, {Auth} from 'aws-amplify'
@@ -5,8 +7,11 @@ import API, {graphqlOperation} from '@aws-amplify/api'
 import Storage from '@aws-amplify/storage'
 import aws_exports from './aws-exports'
 
+import {AmplifyAuthenticator, AmplifySignIn, AmplifySignUp} from "@aws-amplify/ui-react";
+
 
 import {S3Image, withAuthenticator} from 'aws-amplify-react'
+
 import {Divider,Container, Card, Label, Modal,Button, Form, Grid, Header, Segment} from 'semantic-ui-react'
 
 import {BrowserRouter as Router, Route, NavLink} from 'react-router-dom';
@@ -19,6 +24,9 @@ import * as subscriptions from './graphql/subscriptions'
 
 
 Amplify.configure(aws_exports);
+
+
+
 
 function makeComparator(key, order = 'asc') {
   return (a, b) => {
@@ -724,7 +732,16 @@ const AlbumsList = () => {
 function App() {
 
   return (
+    
     <Router>
+
+    <AmplifyAuthenticator usernameAlias="email">
+    <AmplifySignIn slot="sign-in" usernameAlias="email" hideSignUp/>
+    <AmplifySignUp slot="sign-up" usernameAlias="email" />
+    </AmplifyAuthenticator>
+
+
+
       <Grid padded>
         <Grid.Column>
 
@@ -765,10 +782,15 @@ function App() {
     </Router>
   )
 }
+
+export default App;
+/*
+
 export default  withAuthenticator(App, {
   includeGreetings: true,
   signUpConfig: {
     hiddenDefaults: ['phone_number']
   }
-})
+})*/
+
 
