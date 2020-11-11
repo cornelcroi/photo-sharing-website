@@ -14,12 +14,6 @@
     "categories": {
       "auth": {
         "manbehindlensadmin84970f75": {}
-      },
-      "hosting": {
-        "amplifyhosting": {
-          "appId": "d1m9q6c21ueivr",
-          "type": "cicd"
-        }
       }
     }
   },
@@ -33,7 +27,7 @@
       "UnauthRoleName": "amplify-manbehindlensadmin-prod-94239-unauthRole",
       "StackName": "amplify-manbehindlensadmin-prod-94239",
       "StackId": "arn:aws:cloudformation:eu-west-1:554189332310:stack/amplify-manbehindlensadmin-prod-94239/5e0f1c10-219e-11eb-b0b2-02c4fae2d862",
-      "AmplifyAppId": "duehkodf3iqx3"
+      "AmplifyAppId": "d2aiwlyzua5nct"
     },
     "categories": {
       "auth": {
@@ -44,7 +38,7 @@
       },
       "hosting": {
         "amplifyhosting": {
-          "appId": "duehkodf3iqx3",
+          "appId": "d2aiwlyzua5nct",
           "type": "cicd"
         }
       }

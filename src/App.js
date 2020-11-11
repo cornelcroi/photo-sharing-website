@@ -7,12 +7,12 @@ import API, {graphqlOperation} from '@aws-amplify/api'
 import Storage from '@aws-amplify/storage'
 import aws_exports from './aws-exports'
 
-import {AmplifyAuthenticator, AmplifySignIn, AmplifySignUp} from "@aws-amplify/ui-react";
+import {AmplifyAuthenticator, AmplifyGoogleButton, AmplifySignIn, AmplifySignUp} from "@aws-amplify/ui-react";
 
 
 import {S3Image, withAuthenticator} from 'aws-amplify-react'
 
-import {Divider,Container, Card, Label, Modal,Button, Form, Grid, Header, Segment} from 'semantic-ui-react'
+import {Divider,Container, Card, Image, Label, Modal,Button, Form, Grid, Header, Segment} from 'semantic-ui-react'
 
 import {BrowserRouter as Router, Route, NavLink} from 'react-router-dom';
 
@@ -524,19 +524,13 @@ const AlbumsList = () => {
       const PhotoItems = (props) => {
         return (props.photos.map(photo => {
 
-          console.log(photo.thumbnail.key);
-          console.log('resized/' + photo.thumbnail.key.replace(/.+resized\//, ''));
+          const picUrl = "https://" + photo.bucket + ".s3-" + aws_exports.aws_project_region + ".amazonaws.com/" + photo.thumbnail.key
+
           if(photo.featured && photo.featured===true){
             return (
               <Card color="green" title="Images">
-              <S3Image 
-                key={photo.thumbnail.key} 
-                imgKey={photo.thumbnail.key}
-                level="private"
-                theme={{
-                  photoImg: { maxWidth: "100%", maxHeight: "100%", borderRadius: "3px 3px 0px  0px" }
-                }}
-              />
+              <Image src={picUrl} wrapped ui={false} />
+
     
               <Card.Content>
                 <Card.Description>
@@ -568,14 +562,9 @@ const AlbumsList = () => {
           }else{
             return (
               <Card color="yellow" title="Images">
-              <S3Image 
-                key={photo.thumbnail.key} 
-                imgKey={'resized/' + photo.thumbnail.key.replace(/.+resized\//, '')}
-                level="private"
-                theme={{
-                  photoImg: { maxWidth: "100%", maxHeight: "100%", borderRadius: "3px 3px 0px  0px" }
-                }}
-              />
+              
+              <Image src={picUrl} wrapped ui={false} />
+
     
               <Card.Content>
                 <Card.Description>
@@ -672,7 +661,8 @@ const AlbumsList = () => {
     
     
     const uploadFile = async (file) => {
-      const fileName = 'upload/'+uuid();
+      const extention = file.name.split('.').pop();
+      const fileName = 'upload/'+uuid()+"."+extention;
       const user = await Auth.currentAuthenticatedUser();
   
       const result = await Storage.vault.put(

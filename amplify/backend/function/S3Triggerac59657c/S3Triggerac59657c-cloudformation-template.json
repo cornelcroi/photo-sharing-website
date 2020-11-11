@@ -80,7 +80,7 @@
           "S3Key": "amplify-builds/S3Triggerac59657c-334c736f5a333537314f-build.zip"
         },
         "Layers": [
-          "arn:aws:lambda:eu-west-1:554189332310:layer:Sharp:1"
+          "arn:aws:lambda:eu-west-1:554189332310:layer:Sharp:4"
         ]
       }
     },
