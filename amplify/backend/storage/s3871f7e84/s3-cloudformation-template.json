@@ -270,11 +270,77 @@
 				}
 			}
 		},
+		"S3HostingBucket": {
+			"Type": "AWS::S3::Bucket",
+		     
+			"DeletionPolicy" : "Retain",
+			"Properties": {
+				"BucketName": 
+                        {
+                            "Fn::Join": [
+                                "",
+                                [
+                                    {
+                                        "Ref": "bucketName"
+                                    },
+                                    {
+                                      "Fn::Select": [
+                                          3,
+                                          {
+                                              "Fn::Split": [
+                                                  "-",
+                                                  {
+                                                      "Ref": "AWS::StackName"
+                                                  }
+                                              ]
+                                          }
+                                      ]
+									},
+									"-",
+									"hosting",
+                                    "-",
+                                    {
+                                        "Ref": "env"
+                                    }
+                                ]
+                            ]
+                        },
+                    
+                       
+						"CorsConfiguration": {
+									"CorsRules": [
+										{
+											"AllowedHeaders": [
+												"*"
+											],
+											"AllowedMethods": [
+												"GET",
+												"HEAD",
+												"PUT",
+												"POST",
+												"DELETE"
+											],
+											"AllowedOrigins": [
+												"*"
+											],
+											"ExposedHeaders": [
+												"x-amz-server-side-encryption",
+												"x-amz-request-id",
+												"x-amz-id-2",
+												"ETag"
+											],
+											"Id": "S3CORSRuleId1",
+											"MaxAge": "3000"
+										}
+									]
+						}
+			}
+		},
 		"CloudFrontOriginAccessIdentity": {
             "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
             "Properties": {
                 "CloudFrontOriginAccessIdentityConfig": {
-                    "Comment": { "Ref": "S3Bucket" }
+                    "Comment": { "Ref": "S3HostingBucket" }
                 }
             }
         },
@@ -318,7 +384,7 @@
 				  "HttpVersion": "http2",
 				  "Origins": [
 					 {
-						"DomainName": { "Fn::GetAtt" : [ "S3Bucket", "DomainName" ] },
+						"DomainName": { "Fn::GetAtt" : [ "S3HostingBucket", "DomainName" ] },
 						"Id": "s3origin",
 						"S3OriginConfig": {
 						   "OriginAccessIdentity": {"Fn::Sub": "origin-access-identity/cloudfront/${CloudFrontOriginAccessIdentity}" }
