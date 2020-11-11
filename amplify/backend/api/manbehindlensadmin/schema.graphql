@@ -60,8 +60,7 @@ input PhotoS3InfoInput {
 }
 
 
+
 type Query {
-  echo(msg: String): String @function(name: "publish-${env}")
+  echo(msg: String): String @function(name: "StaticWeb59657c-${env}")
 }
-
-

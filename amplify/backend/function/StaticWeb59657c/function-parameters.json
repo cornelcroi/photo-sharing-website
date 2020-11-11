@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "api": {
+      "manbehindlensadmin": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    },
+    "storage": {
+      "s3871f7e84": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}
