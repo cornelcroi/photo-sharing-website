@@ -270,6 +270,65 @@
 				}
 			}
 		},
+		"CloudFrontOriginAccessIdentity": {
+            "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
+            "Properties": {
+                "CloudFrontOriginAccessIdentityConfig": {
+                    "Comment": { "Ref": "S3Bucket" }
+                }
+            }
+        },
+		"CloudFrontDistribution": {
+			"Type": "AWS::CloudFront::Distribution",
+			"Properties": {
+			   "DistributionConfig": {
+				  "CustomErrorResponses": [
+					 {
+						"ErrorCode": 403,
+						"ResponseCode": 404,
+						"ResponsePagePath": "/index.html"
+					 }
+				  ],
+				  "DefaultCacheBehavior": {
+					 "AllowedMethods": [
+						"GET",
+						"HEAD",
+						"OPTIONS"
+					 ],
+					 "CachedMethods": [
+						"GET",
+						"HEAD",
+						"OPTIONS"
+					 ],
+					 "Compress": true,
+					 "DefaultTTL": 3600,
+					 "ForwardedValues": {
+						"Cookies": {
+						   "Forward": "none"
+						},
+						"QueryString": false
+					 },
+					 "MaxTTL": 86400,
+					 "MinTTL": 60,
+					 "TargetOriginId": "s3origin",
+					 "ViewerProtocolPolicy": "allow-all"
+				  },
+				  "DefaultRootObject": "index.html",
+				  "Enabled": true,
+				  "HttpVersion": "http2",
+				  "Origins": [
+					 {
+						"DomainName": { "Fn::GetAtt" : [ "S3Bucket", "DomainName" ] },
+						"Id": "s3origin",
+						"S3OriginConfig": {
+						   "OriginAccessIdentity": {"Fn::Sub": "origin-access-identity/cloudfront/${CloudFrontOriginAccessIdentity}" }
+						}
+					 }
+				  ],
+				  "PriceClass": "PriceClass_All"
+			   }
+			}
+		 },
 	    "TriggerPermissions": {
           "Type": "AWS::Lambda::Permission",
           "Properties": {
