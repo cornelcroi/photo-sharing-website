@@ -12,6 +12,10 @@
     "apimanbehindlensadminGraphQLAPIEndpointOutput": {
       "Type": "String",
       "Default": "apimanbehindlensadminGraphQLAPIEndpointOutput"
+    },
+    "hostingBucketSuffix": {
+      "Type": "String",
+      "Default": "hosting"
     }
   },
   "Conditions": {
@@ -64,6 +68,9 @@
             },
             "API_MANBEHINDLENSADMIN_GRAPHQLAPIENDPOINTOUTPUT": {
               "Ref": "apimanbehindlensadminGraphQLAPIEndpointOutput"
+            },
+            "HOSTING_BUCKET_SUFFIX": {
+              "Ref": "hostingBucketSuffix"
             }
           }
         },
@@ -77,7 +84,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-manbehindlensadmin-prod-94239-deployment",
-          "S3Key": "amplify-builds/S3Triggerac59657c-334c736f5a333537314f-build.zip"
+          "S3Key": "amplify-builds/S3Triggerac59657c-774f59686247756e626c-build.zip"
         },
         "Layers": [
           "arn:aws:lambda:eu-west-1:554189332310:layer:Sharp:4"

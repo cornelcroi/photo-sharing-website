@@ -16,6 +16,10 @@
     "storages3871f7e84BucketName": {
       "Type": "String",
       "Default": "storages3871f7e84BucketName"
+    },
+    "hostingBucketSuffix": {
+      "Type": "String",
+      "Default": "hosting"
     }
   },
   "Conditions": {
@@ -71,6 +75,9 @@
             },
             "API_MANBEHINDLENSADMIN_GRAPHQLAPIENDPOINTOUTPUT": {
               "Ref": "apimanbehindlensadminGraphQLAPIEndpointOutput"
+            },
+            "HOSTING_BUCKET_SUFFIX": {
+              "Ref": "hostingBucketSuffix"
             }
           }
         },

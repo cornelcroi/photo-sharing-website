@@ -34,7 +34,6 @@ const Sharp = require('sharp');
 // We'll expect these environment variables to be defined when the Lambda function is deployed
 const THUMBNAIL_WIDTH = 600;//parseInt(process.env.THUMBNAIL_WIDTH || 80, 10);
 const THUMBNAIL_HEIGHT = 400;//parseInt(process.env.THUMBNAIL_HEIGHT || 80, 10);
-
 let client = null
 
 
@@ -92,7 +91,7 @@ function thumbnailKey(keyPrefix, filename) {
 }
 
 function fullsizeKey(keyPrefix, filename) {
-	return `${keyPrefix}/fullsize/${filename}`;
+	return `public/fullsize/${filename}`;
 }
 
 function makeThumbnail(photo) {
@@ -106,18 +105,20 @@ async function resize(photoBody, bucketName, key) {
   console.log('keyPrefix='+keyPrefix);
   console.log('originalPhotoName='+originalPhotoName);
   const thumbnail = await makeThumbnail(photoBody);
+  const DEST_BUCKET = bucketName + '-' + process.env.HOSTING_BUCKET_SUFFIX;
 
   //TODO add more sizes
 
+  
 	await Promise.all([
 		S3.putObject({
 			Body: thumbnail,
-			Bucket: bucketName,
+			Bucket: DEST_BUCKET,
 			Key: thumbnailKey(keyPrefix, originalPhotoName),
 		}).promise(),
 
 		S3.copyObject({
-			Bucket: bucketName,
+			Bucket: DEST_BUCKET,
 			CopySource: bucketName + '/' + key,
 			Key: fullsizeKey(keyPrefix, originalPhotoName),
 		}).promise(),
@@ -148,6 +149,7 @@ async function resize(photoBody, bucketName, key) {
 async function processRecord(record) {
 	const bucketName = record.s3.bucket.name;
   const key = decodeURIComponent(record.s3.object.key.replace(/\+/g, " "));
+  const DEST_BUCKET = bucketName + '-' + process.env.HOSTING_BUCKET_SUFFIX;
 
   console.log('processRecord', JSON.stringify(record))
 
@@ -181,7 +183,7 @@ async function processRecord(record) {
 		id: id,
 		owner: metadata.owner,
 		albumId: metadata.albumid,
-    bucket: bucketName,
+    bucket: DEST_BUCKET,
     thumbnail: {
       width: sizes.thumbnail.width,
       height: sizes.thumbnail.height, 

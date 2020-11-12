@@ -82,9 +82,14 @@
 		"triggerFunction": {
 			"Type": "String"
 		},
-	
-    
-    
+		"storages3871f7e84BucketName": {
+			"Type": "String",
+			"Default": "storages3871f7e84BucketName"
+		},	
+		"hostingBucketSuffix": {
+			"Type": "String",
+			"Default": "hosting"
+		  },    
         "functionS3Triggerac59657cName": {
             "Type": "String",
             "Default": "functionS3Triggerac59657cName"
@@ -296,12 +301,14 @@
                                           }
                                       ]
 									},
-									"-",
-									"hosting",
                                     "-",
                                     {
                                         "Ref": "env"
-                                    }
+									},
+									"-",
+									{
+										"Ref": "hostingBucketSuffix"
+									}
                                 ]
                             ]
                         },
@@ -483,6 +490,33 @@
                                             {
                                                 "Ref": "S3Bucket"
                                             },
+                                            "/*"
+                                        ]
+                                    ]
+                                }
+                            ]
+						},
+						{
+                            "Effect": "Allow",
+                            "Action": [
+                                "s3:PutObject",
+                                "s3:GetObject",
+                                "s3:ListBucket",
+                                "s3:DeleteObject"
+                            ],
+                            "Resource": [
+                                {
+                                    "Fn::Join": [
+                                        "",
+                                        [
+                                            "arn:aws:s3:::",
+                                            {
+                                                "Ref": "S3Bucket"
+											},
+											"-",
+											{
+												"Ref": "hostingBucketSuffix"
+											},											
                                             "/*"
                                         ]
                                     ]
@@ -905,18 +939,18 @@
 		"S3BucketPolicy": {
 			"Type" : "AWS::S3::BucketPolicy",
 			"Properties" : {
-			  "Bucket" : {"Ref" : "S3Bucket"},
+			  "Bucket" : {"Ref" : "S3HostingBucket"},
 			  "PolicyDocument": {
 				"Statement":[{
 				  "Sid": "PublicReadGetObject",
 				  "Effect": "Allow",
 				  "Action": "s3:GetObject",
 				  "Principal": "*",
-				  "Resource": { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "S3Bucket" } , "/public/*" ]]}
+				  "Resource": { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "S3HostingBucket" } , "/public/*" ]]}
 				}]
 			  }
 			}
-		  }
+		}
 	},
 	"Outputs": {
 		"BucketName": {
@@ -924,6 +958,12 @@
 				"Ref": "S3Bucket"
 			},
 			"Description": "Bucket name for the S3 bucket"
+		},
+		"HostingBucketName": {
+			"Value": {
+				"Ref": "S3HostingBucket"
+			},
+			"Description": "Bucket name for the S3 hosting bucket"
 		},
 		"Region": {
 			"Value": {
