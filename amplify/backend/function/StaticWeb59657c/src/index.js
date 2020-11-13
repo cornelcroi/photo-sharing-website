@@ -24,28 +24,7 @@ let client = new AWSAppSyncClient({
     },
     disableOffline: true
   });
-const listAlbums = gql`
-  query ListAlbums(
-    $filter: ModelAlbumFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listAlbums(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        name
-        description
-        createdAt
-        updatedAt
-        owner
-        photos {
-          nextToken
-        }
-      }
-      nextToken
-    }
-  }
-`;
+
 
 const listPhotosByAlbum = gql`
   query ListPhotosByAlbum(
@@ -102,6 +81,58 @@ exports.handler = async (event, context, callback) => {
     console.log('Received  event:', JSON.stringify(event, null, 2));
 
 	try {
+
+    const listAlbums = gql`
+  query ListAlbums(
+    $filter: ModelAlbumFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listAlbums(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        description
+        createdAt
+        updatedAt
+        owner
+        photos {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+
+    const BUCKET = process.env.STORAGE_S3871F7E84_BUCKETNAME + '-' + process.env.HOSTING_BUCKET_SUFFIX;
+
+    const album_galery_templateFile = 'album-gallery-template.html';
+    const albums_templateFile = 'albums-template.html';
+
+    //ALBUM LIST
+    const paramsAlbumList = 
+      {
+        Bucket: BUCKET, // a path to your Bucket
+        Key: album_galery_templateFile // a key (literally a path to your file)
+      }
+      const albumFileFromS3 = await S3.getObject(paramsAlbumList).promise();
+      // if successful then:
+      //console.log(JSON.stringify(fileFromS3))
+      var album_gallery_templateHTML = albumFileFromS3.Body.toString('utf-8');
+      
+      //ALBUM GALERY
+      const paramsAlbumGalery = 
+      {
+        Bucket: BUCKET, // a path to your Bucket
+        Key: albums_templateFile // a key (literally a path to your file)
+      }
+      const albumsFileFromS3 = await S3.getObject(paramsAlbumGalery).promise();
+      var albums_templateHTML = albumsFileFromS3.Body.toString('utf-8');
+
+    //s3client.download_file(BUCKET, templateFile, templateFile)
+
+
 		//event.Records.forEach(processRecord);
         console.log('published start');
         const result = await client.query({           
@@ -121,7 +152,8 @@ exports.handler = async (event, context, callback) => {
         var albumCSS = ""; 
         var photoListHTML = "";
         while (result.data.listAlbums.items.length>i) {
-            console.log(result.data.listAlbums.items[i]);
+            
+            console.log("result.data.listAlbums.items[i].name="+result.data.listAlbums.items[i].name);
 
             const result2 = await client.query({           
                 query: listPhotosByAlbum,
@@ -152,7 +184,7 @@ exports.handler = async (event, context, callback) => {
             albumHTML += `
             <div class="row row-no-gutter">
                 <div class="col-md-6">
-                    <div class="banner blog-2-image" id="photo-album-${i}"></div>
+                    <div class="banner blog-2-image" id="blog-photo-post${i}"></div>
                 </div>
                 <div class="col-md-6">
                     <div class="blog-2-text">
@@ -175,8 +207,8 @@ exports.handler = async (event, context, callback) => {
             </div>`;
               
             albumCSS += `
-            #photo-album-${i} {
-                background-image: url('../images/albums/photo-album-cover-${i}.jpg');
+            #blog-photo-post${i} {
+                background-image: url('../images/theme/album-01.jpg');
               }`;
 
             elementsMap.set(result.data.listAlbums.items[i].name, 
@@ -189,13 +221,33 @@ exports.handler = async (event, context, callback) => {
             i++;
         }
 
-        //console.log(elementsMap);
-        //console.log(elementsMap.get('Chaumonts').photos)
-        //setAlbums(result.data.listAlbums.items)
-        console.log(albumHTML);
-        console.log(albumCSS);
-        console.log(photoListHTML);
+        albums_templateHTML = albums_templateHTML
+        .toString()
+        .replace(/\{ALBUMS_LIST\}/g, albumHTML);
+//        console.log("#### START ###");
+//        console.log("#### SEND ###");
         console.log('published end');
+
+
+        await Promise.all([
+          S3.putObject({
+            Body: albums_templateHTML,
+            Bucket: BUCKET,
+            Key: "albums.html",
+            ContentType: 'text/html',
+
+          }).promise(), 
+
+          S3.putObject({
+            Body: albumCSS,
+            Bucket: BUCKET,
+            Key: "styles/albums.css",
+            ContentType: 'text/css',
+
+          }).promise(), 
+
+          
+        ]);
 
 	}
 	catch (err) {

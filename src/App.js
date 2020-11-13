@@ -61,7 +61,6 @@ const NewAlbum = () => {
     setDescription] = useState('');
   
   const [open, setOpen] = React.useState(false)
-
   const createAlbum = async(event) => {
     
     API.graphql(graphqlOperation(mutations.createAlbum, {input: {
@@ -108,16 +107,13 @@ const NewAlbum = () => {
 const PublishAlbum = () => {
   console.log("publish...");
   
-  const [name,
-    setName] = useState('')
 
-  const [description,
-    setDescription] = useState('');
-  
-  const [open, setOpen] = React.useState(false)
+  const [publishInProgress, setPublishInProgress] = useState(false)
+
+  //setPublishInProgress(false)
 
   const publish = async(event) => {
-    
+    setPublishInProgress(true)
     console.log("publishing");
     
     API.graphql(graphqlOperation(queries.echo, {input: {
@@ -127,7 +123,7 @@ const PublishAlbum = () => {
   //  setDescription('');
     
   //  setOpen(false);
-
+      setPublishInProgress(false)
     
     }
   
@@ -138,6 +134,8 @@ const PublishAlbum = () => {
                     icon='upload'
                     labelPosition='left' 
                     onClick={publish}
+                    disabled={publishInProgress}
+                    content={publishInProgress ? 'publishing...' : 'Publishh'}
                     />
   )
 }

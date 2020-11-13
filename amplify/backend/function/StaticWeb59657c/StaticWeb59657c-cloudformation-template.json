@@ -21,6 +21,10 @@
     "storages3871f7e84BucketName": {
       "Type": "String",
       "Default": "storages3871f7e84BucketName"
+    },
+    "hostingBucketSuffix": {
+      "Type": "String",
+      "Default": "hosting"
     }
   },
   "Conditions": {
@@ -76,6 +80,9 @@
             },
             "STORAGE_S3871F7E84_BUCKETNAME": {
               "Ref": "storages3871f7e84BucketName"
+            },
+            "HOSTING_BUCKET_SUFFIX": {
+              "Ref": "hostingBucketSuffix"
             }
           }
         },
@@ -90,7 +97,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-manbehindlensadmin-prod-94239-deployment",
-          "S3Key": "amplify-builds/StaticWeb59657c-41765542345769574846-build.zip"
+          "S3Key": "amplify-builds/StaticWeb59657c-76335255776e42764a65-build.zip"
         }
       }
     },
@@ -241,6 +248,33 @@
                       "arn:aws:s3:::",
                       {
                         "Ref": "storages3871f7e84BucketName"
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "s3:PutObject",
+                "s3:GetObject",
+                "s3:ListBucket",
+                "s3:DeleteObject"
+              ],
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:s3:::",
+                      {
+                        "Ref": "storages3871f7e84BucketName"
+                      },
+                      "-",
+                      {
+                        "Ref": "hostingBucketSuffix"
                       },
                       "/*"
                     ]

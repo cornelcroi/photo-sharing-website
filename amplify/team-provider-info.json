@@ -35,12 +35,6 @@
       },
       "function": {
         "S3Triggerac59657c": {}
-      },
-      "hosting": {
-        "amplifyhosting": {
-          "appId": "d2aiwlyzua5nct",
-          "type": "cicd"
-        }
       }
     }
   }
