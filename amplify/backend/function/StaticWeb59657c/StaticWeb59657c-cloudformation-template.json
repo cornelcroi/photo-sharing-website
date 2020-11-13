@@ -2,6 +2,14 @@
   "AWSTemplateFormatVersion": "2010-09-09",
   "Description": "Lambda Function resource stack creation using Amplify CLI",
   "Parameters": {
+    "CloudWatchRule": {
+      "Type": "String",
+      "Default": "NONE",
+      "Description": " Schedule Expression"
+    },
+    "env": {
+      "Type": "String"
+    },
     "apimanbehindlensadminGraphQLAPIIdOutput": {
       "Type": "String",
       "Default": "apimanbehindlensadminGraphQLAPIIdOutput"
@@ -10,16 +18,9 @@
       "Type": "String",
       "Default": "apimanbehindlensadminGraphQLAPIEndpointOutput"
     },
-    "env": {
-      "Type": "String"
-    },
     "storages3871f7e84BucketName": {
       "Type": "String",
       "Default": "storages3871f7e84BucketName"
-    },
-    "hostingBucketSuffix": {
-      "Type": "String",
-      "Default": "hosting"
     }
   },
   "Conditions": {
@@ -67,17 +68,14 @@
             "REGION": {
               "Ref": "AWS::Region"
             },
-            "STORAGE_S3871F7E84_BUCKETNAME": {
-              "Ref": "storages3871f7e84BucketName"
-            },
             "API_MANBEHINDLENSADMIN_GRAPHQLAPIIDOUTPUT": {
               "Ref": "apimanbehindlensadminGraphQLAPIIdOutput"
             },
             "API_MANBEHINDLENSADMIN_GRAPHQLAPIENDPOINTOUTPUT": {
               "Ref": "apimanbehindlensadminGraphQLAPIEndpointOutput"
             },
-            "HOSTING_BUCKET_SUFFIX": {
-              "Ref": "hostingBucketSuffix"
+            "STORAGE_S3871F7E84_BUCKETNAME": {
+              "Ref": "storages3871f7e84BucketName"
             }
           }
         },
@@ -92,7 +90,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-manbehindlensadmin-prod-94239-deployment",
-          "S3Key": "amplify-builds/StaticWeb59657c-6b7557794d3661796167-build.zip"
+          "S3Key": "amplify-builds/StaticWeb59657c-41765542345769574846-build.zip"
         }
       }
     },
@@ -102,12 +100,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "manbehindlensadminLambdaRoleb928438f",
+            "manbehindlensadminLambdaRole6055ec64",
             {
               "Fn::Join": [
                 "",
                 [
-                  "manbehindlensadminLambdaRoleb928438f",
+                  "manbehindlensadminLambdaRole6055ec64",
                   "-",
                   {
                     "Ref": "env"

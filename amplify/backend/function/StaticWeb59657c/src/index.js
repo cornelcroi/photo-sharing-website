@@ -15,15 +15,7 @@ const AWSAppSyncClient = require('aws-appsync').default;
 const uuidv4 = require('uuid/v4');
 const gql = require('graphql-tag');
 
-let client = null
-
-
-exports.handler = async (event, context, callback) => {
-   
-   
-    console.log('Received  event:', JSON.stringify(event, null, 2));
-
-  client = new AWSAppSyncClient({
+let client = new AWSAppSyncClient({
     url: process.env.API_MANBEHINDLENSADMIN_GRAPHQLAPIENDPOINTOUTPUT,
     region: process.env.REGION,
     auth: {
@@ -32,8 +24,7 @@ exports.handler = async (event, context, callback) => {
     },
     disableOffline: true
   });
- 
-  const listAlbums = gql`
+const listAlbums = gql`
   query ListAlbums(
     $filter: ModelAlbumFilterInput
     $limit: Int
@@ -104,6 +95,11 @@ const listPhotosByAlbum = gql`
     }
   }
 `;
+
+exports.handler = async (event, context, callback) => {
+   
+   
+    console.log('Received  event:', JSON.stringify(event, null, 2));
 
 	try {
 		//event.Records.forEach(processRecord);

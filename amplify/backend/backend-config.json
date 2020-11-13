@@ -43,6 +43,28 @@
           ]
         }
       ]
+    },
+    "StaticWeb59657c": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "manbehindlensadmin",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput"
+          ]
+        },
+        {
+          "category": "storage",
+          "resourceName": "s3871f7e84",
+          "attributes": [
+            "BucketName"
+          ]
+        }
+      ]
     }
   },
   "storage": {
