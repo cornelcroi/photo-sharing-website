@@ -15,15 +15,8 @@ const AWSAppSyncClient = require('aws-appsync').default;
 const uuidv4 = require('uuid/v4');
 const gql = require('graphql-tag');
 
-let client = new AWSAppSyncClient({
-    url: process.env.API_MANBEHINDLENSADMIN_GRAPHQLAPIENDPOINTOUTPUT,
-    region: process.env.REGION,
-    auth: {
-      type: AUTH_TYPE.AWS_IAM,
-      credentials: AWS.config.credentials
-    },
-    disableOffline: true
-  });
+let client = null
+
 
 
 const listPhotosByAlbum = gql`
@@ -75,36 +68,49 @@ const listPhotosByAlbum = gql`
   }
 `;
 
+ 
+const listAlbums = gql`
+query ListAlbums(
+  $filter: ModelAlbumFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listAlbums(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      description
+      createdAt
+      updatedAt
+      owner
+      photos {
+        nextToken
+      }
+    }
+    nextToken
+  }
+}
+`;
+
+
 exports.handler = async (event, context, callback) => {
    
    
     console.log('Received  event:', JSON.stringify(event, null, 2));
 
+    client = new AWSAppSyncClient({
+      url: process.env.API_MANBEHINDLENSADMIN_GRAPHQLAPIENDPOINTOUTPUT,
+      region: process.env.REGION,
+      auth: {
+        type: AUTH_TYPE.AWS_IAM,
+        credentials: AWS.config.credentials
+      },
+      disableOffline: true
+    });
+
 	try {
 
-    const listAlbums = gql`
-  query ListAlbums(
-    $filter: ModelAlbumFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listAlbums(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        name
-        description
-        createdAt
-        updatedAt
-        owner
-        photos {
-          nextToken
-        }
-      }
-      nextToken
-    }
-  }
-`;
-
+   
     const BUCKET = process.env.STORAGE_S3871F7E84_BUCKETNAME + '-' + process.env.HOSTING_BUCKET_SUFFIX;
 
     const album_galery_templateFile = 'album-gallery-template.html';

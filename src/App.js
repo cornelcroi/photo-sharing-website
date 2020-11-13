@@ -110,8 +110,6 @@ const PublishAlbum = () => {
 
   const [publishInProgress, setPublishInProgress] = useState(false)
 
-  //setPublishInProgress(false)
-
   const publish = async(event) => {
     setPublishInProgress(true)
     console.log("publishing");
@@ -119,10 +117,7 @@ const PublishAlbum = () => {
     API.graphql(graphqlOperation(queries.echo, {input: {
       msg:"test"
       }}))
-  //setName('')
-  //  setDescription('');
-    
-  //  setOpen(false);
+
       setPublishInProgress(false)
     
     }
