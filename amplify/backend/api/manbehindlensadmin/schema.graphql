@@ -62,5 +62,5 @@ input PhotoS3InfoInput {
 
 
 type Query {
-  echo(msg: String): String @function(name: "StaticWeb59657c-${env}")
+  generate(payload: String): String @function(name: "StaticWeb59657c-${env}")
 }

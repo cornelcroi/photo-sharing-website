@@ -114,23 +114,19 @@ const PublishAlbum = () => {
     setPublishInProgress(true)
     console.log("publishing");
     
-    API.graphql(graphqlOperation(queries.echo, {input: {
-      msg:"test"
-      }}))
-
-      setPublishInProgress(false)
+    const results = await API.graphql(graphqlOperation(queries.generate))
+    setPublishInProgress(false)
     
     }
   
 
   return (
     <Button color='green'
-                    content='Publish'
                     icon='upload'
                     labelPosition='left' 
                     onClick={publish}
                     disabled={publishInProgress}
-                    content={publishInProgress ? 'publishing...' : 'Publishh'}
+                    content={publishInProgress ? 'generating...' : 'Generate HTML'}
                     />
   )
 }
