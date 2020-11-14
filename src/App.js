@@ -7,10 +7,8 @@ import API, {graphqlOperation} from '@aws-amplify/api'
 import Storage from '@aws-amplify/storage'
 import aws_exports from './aws-exports'
 
-import {AmplifyAuthenticator, AmplifyGoogleButton, AmplifySignIn, AmplifySignUp} from "@aws-amplify/ui-react";
+import {AmplifyAuthenticator, AmplifySignIn, AmplifySignUp} from "@aws-amplify/ui-react";
 
-
-import {S3Image, withAuthenticator} from 'aws-amplify-react'
 
 import {Divider,Container, Card, Image, Label, Modal,Button, Form, Grid, Header, Segment} from 'semantic-ui-react'
 
@@ -19,6 +17,7 @@ import {BrowserRouter as Router, Route, NavLink} from 'react-router-dom';
 import {v4 as uuid} from 'uuid';
 
 import * as queries from './graphql/queries'
+import * as queries_custom from './graphql/queries_custom'
 import * as mutations from './graphql/mutations'
 import * as subscriptions from './graphql/subscriptions'
 
@@ -54,21 +53,23 @@ function makeComparator(key, order = 'asc') {
 
 
 const NewAlbum = () => {
-  const [name,
-    setName] = useState('')
-
-  const [description,
-    setDescription] = useState('');
   
-  const [open, setOpen] = React.useState(false)
+  const [name, setName] = useState('')
+  const [date, setDate] = useState('')
+  const [description, setDescription] = useState('');
+  const [open, setOpen] = useState(false)
+  
   const createAlbum = async(event) => {
     
     API.graphql(graphqlOperation(mutations.createAlbum, {input: {
       name,
+      date,
       description
+      
       }}))
     setName('')
     setDescription('');
+    setDate('');
     
     setOpen(false);
   }
@@ -93,6 +94,7 @@ const NewAlbum = () => {
             <Form.Group widths='equal'>
             <Form.Input name="name" value={name} onChange={(e) => setName(e.target.value)} fluid label='Name' placeholder='Album name' />
             </Form.Group>
+            <Form.Input name="name" value={date} onChange={(e) => setDate(e.target.value)} fluid label='Date' placeholder='Album date' />
             
             <Form.TextArea name="description" value={description}  onChange={(e) => setDescription(e.target.value)} label='Description' placeholder='Album description' />
             
@@ -114,7 +116,7 @@ const PublishAlbum = () => {
     setPublishInProgress(true)
     console.log("publishing");
     
-    const results = await API.graphql(graphqlOperation(queries.generate))
+    await API.graphql(graphqlOperation(queries.generate))
     setPublishInProgress(false)
     
     }
@@ -134,25 +136,33 @@ const PublishAlbum = () => {
 
 
 const AlbumsList = () => {
-  const [albums,
-    setAlbums] = useState([])
-
-    const [name,
-      setName] = useState('')
-
-    const [id,
-        setId] = useState('')
-  
-    const [description,
-      setDescription] = useState('');
-  
-    const [open, setOpen] = React.useState(false)
+  const [albums, setAlbums] = useState([])
+  const [name, setName] = useState('')
+  const [id, setId] = useState('')  
+  const [description, setDescription] = useState('');
+  const [date, setDate] = useState('');
+  const [open, setOpen] = useState(false)
 
       
   useEffect(() => {
     async function fetchData() {
-      const result = await API.graphql(graphqlOperation(queries.listAlbums, {limit: 999}))
-      console.log('result.data.listAlbums.items:',result.data.listAlbums.items);
+      const result = await API.graphql(graphqlOperation(queries_custom.listAlbumsWithPhotos, {limit: 999}))
+      
+
+      let j=0;
+      while (result.data.listAlbums.items.length>j) {
+        var found = result.data.listAlbums.items[j].photos.items.find(element => element.cover === true);
+        if(found){
+          result.data.listAlbums.items[j].cover="https://" + found.bucket + ".s3-" + aws_exports.aws_project_region + ".amazonaws.com/" + found.thumbnail.key;;
+
+        }else{
+          result.data.listAlbums.items[j].cover="images/no_cover.jpg";
+        }
+        j++
+
+      }
+
+
       setAlbums(result.data.listAlbums.items)
     }
     fetchData()
@@ -165,6 +175,7 @@ const AlbumsList = () => {
       subscription = API.graphql(graphqlOperation(subscriptions.onCreateAlbum, {owner: user.username})).subscribe({
         next: (data) => {
           const album = data.value.data.onCreateAlbum
+          album.cover="images/no_cover.jpg";
           setAlbums(a => a.concat([album].sort(makeComparator('name'))))
         }
       })
@@ -200,25 +211,6 @@ const AlbumsList = () => {
   }, [])
 
   
-  const getFeaturePic= async (albumid) => {
-    
-    let queryPicturesArgs = {
-      albumId: albumid
-    }
-
-    const results = await API.graphql(graphqlOperation(queries.listPhotosByAlbum, queryPicturesArgs))
-    if(results.data.listPhotosByAlbum.items.length && results.data.listPhotosByAlbum.items.length> 0){      
-      console.log('has pictures');
-
-
-    }else{
-      console.log('no picture, setting default feature pic');
-    }
-
-    return "&nbsp;"
-
-  }
-  
   const deleteAlbum = async (albumid) => {
 
     let queryPicturesArgs = {
@@ -226,7 +218,6 @@ const AlbumsList = () => {
     }
 
     const results = await API.graphql(graphqlOperation(queries.listPhotosByAlbum, queryPicturesArgs))
-    console.log('results',results);
     if(results.data.listPhotosByAlbum.items.length && results.data.listPhotosByAlbum.items.length> 0){      
       window.alert('You have pictures on this album. Please delete the pictures before deleting the album');
       
@@ -237,30 +228,40 @@ const AlbumsList = () => {
       }
       await API.graphql({ query: mutations.deleteAlbum, variables: {input: queryAlbums}});
     }
-    console.log('results:',results);
 
   }
 
   
   const albumItems = () => {
 
-    const openModify = async(id, name, desc) => {
+    const openModify = async(id, name, date, desc) => {
       setOpen(true);
       setName(name)
+      setDate(date)
       setDescription(desc)
       setId(id)
-      console.log(id)
     }
-    //getFeaturePic(album.id)
+
+    
 
     return albums
       //.sort(makeComparator('name'))
-      .map( album =>   
-                <Card key={album.id}>
+      .map( album =>   {
+
+         return <Card key={album.id}>
+                  
+                  
+                  <Image src={album.cover} wrapped ui={false} />
+          
+            
+       
                   <Card.Content>
                   <Card.Header>
                   <NavLink to={`/albums/${album.id}`}>{album.name}</NavLink>
                   </Card.Header>
+                  <Card.Meta>
+                  {album.date} / {album.photos.items.length} photos
+                  </Card.Meta>
                   <Card.Description>
                   {album.description}
                   </Card.Description>
@@ -273,12 +274,14 @@ const AlbumsList = () => {
                   }}>
                     Delete
                   </Button>
-                  <Button basic color='green' onClick={() => openModify(album.id, album.name, album.description )}>
+                  <Button basic color='green' onClick={() => openModify(album.id, album.name, album.date, album.description )}>
                     Modify
                   </Button>
                 </div>
               </Card.Content>
               </Card>
+      
+                }      
               
       );
 
@@ -287,23 +290,21 @@ const AlbumsList = () => {
   
   const updateAlbum = async(event) => {
     
-    console.log(id)
-    
     var queryArgs = {
       id: id,
       name: name,
+      date: date,
       description: description
 
     }
-    console.log(queryArgs)
 
     API.graphql({ query: mutations.updateAlbum, variables: { input: queryArgs } });
 
-
     setName('');
+    setDate('');
     setDescription('');
     setId('');
-
+    
     setOpen(false);
 
 
@@ -327,14 +328,12 @@ const AlbumsList = () => {
           </Container>
           </div>
           <Modal 
-      as={Form} 
-      onSubmit={updateAlbum}
-      onClose={() => setOpen(false)}
-      onOpen={() => setOpen(true)}
-      open={open}
-      
-                    
-    >
+            as={Form} 
+            onSubmit={updateAlbum}
+            onClose={() => setOpen(false)}
+            onOpen={() => setOpen(true)}
+            open={open}                        
+          >
       <Modal.Header>Modify album</Modal.Header>
       <Modal.Content image>
         <Modal.Description>
@@ -343,6 +342,11 @@ const AlbumsList = () => {
             <Form.Input name="name" value={name} onChange={(e) => setName(e.target.value)} fluid label='Name' placeholder='Album name' />
             </Form.Group>
             
+            <Form.Group widths='equal'>
+            <Form.Input name="date" value={date} onChange={(e) => setDate(e.target.value)} fluid label='Date' placeholder='Album date' />
+            </Form.Group>
+            
+
             <Form.TextArea name="description" value={description}  onChange={(e) => setDescription(e.target.value)} label='Description' placeholder='Album description' />
             
             <Form.Button type="submit"  color='green' >Save</Form.Button>
@@ -399,10 +403,8 @@ const AlbumsList = () => {
     }
     
     const updateItem = (items, i) => {
-      console.log("Before update: ", items)
       var objIndex = items.findIndex((obj => obj.id === i.id));
       items[objIndex] = i
-      console.log("After update: ", items)
       return items
     }
 
@@ -460,49 +462,34 @@ const AlbumsList = () => {
       let queryArgs = {
         id: photoid
       }
-      const results = await API.graphql({ query: mutations.deletePhoto, variables: {input: queryArgs}});
+      await API.graphql({ query: mutations.deletePhoto, variables: {input: queryArgs}});
   
     }
 
-    const setFeaturePicture = async (photoid) => {
+    const setCoverPicture = async (photoid) => {
 
     var queryArgs;
 
-    var toModify = false;
-    
      photos.forEach(function(entry) {
       
-       if (entry.featured && entry.featured === true) {
-         console.log("true");
-         console.log(entry.featured)
+       if (entry.cover && entry.cover === true) {
          queryArgs = {
           id: entry.id,
-          featured: false
-    
+          cover: false    
         }
 
         API.graphql({ query: mutations.updatePhoto, variables: { input: queryArgs } });
-
-        toModify = true;
-         
+ 
        }
 
      });
      
-     queryArgs = {
-      id: photoid,
-      featured: false
-
-    }
-
       queryArgs = {
         id: photoid,
-        featured: true
+        cover: true
 
       }
       await API.graphql({ query: mutations.updatePhoto, variables: {input: queryArgs}});
-      //console.log('results:',results);
-      console.log('photoid:',photoid);
   
     }
 
@@ -515,42 +502,11 @@ const AlbumsList = () => {
 
           const picUrl = "https://" + photo.bucket + ".s3-" + aws_exports.aws_project_region + ".amazonaws.com/" + photo.thumbnail.key
 
-          if(photo.featured && photo.featured===true){
-            return (
-              <Card color="green" title="Images">
-              <Image src={picUrl} wrapped ui={false} />
+          
+            return ( 
 
-    
-              <Card.Content>
-                <Card.Description>
-                {photo.exifcamera} 
-                </Card.Description>
-                <Card.Meta>
-                {photo.exiflens} 
-                </Card.Meta>
-                
-              </Card.Content>
-                         
-              <Card.Content>
-              <div><div className="ui green label">Album cover</div></div>
-
-              <div>
-            </div>
-              </Card.Content>
-              <Card.Content extra>
-                    <div className='ui one buttons'>
-                    <Button basic color='red' onClick={()=>{
-                        if (window.confirm('Are you sure you wish to delete this picture ?'))  deletePic(photo.id);
-                    }}>
-                        Delete picture
-                      </Button>
-                    </div>
-              </Card.Content>
-              
-              </Card>)
-          }else{
-            return (
-              <Card color="yellow" title="Images">
+            
+              <Card  key={photo.id}>
               
               <Image src={picUrl} wrapped ui={false} />
 
@@ -563,18 +519,17 @@ const AlbumsList = () => {
                 {photo.exiflens} 
                 </Card.Meta>
                 
+                <Card.Description>
+                <div>
+              {photo.cover && photo.cover===true ? 
+                <div className="ui green label">Album cover</div> :  <Label as='a' image onClick={()=>{setCoverPicture(photo.id); }}>Set as album cover </Label>
+              }
+              
+              </div>
+                </Card.Description>
               </Card.Content>
                          
-              <Card.Content>
-              <div>
-              <Label as='a' image onClick={()=>{
-                        setFeaturePicture(photo.id);
-                    }}>
-                Set as album cover
-              </Label>
-              
-            </div>
-              </Card.Content>
+            
               <Card.Content extra>
                     <div className='ui one buttons'>
                     <Button basic color='red' onClick={()=>{
@@ -586,7 +541,7 @@ const AlbumsList = () => {
               </Card.Content>
               
               </Card>)
-          }
+          
           
 
         }
@@ -763,13 +718,6 @@ function App() {
 }
 
 export default App;
-/*
 
-export default  withAuthenticator(App, {
-  includeGreetings: true,
-  signUpConfig: {
-    hiddenDefaults: ['phone_number']
-  }
-})*/
 
 

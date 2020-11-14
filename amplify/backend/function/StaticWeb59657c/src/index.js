@@ -50,7 +50,7 @@ const listPhotosByAlbum = gql`
         }
         exifcamera
         exiflens
-        featured
+        cover
         createdAt
         updatedAt
         album {
@@ -158,7 +158,7 @@ exports.handler = async (event, context, callback) => {
         var albumCSS = ""; 
         var photoListHTML = "";
         while (result.data.listAlbums.items.length>i) {
-            
+            photoListHTML = "";
             console.log("result.data.listAlbums.items[i].name="+result.data.listAlbums.items[i].name);
 
             const result2 = await client.query({           
@@ -171,21 +171,37 @@ exports.handler = async (event, context, callback) => {
             var photoArray = [];
             while (result2.data.listPhotosByAlbum.items.length>j) {
 
+                console.log("result2.data.listPhotosByAlbum.items[j].thumbnail.key="+result2.data.listPhotosByAlbum.items[j].thumbnail.key);
                 
                 photoArray.push({"thumbnail": result2.data.listPhotosByAlbum.items[j].thumbnail.key,
                 "exifcamera": result2.data.listPhotosByAlbum.items[j].exifcamera,
                 "exiflens": result2.data.listPhotosByAlbum.items[j].exiflens,
                 "bucket": result2.data.listPhotosByAlbum.items[j].bucket
-               });                
+               });
+
                 //console.log("photoMap="+photoArray);
                 photoListHTML += `
-                    <div class="grid-item publications" data-src="images/demo/gallery/${result2.data.listPhotosByAlbum.items[j].thumbnail.key}">
-                        <img src="images/demo/gallery/${result2.data.listPhotosByAlbum.items[j].thumbnail.key}" alt="">
+                    <div class="grid-item publications" data-src="${result2.data.listPhotosByAlbum.items[j].fullsize.key}">
+                        <img src="${result2.data.listPhotosByAlbum.items[j].thumbnail.key}" alt="">
                     </div>
                 `;
 
                 j++
             }
+            console.log("photoListHTML="+photoListHTML);
+            album_gallery_templateHTML_i = album_gallery_templateHTML.toString().replace(/\{PICTURES_LIST\}/g, photoListHTML);
+
+            await Promise.all([
+              S3.putObject({
+                Body: album_gallery_templateHTML_i,
+                Bucket: BUCKET,
+                Key: "albums-gallery-" + i + ".html",
+                ContentType: 'text/html',
+    
+              }).promise(), 
+    
+              
+            ]);
 
             albumHTML += `
             <div class="row row-no-gutter">
@@ -205,7 +221,7 @@ exports.handler = async (event, context, callback) => {
                         <div class="voffset40"></div>
                         
                         <div class="voffset50"></div>
-                        <a href="gallery-album1.html#page-gallery" class="readfull">See the full gallery</a>
+                        <a href="albums-gallery-${i}.html#page-gallery" class="readfull">See the full gallery</a>
                         <div class="voffset50"></div>
                     </div>
                     </div>

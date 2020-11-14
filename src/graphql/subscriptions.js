@@ -7,6 +7,7 @@ export const onCreateAlbum = /* GraphQL */ `
       id
       name
       description
+      date
       createdAt
       updatedAt
       owner
@@ -17,7 +18,7 @@ export const onCreateAlbum = /* GraphQL */ `
           bucket
           exifcamera
           exiflens
-          featured
+          cover
           createdAt
           updatedAt
           owner
@@ -33,6 +34,7 @@ export const onUpdateAlbum = /* GraphQL */ `
       id
       name
       description
+      date
       createdAt
       updatedAt
       owner
@@ -43,7 +45,7 @@ export const onUpdateAlbum = /* GraphQL */ `
           bucket
           exifcamera
           exiflens
-          featured
+          cover
           createdAt
           updatedAt
           owner
@@ -59,6 +61,7 @@ export const onDeleteAlbum = /* GraphQL */ `
       id
       name
       description
+      date
       createdAt
       updatedAt
       owner
@@ -69,7 +72,7 @@ export const onDeleteAlbum = /* GraphQL */ `
           bucket
           exifcamera
           exiflens
-          featured
+          cover
           createdAt
           updatedAt
           owner
@@ -97,13 +100,14 @@ export const onCreatePhoto = /* GraphQL */ `
       }
       exifcamera
       exiflens
-      featured
+      cover
       createdAt
       updatedAt
       album {
         id
         name
         description
+        date
         createdAt
         updatedAt
         owner
@@ -133,13 +137,14 @@ export const onUpdatePhoto = /* GraphQL */ `
       }
       exifcamera
       exiflens
-      featured
+      cover
       createdAt
       updatedAt
       album {
         id
         name
         description
+        date
         createdAt
         updatedAt
         owner
@@ -169,13 +174,14 @@ export const onDeletePhoto = /* GraphQL */ `
       }
       exifcamera
       exiflens
-      featured
+      cover
       createdAt
       updatedAt
       album {
         id
         name
         description
+        date
         createdAt
         updatedAt
         owner

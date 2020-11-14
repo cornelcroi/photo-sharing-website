@@ -17,6 +17,7 @@ export const listAlbums = /* GraphQL */ `
         id
         name
         description
+        date
         createdAt
         updatedAt
         owner
@@ -34,6 +35,7 @@ export const getAlbum = /* GraphQL */ `
       id
       name
       description
+      date
       createdAt
       updatedAt
       owner
@@ -44,7 +46,7 @@ export const getAlbum = /* GraphQL */ `
           bucket
           exifcamera
           exiflens
-          featured
+          cover
           createdAt
           updatedAt
           owner
@@ -72,13 +74,14 @@ export const getPhoto = /* GraphQL */ `
       }
       exifcamera
       exiflens
-      featured
+      cover
       createdAt
       updatedAt
       album {
         id
         name
         description
+        date
         createdAt
         updatedAt
         owner
@@ -113,13 +116,14 @@ export const listPhotos = /* GraphQL */ `
         }
         exifcamera
         exiflens
-        featured
+        cover
         createdAt
         updatedAt
         album {
           id
           name
           description
+          date
           createdAt
           updatedAt
           owner
@@ -161,13 +165,14 @@ export const listPhotosByAlbum = /* GraphQL */ `
         }
         exifcamera
         exiflens
-        featured
+        cover
         createdAt
         updatedAt
         album {
           id
           name
           description
+          date
           createdAt
           updatedAt
           owner

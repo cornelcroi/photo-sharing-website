@@ -7,6 +7,7 @@ type Album
     id: ID!
     name: String!
     description: String
+    date: String
     photos: [Photo] @connection(keyName: "byAlbum", fields: ["id"])
     createdAt: AWSDateTime
     updatedAt: AWSDateTime
@@ -28,7 +29,7 @@ type Photo
     thumbnail: PhotoS3Info!
     exifcamera: String
     exiflens: String
-    featured: Boolean!
+    cover: Boolean!
     createdAt: AWSDateTime
     updatedAt: AWSDateTime
 }
@@ -48,7 +49,7 @@ input CreatePhotoInput {
 	thumbnail: PhotoS3InfoInput!
   exifcamera: String
   exiflens: String
-  featured: Boolean!
+  cover: Boolean!
 
 
 }

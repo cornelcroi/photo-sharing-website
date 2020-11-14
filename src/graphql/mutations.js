@@ -10,6 +10,7 @@ export const createAlbum = /* GraphQL */ `
       id
       name
       description
+      date
       createdAt
       updatedAt
       owner
@@ -20,7 +21,7 @@ export const createAlbum = /* GraphQL */ `
           bucket
           exifcamera
           exiflens
-          featured
+          cover
           createdAt
           updatedAt
           owner
@@ -39,6 +40,7 @@ export const updateAlbum = /* GraphQL */ `
       id
       name
       description
+      date
       createdAt
       updatedAt
       owner
@@ -49,7 +51,7 @@ export const updateAlbum = /* GraphQL */ `
           bucket
           exifcamera
           exiflens
-          featured
+          cover
           createdAt
           updatedAt
           owner
@@ -68,6 +70,7 @@ export const deleteAlbum = /* GraphQL */ `
       id
       name
       description
+      date
       createdAt
       updatedAt
       owner
@@ -78,7 +81,7 @@ export const deleteAlbum = /* GraphQL */ `
           bucket
           exifcamera
           exiflens
-          featured
+          cover
           createdAt
           updatedAt
           owner
@@ -109,13 +112,14 @@ export const createPhoto = /* GraphQL */ `
       }
       exifcamera
       exiflens
-      featured
+      cover
       createdAt
       updatedAt
       album {
         id
         name
         description
+        date
         createdAt
         updatedAt
         owner
@@ -148,13 +152,14 @@ export const updatePhoto = /* GraphQL */ `
       }
       exifcamera
       exiflens
-      featured
+      cover
       createdAt
       updatedAt
       album {
         id
         name
         description
+        date
         createdAt
         updatedAt
         owner
@@ -187,13 +192,14 @@ export const deletePhoto = /* GraphQL */ `
       }
       exifcamera
       exiflens
-      featured
+      cover
       createdAt
       updatedAt
       album {
         id
         name
         description
+        date
         createdAt
         updatedAt
         owner

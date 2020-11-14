@@ -66,7 +66,7 @@ async function storePhotoInfo(item) {
         }
         exifcamera
         exiflens
-        featured
+        cover
       }
     }
   `;
@@ -196,7 +196,7 @@ async function processRecord(record) {
     },
     exifcamera: metadataCamera,
     exiflens: metadataLens,
-    featured: "false"
+    cover: "false"
   }
 
   console.log(JSON.stringify(metadata), JSON.stringify(sizes), JSON.stringify(item))
