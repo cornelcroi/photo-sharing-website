@@ -32,8 +32,12 @@ If you're not working in Cloud9, you can follow the instructions on http://sharp
 const Sharp = require('sharp');
 
 // We'll expect these environment variables to be defined when the Lambda function is deployed
-const THUMBNAIL_WIDTH = 600;//parseInt(process.env.THUMBNAIL_WIDTH || 80, 10);
-const THUMBNAIL_HEIGHT = 400;//parseInt(process.env.THUMBNAIL_HEIGHT || 80, 10);
+const THUMBNAIL_WIDTH = 600;
+const THUMBNAIL_HEIGHT = 400;
+
+const MIDDLESIZE_WIDTH = 961;
+const MIDDLESIZE_HEIGHT = 591;
+
 let client = null
 
 
@@ -55,6 +59,11 @@ async function storePhotoInfo(item) {
           height
         }
         thumbnail {
+          key
+          width
+          height
+        }
+        middlesize {
           key
           width
           height
@@ -86,16 +95,24 @@ async function storePhotoInfo(item) {
 	return `${keyPrefix}/resized/${filename}`;
 }*/
 
-function thumbnailKey(keyPrefix, filename) {
+function thumbnailKey(filename) {
 	return `public/resized/${filename}`;
 }
 
-function fullsizeKey(keyPrefix, filename) {
+function middlesizeKey(filename) {
+	return `public/middlesize/${filename}`;
+}
+
+function fullsizeKey(filename) {
 	return `public/fullsize/${filename}`;
 }
 
 function makeThumbnail(photo) {
 	return Sharp(photo).resize(THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT).toBuffer();
+}
+
+function makeMiddlesize(photo) {
+	return Sharp(photo).resize(MIDDLESIZE_WIDTH, MIDDLESIZE_HEIGHT).toBuffer();
 }
 
 async function resize(photoBody, bucketName, key) {
@@ -105,6 +122,7 @@ async function resize(photoBody, bucketName, key) {
   console.log('keyPrefix='+keyPrefix);
   console.log('originalPhotoName='+originalPhotoName);
   const thumbnail = await makeThumbnail(photoBody);
+  const middlesize = await makeMiddlesize(photoBody);
   const DEST_BUCKET = bucketName + '-' + process.env.HOSTING_BUCKET_SUFFIX;
 
   //TODO add more sizes
@@ -114,13 +132,19 @@ async function resize(photoBody, bucketName, key) {
 		S3.putObject({
 			Body: thumbnail,
 			Bucket: DEST_BUCKET,
-			Key: thumbnailKey(keyPrefix, originalPhotoName),
+			Key: thumbnailKey(originalPhotoName),
+    }).promise(),
+    
+    S3.putObject({
+			Body: middlesize,
+			Bucket: DEST_BUCKET,
+			Key: middlesizeKey(originalPhotoName),
 		}).promise(),
 
 		S3.copyObject({
 			Bucket: DEST_BUCKET,
 			CopySource: bucketName + '/' + key,
-			Key: fullsizeKey(keyPrefix, originalPhotoName),
+			Key: fullsizeKey(originalPhotoName),
 		}).promise(),
 	]);
 
@@ -133,13 +157,17 @@ async function resize(photoBody, bucketName, key) {
 		photoId: originalPhotoName,
 		
 		thumbnail: {
-			key: thumbnailKey(keyPrefix, originalPhotoName),
+			key: thumbnailKey(originalPhotoName),
 			width: THUMBNAIL_WIDTH,
 			height: THUMBNAIL_HEIGHT
 		},
-
+    middlesize: {
+			key: middlesizeKey(originalPhotoName),
+			width: MIDDLESIZE_WIDTH,
+			height: MIDDLESIZE_HEIGHT
+		},
 		fullsize: {
-			key: fullsizeKey(keyPrefix, originalPhotoName),
+			key: fullsizeKey(originalPhotoName),
 			width: originalPhotoDimensions.width,
 			height: originalPhotoDimensions.height
 		}
@@ -189,6 +217,11 @@ async function processRecord(record) {
       height: sizes.thumbnail.height, 
       key: sizes.thumbnail.key,
     },
+    middlesize: {
+      width: sizes.middlesize.width,
+      height: sizes.middlesize.height, 
+      key: sizes.middlesize.key,
+    },
     fullsize: {
       width: sizes.fullsize.width,
       height: sizes.fullsize.height,
@@ -219,7 +252,8 @@ exports.handler = async (event, context, callback) => {
  
 	try {
 		event.Records.forEach(processRecord);
-		callback(null, { status: 'Photo Processed' });
+    callback(null, { status: 'Photo Processed' });
+    
 	}
 	catch (err) {
 		console.error(err);

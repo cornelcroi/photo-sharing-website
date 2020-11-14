@@ -27,6 +27,7 @@ type Photo
     bucket: String!
     fullsize: PhotoS3Info!
     thumbnail: PhotoS3Info!
+    middlesize: PhotoS3Info!
     exifcamera: String
     exiflens: String
     cover: Boolean!
@@ -47,6 +48,7 @@ input CreatePhotoInput {
 	bucket: String!
 	fullsize: PhotoS3InfoInput!
 	thumbnail: PhotoS3InfoInput!
+  middlesize: PhotoS3InfoInput!
   exifcamera: String
   exiflens: String
   cover: Boolean!

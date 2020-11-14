@@ -48,6 +48,11 @@ const listPhotosByAlbum = gql`
           width
           height
         }
+        middlesize {
+          key
+          width
+          height
+        }
         exifcamera
         exiflens
         cover
@@ -136,10 +141,6 @@ exports.handler = async (event, context, callback) => {
       const albumsFileFromS3 = await S3.getObject(paramsAlbumGalery).promise();
       var albums_templateHTML = albumsFileFromS3.Body.toString('utf-8');
 
-    //s3client.download_file(BUCKET, templateFile, templateFile)
-
-
-		//event.Records.forEach(processRecord);
         console.log('published start');
         const result = await client.query({           
             query: listAlbums,
@@ -148,10 +149,6 @@ exports.handler = async (event, context, callback) => {
 
         let elementsMap = new Map();
 
-
-        //console.log('result.data.listAlbums.items:',result.data.listAlbums.items);
-
-        //result.data.listAlbums.items.forEach(element => console.log("ELEM"+element));
 
         let i=0;
         var albumHTML = "";
@@ -169,6 +166,7 @@ exports.handler = async (event, context, callback) => {
             
             let j=0;
             var photoArray = [];
+            var coverPictureurl = "images/theme/album-01.jpg";
             while (result2.data.listPhotosByAlbum.items.length>j) {
 
                 console.log("result2.data.listPhotosByAlbum.items[j].thumbnail.key="+result2.data.listPhotosByAlbum.items[j].thumbnail.key);
@@ -186,9 +184,13 @@ exports.handler = async (event, context, callback) => {
                     </div>
                 `;
 
+                if(result2.data.listPhotosByAlbum.items[j].cover === true)
+                    coverPictureurl=result2.data.listPhotosByAlbum.items[j].middlesize.key;
                 j++
             }
-            console.log("photoListHTML="+photoListHTML);
+
+            console.log("coverPictureurl="+coverPictureurl);
+            //console.log("photoListHTML="+photoListHTML);
             album_gallery_templateHTML_i = album_gallery_templateHTML.toString().replace(/\{PICTURES_LIST\}/g, photoListHTML);
 
             await Promise.all([
@@ -206,7 +208,7 @@ exports.handler = async (event, context, callback) => {
             albumHTML += `
             <div class="row row-no-gutter">
                 <div class="col-md-6">
-                    <div class="banner blog-2-image" id="blog-photo-post${i}"></div>
+                    <div class="banner blog-2-image" id="album-cover-image-${i}"></div>
                 </div>
                 <div class="col-md-6">
                     <div class="blog-2-text">
@@ -229,8 +231,8 @@ exports.handler = async (event, context, callback) => {
             </div>`;
               
             albumCSS += `
-            #blog-photo-post${i} {
-                background-image: url('../images/theme/album-01.jpg');
+            #album-cover-image-${i} {
+                background-image: url('../${coverPictureurl}');
               }`;
 
             elementsMap.set(result.data.listAlbums.items[i].name, 

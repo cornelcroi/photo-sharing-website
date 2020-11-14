@@ -98,6 +98,11 @@ export const onCreatePhoto = /* GraphQL */ `
         width
         height
       }
+      middlesize {
+        key
+        width
+        height
+      }
       exifcamera
       exiflens
       cover
@@ -135,6 +140,11 @@ export const onUpdatePhoto = /* GraphQL */ `
         width
         height
       }
+      middlesize {
+        key
+        width
+        height
+      }
       exifcamera
       exiflens
       cover
@@ -168,6 +178,11 @@ export const onDeletePhoto = /* GraphQL */ `
         height
       }
       thumbnail {
+        key
+        width
+        height
+      }
+      middlesize {
         key
         width
         height

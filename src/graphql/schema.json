@@ -537,6 +537,21 @@
           "isDeprecated" : false,
           "deprecationReason" : null
         }, {
+          "name" : "middlesize",
+          "description" : null,
+          "args" : [ ],
+          "type" : {
+            "kind" : "NON_NULL",
+            "name" : null,
+            "ofType" : {
+              "kind" : "OBJECT",
+              "name" : "PhotoS3Info",
+              "ofType" : null
+            }
+          },
+          "isDeprecated" : false,
+          "deprecationReason" : null
+        }, {
           "name" : "exifcamera",
           "description" : null,
           "args" : [ ],
@@ -1891,6 +1906,19 @@
           },
           "defaultValue" : null
         }, {
+          "name" : "middlesize",
+          "description" : null,
+          "type" : {
+            "kind" : "NON_NULL",
+            "name" : null,
+            "ofType" : {
+              "kind" : "INPUT_OBJECT",
+              "name" : "PhotoS3InfoInput",
+              "ofType" : null
+            }
+          },
+          "defaultValue" : null
+        }, {
           "name" : "exifcamera",
           "description" : null,
           "type" : {
@@ -2127,6 +2155,15 @@
           "defaultValue" : null
         }, {
           "name" : "thumbnail",
+          "description" : null,
+          "type" : {
+            "kind" : "INPUT_OBJECT",
+            "name" : "PhotoS3InfoInput",
+            "ofType" : null
+          },
+          "defaultValue" : null
+        }, {
+          "name" : "middlesize",
           "description" : null,
           "type" : {
             "kind" : "INPUT_OBJECT",

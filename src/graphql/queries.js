@@ -72,6 +72,11 @@ export const getPhoto = /* GraphQL */ `
         width
         height
       }
+      middlesize {
+        key
+        width
+        height
+      }
       exifcamera
       exiflens
       cover
@@ -110,6 +115,11 @@ export const listPhotos = /* GraphQL */ `
           height
         }
         thumbnail {
+          key
+          width
+          height
+        }
+        middlesize {
           key
           width
           height
@@ -159,6 +169,11 @@ export const listPhotosByAlbum = /* GraphQL */ `
           height
         }
         thumbnail {
+          key
+          width
+          height
+        }
+        middlesize {
           key
           width
           height
