@@ -107,22 +107,28 @@ function fullsizeKey(filename) {
 	return `public/fullsize/${filename}`;
 }
 
-function makeThumbnail(photo) {
-	return Sharp(photo).resize(THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT).toBuffer();
+function getRandomArbitrary(min, max) {
+  return Math.round(Math.random() * (max - min) + min);
 }
 
-function makeMiddlesize(photo) {
-	return Sharp(photo).resize(MIDDLESIZE_WIDTH, MIDDLESIZE_HEIGHT).toBuffer();
+function resizePicture(photo, width, height) {
+
+	return Sharp(photo).resize(width, height).toBuffer();
 }
 
 async function resize(photoBody, bucketName, key) {
-  const keyPrefix = key.substr(0, key.indexOf('/upload/'))
+  
+  const thumbnailWidth = THUMBNAIL_WIDTH;
+  const thumbnailHeight = THUMBNAIL_HEIGHT + getRandomArbitrary(50, 400);
+
+  const middlesizeWidth = MIDDLESIZE_WIDTH;
+  const middlesizeHeight = MIDDLESIZE_HEIGHT + getRandomArbitrary(50, 1000);
+
   const originalPhotoName = key.substr(key.lastIndexOf('/') + 1)
   const originalPhotoDimensions = await Sharp(photoBody).metadata();
-  console.log('keyPrefix='+keyPrefix);
-  console.log('originalPhotoName='+originalPhotoName);
-  const thumbnail = await makeThumbnail(photoBody);
-  const middlesize = await makeMiddlesize(photoBody);
+  const thumbnail = await resizePicture(photoBody, thumbnailWidth, thumbnailHeight);
+  const middlesize = await resizePicture(photoBody, middlesizeWidth, middlesizeHeight);
+
   const DEST_BUCKET = bucketName + '-' + process.env.HOSTING_BUCKET_SUFFIX;
 
   //TODO add more sizes
@@ -158,8 +164,8 @@ async function resize(photoBody, bucketName, key) {
 		
 		thumbnail: {
 			key: thumbnailKey(originalPhotoName),
-			width: THUMBNAIL_WIDTH,
-			height: THUMBNAIL_HEIGHT
+			width: thumbnailWidth,
+			height: thumbnailHeight
 		},
     middlesize: {
 			key: middlesizeKey(originalPhotoName),

@@ -118,7 +118,7 @@ exports.handler = async (event, context, callback) => {
    
     const BUCKET = process.env.STORAGE_S3871F7E84_BUCKETNAME + '-' + process.env.HOSTING_BUCKET_SUFFIX;
 
-    const album_galery_templateFile = 'album-gallery-template.html';
+    const album_galery_templateFile = 'albums-gallery-template.html';
     const albums_templateFile = 'albums-template.html';
 
     //ALBUM LIST
@@ -147,12 +147,8 @@ exports.handler = async (event, context, callback) => {
             limit: 999            
         })
 
-        let elementsMap = new Map();
-
-
         let i=0;
         var albumHTML = "";
-        var albumCSS = ""; 
         var photoListHTML = "";
         while (result.data.listAlbums.items.length>i) {
             photoListHTML = "";
@@ -165,23 +161,32 @@ exports.handler = async (event, context, callback) => {
             });
             
             let j=0;
-            var photoArray = [];
             var coverPictureurl = "images/theme/album-01.jpg";
             while (result2.data.listPhotosByAlbum.items.length>j) {
 
-                console.log("result2.data.listPhotosByAlbum.items[j].thumbnail.key="+result2.data.listPhotosByAlbum.items[j].thumbnail.key);
+                //console.log("result2.data.listPhotosByAlbum.items[j].thumbnail.key="+result2.data.listPhotosByAlbum.items[j].thumbnail.key);
                 
-                photoArray.push({"thumbnail": result2.data.listPhotosByAlbum.items[j].thumbnail.key,
-                "exifcamera": result2.data.listPhotosByAlbum.items[j].exifcamera,
-                "exiflens": result2.data.listPhotosByAlbum.items[j].exiflens,
-                "bucket": result2.data.listPhotosByAlbum.items[j].bucket
-               });
-
                 //console.log("photoMap="+photoArray);
                 photoListHTML += `
-                    <div class="grid-item publications" data-src="${result2.data.listPhotosByAlbum.items[j].fullsize.key}">
-                        <img src="${result2.data.listPhotosByAlbum.items[j].thumbnail.key}" alt="">
+                      <div class="isotope-item fashion">
+
+                      <!-- Begin album single item -->
+                      <div class="album-single-item">
+                        <img class="asi-img" src="${result2.data.listPhotosByAlbum.items[j].thumbnail.key}" alt="image">
+                        <!-- Begin item cover -->
+                        <div class="asi-cover">
+                          <a class="asi-link lg-trigger" href="${result2.data.listPhotosByAlbum.items[j].fullsize.key}" data-exthumbnail="${result2.data.listPhotosByAlbum.items[j].thumbnail.key}" data-sub-html="<p>${result2.data.listPhotosByAlbum.items[j].exifcamera}</p><p>${result2.data.listPhotosByAlbum.items[j].exiflens}</p>">
+                            
+                          </a>
+
+
+                        </div>
+                        <!-- End item cover -->
+                      </div>
+                      <!-- End album single item -->
+
                     </div>
+
                 `;
 
                 if(result2.data.listPhotosByAlbum.items[j].cover === true)
@@ -206,42 +211,59 @@ exports.handler = async (event, context, callback) => {
             ]);
 
             albumHTML += `
-            <div class="row row-no-gutter">
-                <div class="col-md-6">
-                    <div class="banner blog-2-image" id="album-cover-image-${i}"></div>
-                </div>
-                <div class="col-md-6">
-                    <div class="blog-2-text">
-                    <div class="vcenter blog-post-content">
-                        <div class="blog-post-header">
-                        <p class="blog-post-date">DATE  /  ${photoArray.length} photos</p>
-                        </div>
-                        <div class="voffset40"></div>
-                        <h1 class="blog-post-title">${result.data.listAlbums.items[i].name}</h1>
-                        <div class="voffset20"></div>
-                        <p class="blog-post-intro">${result.data.listAlbums.items[i].description}</p>
-                        <div class="voffset40"></div>
-                        
-                        <div class="voffset50"></div>
-                        <a href="albums-gallery-${i}.html#page-gallery" class="readfull">See the full gallery</a>
-                        <div class="voffset50"></div>
+
+
+            <div class="isotope-item fashion">
+
+											<!-- Begin album list item -->
+											<div class="album-list-item">
+												<a class="ali-link" href="albums-gallery-${i}.html">
+													<div class="ali-img-wrap">
+														<img class="ali-img" src="${coverPictureurl}" alt="image">
+													</div>
+													<div class="ali-caption">
+														<h2 class="ali-title">${result.data.listAlbums.items[i].name}</h2>
+														<div class="ali-meta">${result2.data.listPhotosByAlbum.items.length} photos · 134 views</div>
+													</div>
+												</a>
+												<a href="#0" class="album-share" title="Share this album" data-toggle="modal" data-target="#modal-76532457">
+													<i class="fas fa-share-alt"></i>
+												</a>
+
+												<!-- Begin album share modal -->
+												<div id="modal-76532457" class="modal fade" tabindex="-1" role="dialog">
+													<div class="modal-dialog modal-center">
+														<div class="modal-content">
+															<div class="modal-header">
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																<h4 class="modal-title">Share to:</h4>
+															</div>
+															<div class="modal-body text-center">
+																<!-- Begin modal share -->
+																<div class="modal-share">
+																	<ul>
+																		<li><a href="#0" class="btn btn-social-min btn-facebook btn-rounded-full"><i class="fab fa-facebook-f"></i></a></li>
+																		<li><a href="#0" class="btn btn-social-min btn-twitter btn-rounded-full"><i class="fab fa-twitter"></i></a></li>
+																		<li><a href="#0" class="btn btn-social-min btn-google btn-rounded-full"><i class="fab fa-google-plus-g"></i></a></li>
+																		<li><a href="#0" class="btn btn-social-min btn-pinterest btn-rounded-full"><i class="fab fa-pinterest-p"></i></a></li>
+																		<li><a href="#0" class="btn btn-social-min btn-instagram btn-rounded-full"><i class="fab fa-instagram"></i></a></li>
+																	</ul>
+																	<input class="grab-link" type="text" readonly="" value="https://your-site.com/your-album-link" onclick="this.select()">
+																</div>
+																<!-- End modal share -->
+															</div>
+														</div><!-- /.modal-content -->
+													</div><!-- /.modal-dialog -->
+												</div>
+												<!-- End album share modal -->
+
+											</div>
+											<!-- End album list item -->
+
                     </div>
-                    </div>
-                </div>
-            </div>`;
+                    
+                `;
               
-            albumCSS += `
-            #album-cover-image-${i} {
-                background-image: url('../${coverPictureurl}');
-              }`;
-
-            elementsMap.set(result.data.listAlbums.items[i].name, 
-                {"id": result.data.listAlbums.items[i].id,
-                 "description": result.data.listAlbums.items[i].description,
-                 "photos" : photoArray                 
-                }
-            );
-
             i++;
         }
 
@@ -259,14 +281,6 @@ exports.handler = async (event, context, callback) => {
             Bucket: BUCKET,
             Key: "albums.html",
             ContentType: 'text/html',
-
-          }).promise(), 
-
-          S3.putObject({
-            Body: albumCSS,
-            Bucket: BUCKET,
-            Key: "styles/albums.css",
-            ContentType: 'text/css',
 
           }).promise(), 
 
