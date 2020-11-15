@@ -56,6 +56,7 @@ const NewAlbum = () => {
   
   const [name, setName] = useState('')
   const [date, setDate] = useState('')
+  const [labels, setLabels] = useState('')
   const [description, setDescription] = useState('');
   const [open, setOpen] = useState(false)
   
@@ -64,12 +65,14 @@ const NewAlbum = () => {
     API.graphql(graphqlOperation(mutations.createAlbum, {input: {
       name,
       date,
+      labels,
       description
       
       }}))
     setName('')
     setDescription('');
     setDate('');
+    setLabels('');
     
     setOpen(false);
   }
@@ -95,6 +98,8 @@ const NewAlbum = () => {
             <Form.Input name="name" value={name} onChange={(e) => setName(e.target.value)} fluid label='Name' placeholder='Album name' />
             </Form.Group>
             <Form.Input name="name" value={date} onChange={(e) => setDate(e.target.value)} fluid label='Date' placeholder='Album date' />
+            <Form.Input name="labels" value={labels} onChange={(e) => setLabels(e.target.value)} fluid label='Labels' placeholder='Album labels' />
+            
             
             <Form.TextArea name="description" value={description}  onChange={(e) => setDescription(e.target.value)} label='Description' placeholder='Album description' />
             
@@ -141,6 +146,7 @@ const AlbumsList = () => {
   const [id, setId] = useState('')  
   const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
+  const [labels, setLabels] = useState('');
   const [open, setOpen] = useState(false)
 
       
@@ -151,6 +157,7 @@ const AlbumsList = () => {
 
       let j=0;
       while (result.data.listAlbums.items.length>j) {
+        console.log("result.data.listAlbums.items[j]="+result.data.listAlbums.items[j].labels);
         var found = result.data.listAlbums.items[j].photos.items.find(element => element.cover === true);
         if(found){
           result.data.listAlbums.items[j].cover="https://" + found.bucket + ".s3-" + aws_exports.aws_project_region + ".amazonaws.com/" + found.thumbnail.key;;
@@ -161,7 +168,6 @@ const AlbumsList = () => {
         j++
 
       }
-
 
       setAlbums(result.data.listAlbums.items)
     }
@@ -234,16 +240,17 @@ const AlbumsList = () => {
   
   const albumItems = () => {
 
-    const openModify = async(id, name, date, desc) => {
+    const openModify = async(id, name, date, labels, desc) => {
       setOpen(true);
       setName(name)
       setDate(date)
       setDescription(desc)
+      setLabels(labels)
       setId(id)
     }
 
     
-
+    console.log(albums)
     return albums
       //.sort(makeComparator('name'))
       .map( album =>   {
@@ -252,9 +259,6 @@ const AlbumsList = () => {
                   
                   
                   <Image src={album.cover} wrapped ui={false} />
-          
-            
-       
                   <Card.Content>
                   <Card.Header>
                   <NavLink to={`/albums/${album.id}`}>{album.name}</NavLink>
@@ -265,6 +269,9 @@ const AlbumsList = () => {
                   <Card.Description>
                   {album.description}
                   </Card.Description>
+                  <Card.Description>
+                  {album.labels}
+                  </Card.Description>
                 </Card.Content>
                 
                 <Card.Content extra>
@@ -274,7 +281,7 @@ const AlbumsList = () => {
                   }}>
                     Delete
                   </Button>
-                  <Button basic color='green' onClick={() => openModify(album.id, album.name, album.date, album.description )}>
+                  <Button basic color='green' onClick={() => openModify(album.id, album.name, album.date, album.labels, album.description )}>
                     Modify
                   </Button>
                 </div>
@@ -294,6 +301,7 @@ const AlbumsList = () => {
       id: id,
       name: name,
       date: date,
+      labels,
       description: description
 
     }
@@ -302,6 +310,7 @@ const AlbumsList = () => {
 
     setName('');
     setDate('');
+    setLabels('');
     setDescription('');
     setId('');
     
@@ -347,6 +356,10 @@ const AlbumsList = () => {
             </Form.Group>
             
 
+            <Form.Group widths='equal'>
+            <Form.Input name="date" value={labels} onChange={(e) => setLabels(e.target.value)} fluid label='Labels' placeholder='Album labels' />
+            </Form.Group>
+            
             <Form.TextArea name="description" value={description}  onChange={(e) => setDescription(e.target.value)} label='Description' placeholder='Album description' />
             
             <Form.Button type="submit"  color='green' >Save</Form.Button>

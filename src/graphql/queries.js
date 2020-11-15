@@ -18,6 +18,7 @@ export const listAlbums = /* GraphQL */ `
         name
         description
         date
+        labels
         createdAt
         updatedAt
         owner
@@ -36,6 +37,7 @@ export const getAlbum = /* GraphQL */ `
       name
       description
       date
+      labels
       createdAt
       updatedAt
       owner
@@ -87,6 +89,7 @@ export const getPhoto = /* GraphQL */ `
         name
         description
         date
+        labels
         createdAt
         updatedAt
         owner
@@ -134,6 +137,7 @@ export const listPhotos = /* GraphQL */ `
           name
           description
           date
+          labels
           createdAt
           updatedAt
           owner
@@ -188,6 +192,7 @@ export const listPhotosByAlbum = /* GraphQL */ `
           name
           description
           date
+          labels
           createdAt
           updatedAt
           owner

@@ -84,7 +84,9 @@ query ListAlbums(
     items {
       id
       name
+      date
       description
+      labels
       createdAt
       updatedAt
       owner
@@ -175,11 +177,12 @@ exports.handler = async (event, context, callback) => {
                         <img class="asi-img" src="${result2.data.listPhotosByAlbum.items[j].thumbnail.key}" alt="image">
                         <!-- Begin item cover -->
                         <div class="asi-cover">
-                          <a class="asi-link lg-trigger" href="${result2.data.listPhotosByAlbum.items[j].fullsize.key}" data-exthumbnail="${result2.data.listPhotosByAlbum.items[j].thumbnail.key}" data-sub-html="<p>${result2.data.listPhotosByAlbum.items[j].exifcamera}</p><p>${result2.data.listPhotosByAlbum.items[j].exiflens}</p>">
-                            
+                          <a class="asi-link lg-trigger" href="${result2.data.listPhotosByAlbum.items[j].fullsize.key}"
+                          data-exthumbnail="${result2.data.listPhotosByAlbum.items[j].thumbnail.key}"
+                          ` +
+                          (result2.data.listPhotosByAlbum.items[j].exifcamera ? ` data-sub-html="<p>${result2.data.listPhotosByAlbum.items[j].exifcamera}</p><p>${result2.data.listPhotosByAlbum.items[j].exiflens}</p>"> ` : ``)
+                          + ` 
                           </a>
-
-
                         </div>
                         <!-- End item cover -->
                       </div>
@@ -194,10 +197,31 @@ exports.handler = async (event, context, callback) => {
                 j++
             }
 
+          var labels = "";
+
+          if(result.data.listAlbums.items[i].labels){
+            var label_array = result.data.listAlbums.items[i].labels.split(" ");
+            var jj= 0;
+            labels += `<li> <h4 class="head">Labels:</h4>`;
+            
+            for (jj = 0; jj < label_array.length; jj++) {
+              labels += `<span class="info">${label_array[i]}</span> `;
+
+            }
+
+            labels += `</li>`;
+          }
+          
             console.log("coverPictureurl="+coverPictureurl);
             //console.log("photoListHTML="+photoListHTML);
             album_gallery_templateHTML_i = album_gallery_templateHTML.toString().replace(/\{PICTURES_LIST\}/g, photoListHTML);
-
+            
+            album_gallery_templateHTML_i = album_gallery_templateHTML_i.toString().replace(/\{PICTURES_NB\}/g, result2.data.listPhotosByAlbum.items.length);
+            album_gallery_templateHTML_i = album_gallery_templateHTML_i.toString().replace(/\{DESCRIPTION\}/g, result.data.listAlbums.items[i].description);
+            album_gallery_templateHTML_i = album_gallery_templateHTML_i.toString().replace(/\{DATE\}/g, result.data.listAlbums.items[i].date);
+            album_gallery_templateHTML_i = album_gallery_templateHTML_i.toString().replace(/\{ALBUM_NAME\}/g, result.data.listAlbums.items[i].name);
+            album_gallery_templateHTML_i = album_gallery_templateHTML_i.toString().replace(/\{ALBUM_LABELS\}/g, labels);
+            
             await Promise.all([
               S3.putObject({
                 Body: album_gallery_templateHTML_i,
@@ -223,7 +247,7 @@ exports.handler = async (event, context, callback) => {
 													</div>
 													<div class="ali-caption">
 														<h2 class="ali-title">${result.data.listAlbums.items[i].name}</h2>
-														<div class="ali-meta">${result2.data.listPhotosByAlbum.items.length} photos · 134 views</div>
+														<div class="ali-meta">${result2.data.listPhotosByAlbum.items.length} photos · ${result.data.listAlbums.items[i].date}</div>
 													</div>
 												</a>
 												<a href="#0" class="album-share" title="Share this album" data-toggle="modal" data-target="#modal-76532457">
@@ -248,7 +272,7 @@ exports.handler = async (event, context, callback) => {
 																		<li><a href="#0" class="btn btn-social-min btn-pinterest btn-rounded-full"><i class="fab fa-pinterest-p"></i></a></li>
 																		<li><a href="#0" class="btn btn-social-min btn-instagram btn-rounded-full"><i class="fab fa-instagram"></i></a></li>
 																	</ul>
-																	<input class="grab-link" type="text" readonly="" value="https://your-site.com/your-album-link" onclick="this.select()">
+																	<input class="grab-link" type="text" readonly="" value="https://your-site.com/albums-gallery-${i}.html" onclick="this.select()">
 																</div>
 																<!-- End modal share -->
 															</div>

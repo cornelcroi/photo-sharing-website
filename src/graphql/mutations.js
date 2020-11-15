@@ -11,6 +11,7 @@ export const createAlbum = /* GraphQL */ `
       name
       description
       date
+      labels
       createdAt
       updatedAt
       owner
@@ -41,6 +42,7 @@ export const updateAlbum = /* GraphQL */ `
       name
       description
       date
+      labels
       createdAt
       updatedAt
       owner
@@ -71,6 +73,7 @@ export const deleteAlbum = /* GraphQL */ `
       name
       description
       date
+      labels
       createdAt
       updatedAt
       owner
@@ -125,6 +128,7 @@ export const createPhoto = /* GraphQL */ `
         name
         description
         date
+        labels
         createdAt
         updatedAt
         owner
@@ -170,6 +174,7 @@ export const updatePhoto = /* GraphQL */ `
         name
         description
         date
+        labels
         createdAt
         updatedAt
         owner
@@ -215,6 +220,7 @@ export const deletePhoto = /* GraphQL */ `
         name
         description
         date
+        labels
         createdAt
         updatedAt
         owner

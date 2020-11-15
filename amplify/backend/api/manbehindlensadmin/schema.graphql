@@ -8,6 +8,7 @@ type Album
     name: String!
     description: String
     date: String
+    labels: String
     photos: [Photo] @connection(keyName: "byAlbum", fields: ["id"])
     createdAt: AWSDateTime
     updatedAt: AWSDateTime
