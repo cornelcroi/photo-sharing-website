@@ -198,14 +198,17 @@ exports.handler = async (event, context, callback) => {
             }
 
           var labels = "";
+          var keywords = "";
 
           if(result.data.listAlbums.items[i].labels){
+
             var label_array = result.data.listAlbums.items[i].labels.split(" ");
             var jj= 0;
             labels += `<li> <h4 class="head">Labels:</h4>`;
             
             for (jj = 0; jj < label_array.length; jj++) {
-              labels += `<span class="info">${label_array[i]}</span> `;
+              labels += `<span class="info">#${label_array[jj]}</span> `;
+              keywords += `${label_array[jj]}, `;
 
             }
 
@@ -221,6 +224,8 @@ exports.handler = async (event, context, callback) => {
             album_gallery_templateHTML_i = album_gallery_templateHTML_i.toString().replace(/\{DATE\}/g, result.data.listAlbums.items[i].date);
             album_gallery_templateHTML_i = album_gallery_templateHTML_i.toString().replace(/\{ALBUM_NAME\}/g, result.data.listAlbums.items[i].name);
             album_gallery_templateHTML_i = album_gallery_templateHTML_i.toString().replace(/\{ALBUM_LABELS\}/g, labels);
+            
+            album_gallery_templateHTML_i = album_gallery_templateHTML_i.toString().replace(/\{KEYWORDS\}/g, keywords);
             
             await Promise.all([
               S3.putObject({
@@ -287,6 +292,7 @@ exports.handler = async (event, context, callback) => {
                     </div>
                     
                 `;
+              labels = "";
               
             i++;
         }

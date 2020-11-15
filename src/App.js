@@ -269,9 +269,9 @@ const AlbumsList = () => {
                   <Card.Description>
                   {album.description}
                   </Card.Description>
-                  <Card.Description>
+                  <Card.Meta>
                   {album.labels}
-                  </Card.Description>
+                  </Card.Meta>
                 </Card.Content>
                 
                 <Card.Content extra>

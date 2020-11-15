@@ -97,7 +97,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-manbehindlensadmin-prod-94239-deployment",
-          "S3Key": "amplify-builds/StaticWeb59657c-6a4b574c4537696c6c4c-build.zip"
+          "S3Key": "amplify-builds/StaticWeb59657c-79764c6e375336785556-build.zip"
         }
       }
     },
