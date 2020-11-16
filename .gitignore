@@ -11,6 +11,9 @@
 # production
 /build
 
+aws-exports.js
+
+
 # misc
 .DS_Store
 .env.local
