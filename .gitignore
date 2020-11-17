@@ -13,7 +13,7 @@
 
 aws-exports.js
 
-
+amplify/team-provider-info.json
 # misc
 .DS_Store
 .env.local
