@@ -83,7 +83,7 @@
         "Runtime": "nodejs10.x",
         "Timeout": "25",
         "Code": {
-          "S3Bucket": "amplify-manbehindlensadmin-prod-94239-deployment",
+          "S3Bucket": "amplify-manbehindlensadmin-staging-204225-deployment",
           "S3Key": "amplify-builds/S3Triggerac59657c-4158376f5451796b7937-build.zip"
         },
         "Layers": [

@@ -96,7 +96,7 @@
         "Layers": [],
         "Timeout": "25",
         "Code": {
-          "S3Bucket": "amplify-manbehindlensadmin-prod-94239-deployment",
+          "S3Bucket": "amplify-manbehindlensadmin-staging-204225-deployment",
           "S3Key": "amplify-builds/StaticWeb59657c-756c6c59715674437153-build.zip"
         }
       }

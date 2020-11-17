@@ -1,40 +1,45 @@
 {
-  "master": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-manbehindlensadmin-master-210410-authRole",
-      "UnauthRoleArn": "arn:aws:iam::670275281716:role/amplify-manbehindlensadmin-master-210410-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::670275281716:role/amplify-manbehindlensadmin-master-210410-authRole",
-      "Region": "eu-west-1",
-      "DeploymentBucketName": "amplify-manbehindlensadmin-master-210410-deployment",
-      "UnauthRoleName": "amplify-manbehindlensadmin-master-210410-unauthRole",
-      "StackName": "amplify-manbehindlensadmin-master-210410",
-      "StackId": "arn:aws:cloudformation:eu-west-1:670275281716:stack/amplify-manbehindlensadmin-master-210410/e97b6740-1ed8-11eb-951c-0691e94aedb8",
-      "AmplifyAppId": "d1m9q6c21ueivr"
-    },
-    "categories": {
-      "auth": {
-        "manbehindlensadmin84970f75": {}
-      }
-    }
-  },
   "prod": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-manbehindlensadmin-prod-94239-authRole",
-      "UnauthRoleArn": "arn:aws:iam::554189332310:role/amplify-manbehindlensadmin-prod-94239-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::554189332310:role/amplify-manbehindlensadmin-prod-94239-authRole",
+      "AuthRoleName": "amplify-manbehindlensadmin-prod-201738-authRole",
+      "UnauthRoleArn": "arn:aws:iam::554189332310:role/amplify-manbehindlensadmin-prod-201738-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::554189332310:role/amplify-manbehindlensadmin-prod-201738-authRole",
       "Region": "eu-west-1",
-      "DeploymentBucketName": "amplify-manbehindlensadmin-prod-94239-deployment",
-      "UnauthRoleName": "amplify-manbehindlensadmin-prod-94239-unauthRole",
-      "StackName": "amplify-manbehindlensadmin-prod-94239",
-      "StackId": "arn:aws:cloudformation:eu-west-1:554189332310:stack/amplify-manbehindlensadmin-prod-94239/5e0f1c10-219e-11eb-b0b2-02c4fae2d862",
-      "AmplifyAppId": "d2aiwlyzua5nct"
+      "DeploymentBucketName": "amplify-manbehindlensadmin-prod-201738-deployment",
+      "UnauthRoleName": "amplify-manbehindlensadmin-prod-201738-unauthRole",
+      "StackName": "amplify-manbehindlensadmin-prod-201738",
+      "StackId": "arn:aws:cloudformation:eu-west-1:554189332310:stack/amplify-manbehindlensadmin-prod-201738/8fed7340-2909-11eb-86e5-0ac0b9ad48dd",
+      "AmplifyAppId": "d19lqvq6tr9btd"
     },
     "categories": {
       "auth": {
         "manbehindlensadmin84970f75": {}
       },
       "function": {
-        "S3Triggerac59657c": {}
+        "S3Triggerac59657c": {},
+        "StaticWeb59657c": {}
+      }
+    }
+  },
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-manbehindlensadmin-staging-204225-authRole",
+      "UnauthRoleArn": "arn:aws:iam::554189332310:role/amplify-manbehindlensadmin-staging-204225-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::554189332310:role/amplify-manbehindlensadmin-staging-204225-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-manbehindlensadmin-staging-204225-deployment",
+      "UnauthRoleName": "amplify-manbehindlensadmin-staging-204225-unauthRole",
+      "StackName": "amplify-manbehindlensadmin-staging-204225",
+      "StackId": "arn:aws:cloudformation:eu-west-1:554189332310:stack/amplify-manbehindlensadmin-staging-204225/12400030-290d-11eb-920c-0a7c48fe7b06",
+      "AmplifyAppId": "d3lciriql82su8"
+    },
+    "categories": {
+      "auth": {
+        "manbehindlensadmin84970f75": {}
+      },
+      "function": {
+        "S3Triggerac59657c": {},
+        "StaticWeb59657c": {}
       }
     }
   }
