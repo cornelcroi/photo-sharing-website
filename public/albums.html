@@ -10,14 +10,14 @@
 	<head>
 
 		<!-- Title -->
-		<title>ManBehindLens.com | Street photography</title>
+		<title>ManBehindLens.com - Albums | Street photography</title>
 
 		<!-- Meta -->
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="description" content="HTML5 Photography Portfolio Website Template by Themetorium">
 		<meta name="keywords" content="HTML5, CSS3, JavaScript, Bootsrtrap, Responsive, Photography, Portfolio, Template, Theme, Website, Themetorium" />
-		<meta name="author" content="themetorium.net">
+		<meta name="author" content="manbehindlens.coms">
 
 		<!-- Mobile Metas -->
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -46,7 +46,7 @@
 		<link rel="stylesheet" href="assets/css/helper.css">
 
 		<!-- Template dark style CSS (comment or uncomment below line to enable/disable template dark style) -->
-		<link rel="stylesheet" href="assets/css/dark-style.css"> 
+		 <link rel="stylesheet" href="assets/css/dark-style.css"> 
 
 
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -88,7 +88,7 @@
 				</div>
 				<!-- End logo -->
 
-				
+
 				<!-- Begin menu (Bootstrap navbar)
 				=================================== 
 				* Use class "navbar-default" or "navbar-border-bottom" for navbar style.
@@ -109,7 +109,7 @@
 						<!-- Collect the nav links, forms, and other content for toggling -->
 						<div class="collapse navbar-collapse" id="navbar-collapse-1">
 							<ul class="nav navbar-nav navbar-right">
-								
+
 								<li class="nav-item">
 									<a class="nav-link" href="index.html">HOME</a>
 								</li>
@@ -122,6 +122,7 @@
 								<li class="nav-item">
 									<a class="nav-link" href="page-about-me.html">About</a>
 								</li>
+
 							</ul> <!-- /.nav -->
 						</div> <!-- /.navbar-collapse -->
 
@@ -142,35 +143,147 @@
 		=============================== -->
 		<div id="body-content">
 
-			<!-- ==============================
-			/////// Begin intro section ///////
-			===================================
-			* Use class "bg-image-scroll-horizontal" or "bg-image-scroll-vertical" to enable background image scrolling animation (otherwise use class "bg-image" or "bg-image-fixed").
-			* Use class "full-page" to enable fullscreen intro.
-			-->
-			<section id="intro-section" class="full-page bg-image" style="background-image: url(assets/img/album-list/big/img-5.jpg); background-position: 50% 50%;">
+
+			<!-- ================================
+			///// Begin page header section /////
+			================================= -->
+			<section id="page-header-secion" class="alter-heading">
+
+				<!-- Begin page header image 
+				===============================
+				* Use class "parallax" to enable parallax effect.
+				-->
+				<div class="page-header-image parallax bg-image" style="background-image: url(assets/img/headings/heading-blur-5.jpg); background-position: 50% 50%;"></div>
+				<!-- End page header image -->
 
 				<!-- Element cover -->
-				<div class="cover bg-transparent-1-5-dark"></div>
+				<div class="cover page-header-cover"></div>
 
-				<!-- Begin intro caption
-				=========================
-				* Use classes "align-center" and "text-center" to align caption to the center.
-				-->
-				<div class="intro-caption bg-transparent-8-dark text-gray-2">
-					<h1 class="intro-title">ManBehindLens.com</h1>
-					<h1 class="intro-text">Street Photography</h1>
-					
-					<div class="intro-button-wrap">
-						<a href="albums.html" class="btn btn-default btn-rounded-5x">View my Work</a> 
-						
-					</div>
-				</div>
-				<!-- End intro caption -->
+				<!-- Begin page header info -->
+				<div class="container-fluid page-header-content no-padding text-center">
+					<div class="row">
+						<div class="col-md-12">
 
+							<h1 class="album-title">ALBUMS</h1>
+
+						</div> <!-- /.col -->
+					</div> <!-- /.row -->
+				</div> 
+				<!-- End page header info -->
 
 			</section>
-			<!-- End intro section -->
+			<!-- End page header section -->
+
+
+			<!-- ============================
+			///// Begin content section /////
+			============================= -->
+			<section id="content-section">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+
+							<!-- Begin content wrap -->
+							<div class="content-wrap">
+
+								<!-- Begin isotope
+								===================
+								* Use classes "gutter-1", "gutter-2" or "gutter-3" to add more space between items.
+								* Use class "col-1", "col-2", "col-3", "col-4", "col-5" or "col-6" for columns.
+								-->
+								<div class="isotope gutter-3 col-3">
+
+
+
+									<!-- Begin isotope items (album list items) 
+									============================================= 
+									* Use class "caption-gradient" to enable gradient caption.
+									* Use class "caption-outside" to enable caption outside.
+									* Use class "caption-dark" to enable dark caption (no effect if "caption-gradient" or "caption-outside" is used).
+									* Use class "caption-boxed" to enable boxed caption (no effect if "caption-gradient" or "caption-outside" is used).
+									* Use class "caption-sm", "caption-lg" or "caption-xlg" to change caption size.
+									* Use classes "ali-style-1", "ali-style-2" to change album list item style (no effect if "gutter-1" is used).
+									* Note: For grid layout make sure that your images are the same dimensions.
+									* Note: For masonry layout make sure that your images are the different dimensions.
+									-->
+									<div class="isotope-items-wrap caption-gradient">
+
+										<!-- Grid sizer (do not remove!!!) -->
+										<div class="grid-sizer"></div>
+
+
+										<!-- //////////////////
+										// Begin isotope item. Note: use class "width2" for alternative item width (works best on first item)
+										/////////////////////// -->
+										<div class="isotope-item fashion">
+
+											<!-- Begin album list item -->
+											<div class="album-list-item">
+												<a class="ali-link" href="albums-gallery-1.html">
+													<div class="ali-img-wrap">
+														<img class="ali-img" src="assets/img/img-1.jpg" alt="image">
+													</div>
+													<div class="ali-caption">
+														<h2 class="ali-title">Paris Fashion Week</h2>
+														<div class="ali-meta">15 photos · November 2020</div>
+													</div>
+												</a>
+												<a href="#0" class="album-share" title="Share this album" data-toggle="modal" data-target="#modal-76532457">
+													<i class="fas fa-share-alt"></i>
+												</a>
+
+												<!-- Begin album share modal -->
+												<div id="modal-76532457" class="modal fade" tabindex="-1" role="dialog">
+													<div class="modal-dialog modal-center">
+														<div class="modal-content">
+															<div class="modal-header">
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																<h4 class="modal-title">Share to:</h4>
+															</div>
+															<div class="modal-body text-center">
+																<!-- Begin modal share -->
+																<div class="modal-share">
+																	<ul>
+																		<li><a href="#0" class="btn btn-social-min btn-facebook btn-rounded-full"><i class="fab fa-facebook-f"></i></a></li>
+																		<li><a href="#0" class="btn btn-social-min btn-twitter btn-rounded-full"><i class="fab fa-twitter"></i></a></li>
+																		<li><a href="#0" class="btn btn-social-min btn-google btn-rounded-full"><i class="fab fa-google-plus-g"></i></a></li>
+																		<li><a href="#0" class="btn btn-social-min btn-pinterest btn-rounded-full"><i class="fab fa-pinterest-p"></i></a></li>
+																		<li><a href="#0" class="btn btn-social-min btn-instagram btn-rounded-full"><i class="fab fa-instagram"></i></a></li>
+																	</ul>
+																	<input class="grab-link" type="text" readonly="" value="https://your-site.com/your-album-link" onclick="this.select()">
+																</div>
+																<!-- End modal share -->
+															</div>
+														</div><!-- /.modal-content -->
+													</div><!-- /.modal-dialog -->
+												</div>
+												<!-- End album share modal -->
+
+											</div>
+											<!-- End album list item -->
+
+										</div>
+										<!-- End isotope item -->
+
+										
+
+									</div>
+									<!-- End isotope items wrap -->
+
+								</div>
+								<!-- End isotope -->
+
+							</div>
+							<!-- End content wrap -->
+							
+						</div> <!-- /.col -->
+					</div> <!-- /.row -->
+
+					
+
+				</div> <!-- /.container -->
+			</section>
+			<!-- End content section -->
 
 
 			<!-- Begin footer -->
@@ -188,7 +301,8 @@
 							<div class="col-sm-6">
 								<div class="social-icons">
 									<ul>
-										<li><a target="_blank" href="https://www.facebook.com/manbehindlenscom" title="Follow me on Facebook"><i class="fab fa-facebook-f"></i></a></li>
+										<li><a target="_blank" href="https://www.facebook.com/manbehindlenscom" title="Follow me on Facebook"><i class="fab fa-facebook-f"></i><	/a>
+										</li>
 										<li><a target="_blank" href="https://www.instagram.com/manbehindlenscom" title="Follow me on Instagram"><i class="fab fa-instagram"></i></a></li>
 									</ul>
 								</div>

@@ -10,14 +10,14 @@
 	<head>
 
 		<!-- Title -->
-		<title>ManBehindLens.com | Street photography</title>
+		<title>ManBehindLens.com - {ALBUM_NAME} | Street photography</title>
 
 		<!-- Meta -->
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="description" content="HTML5 Photography Portfolio Website Template by Themetorium">
-		<meta name="keywords" content="HTML5, CSS3, JavaScript, Bootsrtrap, Responsive, Photography, Portfolio, Template, Theme, Website, Themetorium" />
-		<meta name="author" content="themetorium.net">
+		<meta name="description" content="{DESCRIPTION}">
+		<meta name="keywords" content="{KEYWORDS}" />
+		<meta name="author" content="manbehindlens.com">
 
 		<!-- Mobile Metas -->
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -63,7 +63,7 @@
 	<!-- =================
 	///// Begin body /////
 	================== -->
-	<body id="body">
+	<body id="body" class="overflow-y-scroll"> <!-- overflow class is for isotope if needed -->
 
 		<!-- Begin page preloader -->
 		<div id="preloader">
@@ -88,7 +88,7 @@
 				</div>
 				<!-- End logo -->
 
-				
+
 				<!-- Begin menu (Bootstrap navbar)
 				=================================== 
 				* Use class "navbar-default" or "navbar-border-bottom" for navbar style.
@@ -109,7 +109,7 @@
 						<!-- Collect the nav links, forms, and other content for toggling -->
 						<div class="collapse navbar-collapse" id="navbar-collapse-1">
 							<ul class="nav navbar-nav navbar-right">
-								
+
 								<li class="nav-item">
 									<a class="nav-link" href="index.html">HOME</a>
 								</li>
@@ -122,6 +122,7 @@
 								<li class="nav-item">
 									<a class="nav-link" href="page-about-me.html">About</a>
 								</li>
+
 							</ul> <!-- /.nav -->
 						</div> <!-- /.navbar-collapse -->
 
@@ -142,35 +143,157 @@
 		=============================== -->
 		<div id="body-content">
 
-			<!-- ==============================
-			/////// Begin intro section ///////
-			===================================
-			* Use class "bg-image-scroll-horizontal" or "bg-image-scroll-vertical" to enable background image scrolling animation (otherwise use class "bg-image" or "bg-image-fixed").
-			* Use class "full-page" to enable fullscreen intro.
-			-->
-			<section id="intro-section" class="full-page bg-image" style="background-image: url(assets/img/album-list/big/img-5.jpg); background-position: 50% 50%;">
+
+			<!-- ================================
+			///// Begin page header section /////
+			================================= -->
+			<section id="page-header-secion" class="alter-heading">
+
+				<!-- Begin page header image 
+				===============================
+				* Use class "parallax" to enable parallax effect.
+				-->
+				<div class="page-header-image parallax bg-image" style="background-image: url(assets/img/headings/heading-3.jpg); background-position: 50% 50%;"></div>
+				<!-- End page header image -->
 
 				<!-- Element cover -->
-				<div class="cover bg-transparent-1-5-dark"></div>
+				<div class="cover page-header-cover"></div>
 
-				<!-- Begin intro caption
-				=========================
-				* Use classes "align-center" and "text-center" to align caption to the center.
-				-->
-				<div class="intro-caption bg-transparent-8-dark text-gray-2">
-					<h1 class="intro-title">ManBehindLens.com</h1>
-					<h1 class="intro-text">Street Photography</h1>
-					
-					<div class="intro-button-wrap">
-						<a href="albums.html" class="btn btn-default btn-rounded-5x">View my Work</a> 
-						
-					</div>
-				</div>
-				<!-- End intro caption -->
+				<!-- Begin page header info -->
+				<div class="container-fluid page-header-content no-padding text-center">
+					<div class="row">
+						<div class="col-md-12">
 
+							<h1 class="album-title">{ALBUM_NAME}</h1>
+							
+
+						</div> <!-- /.col -->
+					</div> <!-- /.row -->
+				</div> 
+				<!-- End page header info -->
 
 			</section>
-			<!-- End intro section -->
+			<!-- End page header section -->
+
+
+			<!-- ===============================================
+			///// Begin content section (portfolio single) /////
+			================================================ -->
+			<section id="content-section" class="portfolio-single portfolio-single-5">
+
+				<!-- Begin content wrap -->
+				<div class="content-wrap">
+
+					<div class="container full-width"> <!-- Use class "max-width-1200" or "full-width" -->
+						<div class="row f-height">
+
+							<div class="col-left col-md-4 col-lg-3">
+
+								<!-- Begin portfolio-info -->
+								<div class="portfolio-info">
+									<div class="portfolio-info-inner">
+
+
+										<!-- Begin portfolio meta -->
+										<div class="album-meta">
+											<span class="photos-count">{PICTURES_NB} Photos</span> /
+											<span class="photos-views">{DATE}</span>
+										</div>
+										<!-- End portfolio meta -->
+
+										
+
+										<!-- Begin portfolio description -->
+										<div class="album-description margin-top-20">
+											<div class="al-desc-inner">
+												<p>{DESCRIPTION}</p>
+
+											
+											</div>
+
+											
+										</div>
+										<!-- End portfolio description -->
+
+										<!-- Begin portfolio atr -->
+										<div class="portfolio-atr margin-top-50">
+											<ul class="list-unstyled">
+												
+												
+												{ALBUM_LABELS}
+												
+												<!-- Begin portfolio share -->
+												<li class="portfolio-share">
+													<h4 class="head">Share:</h4>
+													<span class="info"><a href="#0" title="Share to Facebook"><i class="fab fa-facebook-f"></i></a></span>
+													<span class="info"><a href="#0" title="Share to Instagram"><i class="fab fa-instagram"></i></a></span>
+												</li>
+												<!-- End portfolio share -->
+
+											</ul>
+										</div>
+										<!-- End portfolio atr -->
+
+									</div> <!-- /.portfolio-info-inner -->
+								</div>
+								<!-- End portfolio-info -->
+
+							</div> <!-- /.col -->
+
+							<div class="col-right col-md-8 col-lg-9">
+
+								<!-- Begin isotope
+								===================
+								* Use classes "gutter-1", "gutter-2" or "gutter-3" to add more space between items.
+								* Use class "col-1", "col-2", "col-3", "col-4", "col-5" or "col-6" for columns.
+								-->
+								<div class="isotope gutter-2 col-4">
+
+									<!-- Begin gallery top content -->
+									<div class="gallery-top-content margin-bottom-25">
+
+										<!-- Begin album attributes -->
+										<ul class="album-attributes">
+
+											
+
+											
+											
+										</ul>
+										<!-- End album attributes -->
+
+									</div>
+									<!-- End gallery top content -->
+									
+
+									<!-- Begin isotope items (album single items)
+									=============================================== 
+									* Use classes "hover-center", "hover-boxed", "hover-dark", "hover-simple" to change album single item hover variations.
+									* Note1: For grid layout make sure that your images are the same dimensions.
+									* Note2: For masonry layout make sure that your images are the different dimensions.
+									-->
+									<div id="gallery" class="isotope-items-wrap lightgallery">
+
+										<!-- Grid sizer (do not remove!!!) -->
+										<div class="grid-sizer"></div>
+
+										{PICTURES_LIST}
+
+									</div>
+									<!-- End isotope items wrap -->
+
+								</div>
+								<!-- End isotope -->
+
+							</div> <!-- /.col -->
+						</div> <!-- /.row -->
+					</div> <!-- /.container -->
+
+				</div>
+				<!-- End content wrap -->
+
+			</section>
+			<!-- End content section -->
 
 
 			<!-- Begin footer -->
@@ -181,7 +304,7 @@
 
 							<div class="col-sm-6">
 								<div class="copyright">
-									&copy; 2020 ManBehinsLens.com / All rights reserved
+									&copy; 2020 ManBehindLens.com / All rights reserved
 								</div>
 							</div> <!-- /.col -->
 
@@ -201,7 +324,7 @@
 			<!-- End footer -->
 
 
-		</div>
+      </div>
 		<!-- End body content -->
 
 		<!-- Scroll to top button -->
