@@ -90,11 +90,22 @@
         "Runtime": "nodejs10.x",
         "Timeout": "25",
         "Code": {
-          "S3Bucket": "amplify-manbehindlensadmin-prod-202903-deployment",
+          "S3Bucket": "amplify-manbehindlensadmin-dev-142455-deployment",
           "S3Key": "amplify-builds/S3Triggerac59657c-37366d47635736323877-build.zip"
         },
         "Layers": [
-          "arn:aws:lambda:eu-west-1:554189332310:layer:Sharp-Layer:1"
+          {"Fn::Sub": [
+            "arn:aws:lambda:${region}:${account}:layer:Sharp-Layer:1",
+            {
+              "region": {
+                "Ref": "AWS::Region"
+              },
+              "account": {
+                "Ref": "AWS::AccountId"
+              }
+            }
+          ]
+        }
         ]
       }
     },
