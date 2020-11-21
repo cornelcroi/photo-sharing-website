@@ -25,6 +25,10 @@
     "hostingBucketSuffix": {
       "Type": "String",
       "Default": "hosting"
+    },
+    "hostingS3AndCloudFrontHostingBucketName": {
+      "Type": "String",
+      "Default": "hostingS3AndCloudFrontHostingBucketName"
     }
   },
   "Conditions": {
@@ -83,6 +87,9 @@
             },
             "HOSTING_BUCKET_SUFFIX": {
               "Ref": "hostingBucketSuffix"
+            },
+            "HOSTING_S3ANDCLOUDFRONT_HOSTINGBUCKETNAME": {
+              "Ref": "hostingS3AndCloudFrontHostingBucketName"
             }
           }
         },
@@ -97,7 +104,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-manbehindlensadmin-prod-202903-deployment",
-          "S3Key": "amplify-builds/StaticWeb59657c-5476646e4b5857386455-build.zip"
+          "S3Key": "amplify-builds/StaticWeb59657c-62416c67713266472b51-build.zip"
         }
       }
     },
@@ -270,11 +277,7 @@
                     [
                       "arn:aws:s3:::",
                       {
-                        "Ref": "storages3871f7e84BucketName"
-                      },
-                      "-",
-                      {
-                        "Ref": "hostingBucketSuffix"
+                        "Ref": "hostingS3AndCloudFrontHostingBucketName"
                       },
                       "/*"
                     ]

@@ -2,6 +2,7 @@
 	API_MANBEHINDLENSADMIN_GRAPHQLAPIENDPOINTOUTPUT
 	API_MANBEHINDLENSADMIN_GRAPHQLAPIIDOUTPUT
 	ENV
+	HOSTING_S3ANDCLOUDFRONT_HOSTINGBUCKETNAME
 	REGION
 	STORAGE_S3871F7E84_BUCKETNAME
 Amplify Params - DO NOT EDIT */
@@ -118,7 +119,7 @@ exports.handler = async (event, context, callback) => {
 	try {
 
    
-    const BUCKET = process.env.STORAGE_S3871F7E84_BUCKETNAME + '-' + process.env.HOSTING_BUCKET_SUFFIX;
+    const BUCKET = process.env.HOSTING_S3ANDCLOUDFRONT_HOSTINGBUCKETNAME;
 
     
     const album_galery_templateFile = 'albums-gallery-template.html';

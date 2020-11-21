@@ -86,10 +86,6 @@
 			"Type": "String",
 			"Default": "storages3871f7e84BucketName"
 		},	
-		"hostingBucketSuffix": {
-			"Type": "String",
-			"Default": "hosting"
-		  },    
         "functionS3Triggerac59657cName": {
             "Type": "String",
             "Default": "functionS3Triggerac59657cName"
@@ -275,133 +271,6 @@
 				}
 			}
 		},
-		"S3HostingBucket": {
-			"Type": "AWS::S3::Bucket",
-		     
-			"DeletionPolicy" : "Retain",
-			"Properties": {
-				"BucketName": 
-                        {
-                            "Fn::Join": [
-                                "",
-                                [
-                                    {
-                                        "Ref": "bucketName"
-                                    },
-                                    {
-                                      "Fn::Select": [
-                                          3,
-                                          {
-                                              "Fn::Split": [
-                                                  "-",
-                                                  {
-                                                      "Ref": "AWS::StackName"
-                                                  }
-                                              ]
-                                          }
-                                      ]
-									},
-                                    "-",
-                                    {
-                                        "Ref": "env"
-									},
-									"-",
-									{
-										"Ref": "hostingBucketSuffix"
-									}
-                                ]
-                            ]
-                        },
-                    
-                       
-						"CorsConfiguration": {
-									"CorsRules": [
-										{
-											"AllowedHeaders": [
-												"*"
-											],
-											"AllowedMethods": [
-												"GET",
-												"HEAD",
-												"PUT",
-												"POST",
-												"DELETE"
-											],
-											"AllowedOrigins": [
-												"*"
-											],
-											"ExposedHeaders": [
-												"x-amz-server-side-encryption",
-												"x-amz-request-id",
-												"x-amz-id-2",
-												"ETag"
-											],
-											"Id": "S3CORSRuleId1",
-											"MaxAge": "3000"
-										}
-									]
-						}
-			}
-		},
-		"CloudFrontOriginAccessIdentity": {
-            "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
-            "Properties": {
-                "CloudFrontOriginAccessIdentityConfig": {
-                    "Comment": { "Ref": "S3HostingBucket" }
-                }
-            }
-        },
-		"CloudFrontDistribution": {
-			"Type": "AWS::CloudFront::Distribution",
-			"Properties": {
-			   "DistributionConfig": {
-				  "CustomErrorResponses": [
-					 {
-						"ErrorCode": 403,
-						"ResponseCode": 404,
-						"ResponsePagePath": "/index.html"
-					 }
-				  ],
-				  "DefaultCacheBehavior": {
-					 "AllowedMethods": [
-						"GET",
-						"HEAD",
-						"OPTIONS"
-					 ],
-					 "CachedMethods": [
-						"GET",
-						"HEAD",
-						"OPTIONS"
-					 ],
-					 "Compress": true,
-					 "DefaultTTL": 3600,
-					 "ForwardedValues": {
-						"Cookies": {
-						   "Forward": "none"
-						},
-						"QueryString": false
-					 },
-					 "MaxTTL": 86400,
-					 "MinTTL": 60,
-					 "TargetOriginId": "s3origin",
-					 "ViewerProtocolPolicy": "allow-all"
-				  },
-				  "DefaultRootObject": "index.html",
-				  "Enabled": true,
-				  "HttpVersion": "http2",
-				  "Origins": [
-					 {
-						"DomainName": { "Fn::GetAtt" : [ "S3HostingBucket", "DomainName" ] },
-						"Id": "s3origin",
-						"S3OriginConfig": {
-						   "OriginAccessIdentity": {"Fn::Sub": "origin-access-identity/cloudfront/${CloudFrontOriginAccessIdentity}" }
-						}
-					 }
-				  ],
-				  "PriceClass": "PriceClass_All"
-			   }
-			}
-		 },
 	    "TriggerPermissions": {
           "Type": "AWS::Lambda::Permission",
           "Properties": {
@@ -495,34 +364,7 @@
                                     ]
                                 }
                             ]
-						},
-						{
-                            "Effect": "Allow",
-                            "Action": [
-                                "s3:PutObject",
-                                "s3:GetObject",
-                                "s3:ListBucket",
-                                "s3:DeleteObject"
-                            ],
-                            "Resource": [
-                                {
-                                    "Fn::Join": [
-                                        "",
-                                        [
-                                            "arn:aws:s3:::",
-                                            {
-                                                "Ref": "S3Bucket"
-											},
-											"-",
-											{
-												"Ref": "hostingBucketSuffix"
-											},											
-                                            "/*"
-                                        ]
-                                    ]
-                                }
-                            ]
-                        }
+						}
                     ]
                 }
             }
@@ -935,21 +777,6 @@
 					]
 				}
 			}
-		},
-		"S3BucketPolicy": {
-			"Type" : "AWS::S3::BucketPolicy",
-			"Properties" : {
-			  "Bucket" : {"Ref" : "S3HostingBucket"},
-			  "PolicyDocument": {
-				"Statement":[{
-				  "Sid": "PublicReadGetObject",
-				  "Effect": "Allow",
-				  "Action": "s3:GetObject",
-				  "Principal": "*",
-				  "Resource": { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "S3HostingBucket" } , "/*" ]]}
-				}]
-			  }
-			}
 		}
 	},
 	"Outputs": {
@@ -958,12 +785,6 @@
 				"Ref": "S3Bucket"
 			},
 			"Description": "Bucket name for the S3 bucket"
-		},
-		"HostingBucketName": {
-			"Value": {
-				"Ref": "S3HostingBucket"
-			},
-			"Description": "Bucket name for the S3 hosting bucket"
 		},
 		"Region": {
 			"Value": {

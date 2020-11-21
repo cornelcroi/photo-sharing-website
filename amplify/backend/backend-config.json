@@ -41,6 +41,13 @@
             "GraphQLAPIIdOutput",
             "GraphQLAPIEndpointOutput"
           ]
+        },
+        {
+          "category": "hosting",
+          "resourceName": "S3AndCloudFront",
+          "attributes": [
+            "HostingBucketName"
+          ]
         }
       ]
     },
@@ -62,6 +69,13 @@
           "resourceName": "s3871f7e84",
           "attributes": [
             "BucketName"
+          ]
+        },
+        {
+          "category": "hosting",
+          "resourceName": "S3AndCloudFront",
+          "attributes": [
+            "HostingBucketName"
           ]
         }
       ]

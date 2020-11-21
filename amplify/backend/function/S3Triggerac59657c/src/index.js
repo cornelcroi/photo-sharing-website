@@ -2,6 +2,7 @@
 	API_MANBEHINDLENSADMIN_GRAPHQLAPIENDPOINTOUTPUT
 	API_MANBEHINDLENSADMIN_GRAPHQLAPIIDOUTPUT
 	ENV
+	HOSTING_S3ANDCLOUDFRONT_HOSTINGBUCKETNAME
 	REGION
 Amplify Params - DO NOT EDIT *//* Amplify Params - DO NOT EDIT
 You can access the following resource attributes as environment variables from your Lambda function
@@ -129,7 +130,7 @@ async function resize(photoBody, bucketName, key) {
   const thumbnail = await resizePicture(photoBody, thumbnailWidth, thumbnailHeight);
   const middlesize = await resizePicture(photoBody, middlesizeWidth, middlesizeHeight);
 
-  const DEST_BUCKET = bucketName + '-' + process.env.HOSTING_BUCKET_SUFFIX;
+  const DEST_BUCKET = process.env.HOSTING_S3ANDCLOUDFRONT_HOSTINGBUCKETNAME;
 
   //TODO add more sizes
 
@@ -183,7 +184,7 @@ async function resize(photoBody, bucketName, key) {
 async function processRecord(record) {
 	const bucketName = record.s3.bucket.name;
   const key = decodeURIComponent(record.s3.object.key.replace(/\+/g, " "));
-  const DEST_BUCKET = bucketName + '-' + process.env.HOSTING_BUCKET_SUFFIX;
+  const DEST_BUCKET = process.env.HOSTING_S3ANDCLOUDFRONT_HOSTINGBUCKETNAME;
 
   console.log('processRecord', JSON.stringify(record))
 

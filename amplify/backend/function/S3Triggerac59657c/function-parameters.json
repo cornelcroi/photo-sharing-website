@@ -7,12 +7,20 @@
         "update",
         "delete"
       ]
+    },
+    "hosting": {
+      "S3AndCloudFront": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
     }
   },
   "lambdaLayers": [
     {
       "type": "ExternalLayer",
-      "arn": "arn:aws:lambda:eu-west-1:670275281716:layer:Sharp:1"
+      "arn": "arn:aws:lambda:eu-west-1:554189332310:layer:Sharp-Layer:1"
     }
   ]
 }

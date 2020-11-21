@@ -7,7 +7,7 @@ import API, {graphqlOperation} from '@aws-amplify/api'
 import Storage from '@aws-amplify/storage'
 import aws_exports from './aws-exports'
 
-import {AmplifyAuthenticator, AmplifySignIn, AmplifySignUp} from "@aws-amplify/ui-react";
+import {AmplifyAuthenticator, AmplifySignIn, AmplifySignUp, AmplifyGreetings} from "@aws-amplify/ui-react";
 
 
 import {Divider,Container, Card, Image, Label, Modal,Button, Form, Grid, Header, Segment} from 'semantic-ui-react'
@@ -24,7 +24,7 @@ import * as subscriptions from './graphql/subscriptions'
 
 Amplify.configure(aws_exports);
 
-
+const NO_COVER_IMAGE = "images/no_cover.jpg"
 
 
 function makeComparator(key, order = 'asc') {
@@ -160,10 +160,10 @@ const AlbumsList = () => {
         console.log("result.data.listAlbums.items[j]="+result.data.listAlbums.items[j].labels);
         var found = result.data.listAlbums.items[j].photos.items.find(element => element.cover === true);
         if(found){
-          result.data.listAlbums.items[j].cover="https://" + found.bucket + ".s3-" + aws_exports.aws_project_region + ".amazonaws.com/" + found.thumbnail.key;;
+          result.data.listAlbums.items[j].cover = aws_exports.aws_content_delivery_url + "/" + found.thumbnail.key;;
 
         }else{
-          result.data.listAlbums.items[j].cover="images/no_cover.jpg";
+          result.data.listAlbums.items[j].cover = NO_COVER_IMAGE;
         }
         j++
 
@@ -181,7 +181,7 @@ const AlbumsList = () => {
       subscription = API.graphql(graphqlOperation(subscriptions.onCreateAlbum, {owner: user.username})).subscribe({
         next: (data) => {
           const album = data.value.data.onCreateAlbum
-          album.cover="images/no_cover.jpg";
+          album.cover = NO_COVER_IMAGE;
           setAlbums(a => a.concat([album].sort(makeComparator('name'))))
         }
       })
@@ -257,9 +257,8 @@ const AlbumsList = () => {
 
          return <Card key={album.id}>
                   
-                  
-                  <Image src={album.cover} wrapped ui={false} />
-                  <Card.Content>
+                <Image src={album.cover} />
+                <Card.Content>
                   <Card.Header>
                   <NavLink to={`/albums/${album.id}`}>{album.name}</NavLink>
                   </Card.Header>
@@ -275,17 +274,19 @@ const AlbumsList = () => {
                 </Card.Content>
                 
                 <Card.Content extra>
-                <div className='ui two buttons'>
-                <Button basic color='red' onClick={()=>{
-                      if (window.confirm('Are you sure you wish to delete this album ?'))  deleteAlbum(album.id);
-                  }}>
-                    Delete
-                  </Button>
-                  <Button basic color='green' onClick={() => openModify(album.id, album.name, album.date, album.labels, album.description )}>
-                    Modify
-                  </Button>
-                </div>
-              </Card.Content>
+                  <div className='ui three buttons'>
+                    <Button basic color='red' onClick={()=>{
+                        if (window.confirm('Are you sure you wish to delete this album ?'))  deleteAlbum(album.id);
+                    }}>
+                      Delete
+                    </Button>
+                    <Button basic color='green' onClick={() => openModify(album.id, album.name, album.date, album.labels, album.description )}>
+                      Modify
+                    </Button>
+                  </div>
+                </Card.Content>
+
+                
               </Card>
       
                 }      
@@ -513,8 +514,7 @@ const AlbumsList = () => {
       const PhotoItems = (props) => {
         return (props.photos.map(photo => {
 
-          const picUrl = "https://" + photo.bucket + ".s3-" + aws_exports.aws_project_region + ".amazonaws.com/" + photo.thumbnail.key
-
+          const picUrl = aws_exports.aws_content_delivery_url + "/" + photo.thumbnail.key
           
             return ( 
 
@@ -683,11 +683,12 @@ function App() {
     <Router>
 
     <AmplifyAuthenticator usernameAlias="email">
-    <AmplifySignIn slot="sign-in" usernameAlias="email" hideSignUp/>
-    <AmplifySignUp slot="sign-up" usernameAlias="email" />
+    <AmplifySignIn slot="sign-in" usernameAlias="email" />
+    <AmplifySignUp slot="sign-up" usernameAlias="email" formFields={[{type : 'email'},{type : 'password'}]}/>
     
+  
 
-
+    <AmplifyGreetings slot="greetings" />
 
       <Grid padded>
         <Grid.Column>
@@ -728,7 +729,7 @@ function App() {
       </Grid>
 
       </AmplifyAuthenticator>
-      
+
     </Router>
   )
 }
