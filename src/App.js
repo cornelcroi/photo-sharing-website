@@ -685,7 +685,7 @@ function App() {
     <AmplifyAuthenticator usernameAlias="email">
     <AmplifySignIn slot="sign-in" usernameAlias="email" hideSignUp/>
     <AmplifySignUp slot="sign-up" usernameAlias="email" />
-    </AmplifyAuthenticator>
+    
 
 
 
@@ -726,6 +726,9 @@ function App() {
 
         </Grid.Column>
       </Grid>
+
+      </AmplifyAuthenticator>
+      
     </Router>
   )
 }

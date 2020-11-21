@@ -120,6 +120,7 @@ exports.handler = async (event, context, callback) => {
    
     const BUCKET = process.env.STORAGE_S3871F7E84_BUCKETNAME + '-' + process.env.HOSTING_BUCKET_SUFFIX;
 
+    
     const album_galery_templateFile = 'albums-gallery-template.html';
     const albums_templateFile = 'albums-template.html';
 
