@@ -24,7 +24,7 @@ import * as subscriptions from './graphql/subscriptions'
 
 Amplify.configure(aws_exports);
 
-const NO_COVER_IMAGE = "images/no_cover.jpg"
+const NO_COVER_IMAGE = "assets/img/no_cover.jpg"
 
 
 function makeComparator(key, order = 'asc') {
