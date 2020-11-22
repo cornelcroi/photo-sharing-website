@@ -124,6 +124,7 @@ exports.handler = async (event, context, callback) => {
     
     const album_galery_templateFile = 'albums-gallery-template.html';
     const albums_templateFile = 'albums-template.html';
+    var coverPictureurl = "assets/img/img-1.jpg";
 
     //ALBUM LIST
     const paramsAlbumList = 
@@ -132,8 +133,6 @@ exports.handler = async (event, context, callback) => {
         Key: album_galery_templateFile // a key (literally a path to your file)
       }
       const albumFileFromS3 = await S3.getObject(paramsAlbumList).promise();
-      // if successful then:
-      //console.log(JSON.stringify(fileFromS3))
       var album_gallery_templateHTML = albumFileFromS3.Body.toString('utf-8');
       
       //ALBUM GALERY
@@ -145,7 +144,6 @@ exports.handler = async (event, context, callback) => {
       const albumsFileFromS3 = await S3.getObject(paramsAlbumGalery).promise();
       var albums_templateHTML = albumsFileFromS3.Body.toString('utf-8');
 
-        console.log('published start');
         const result = await client.query({           
             query: listAlbums,
             limit: 999            
@@ -156,7 +154,6 @@ exports.handler = async (event, context, callback) => {
         var photoListHTML = "";
         while (result.data.listAlbums.items.length>i) {
             photoListHTML = "";
-            console.log("result.data.listAlbums.items[i].name="+result.data.listAlbums.items[i].name);
 
             const result2 = await client.query({           
                 query: listPhotosByAlbum,
@@ -165,12 +162,9 @@ exports.handler = async (event, context, callback) => {
             });
             
             let j=0;
-            var coverPictureurl = "images/theme/album-01.jpg";
+            
             while (result2.data.listPhotosByAlbum.items.length>j) {
 
-                //console.log("result2.data.listPhotosByAlbum.items[j].thumbnail.key="+result2.data.listPhotosByAlbum.items[j].thumbnail.key);
-                
-                //console.log("photoMap="+photoArray);
                 photoListHTML += `
                       <div class="isotope-item fashion">
 
@@ -217,8 +211,6 @@ exports.handler = async (event, context, callback) => {
             labels += `</li>`;
           }
           
-            console.log("coverPictureurl="+coverPictureurl);
-            //console.log("photoListHTML="+photoListHTML);
             album_gallery_templateHTML_i = album_gallery_templateHTML.toString().replace(/\{PICTURES_LIST\}/g, photoListHTML);
             
             album_gallery_templateHTML_i = album_gallery_templateHTML_i.toString().replace(/\{PICTURES_NB\}/g, result2.data.listPhotosByAlbum.items.length);
@@ -302,11 +294,6 @@ exports.handler = async (event, context, callback) => {
         albums_templateHTML = albums_templateHTML
         .toString()
         .replace(/\{ALBUMS_LIST\}/g, albumHTML);
-//        console.log("#### START ###");
-//        console.log("#### SEND ###");
-        console.log('published end');
-
-
         await Promise.all([
           S3.putObject({
             Body: albums_templateHTML,

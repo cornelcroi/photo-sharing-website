@@ -92,10 +92,6 @@ async function storePhotoInfo(item) {
   return result
   }
 
-/*function thumbnailKey(keyPrefix, filename) {
-	return `${keyPrefix}/resized/${filename}`;
-}*/
-
 function thumbnailKey(filename) {
 	return `public/resized/${filename}`;
 }

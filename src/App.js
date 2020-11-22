@@ -90,7 +90,7 @@ const NewAlbum = () => {
                     labelPosition='left'/>}
                     
     >
-      <Modal.Header>New album</Modal.Header>
+      <Modal.Header>New albumxx</Modal.Header>
       <Modal.Content image>
         <Modal.Description>
       
@@ -148,7 +148,7 @@ const AlbumsList = () => {
   const [date, setDate] = useState('');
   const [labels, setLabels] = useState('');
   const [open, setOpen] = useState(false)
-
+console.log("xxxx");
       
   useEffect(() => {
     async function fetchData() {
@@ -689,10 +689,11 @@ function App() {
   
 
     <AmplifyGreetings slot="greetings" />
+    </AmplifyAuthenticator>
 
       <Grid padded>
         <Grid.Column>
-
+sdddsd
         <Segment>
       
       
@@ -700,15 +701,15 @@ function App() {
          <Container style={{padding: 10}}>
 
          <Route path="/" exact component={PublishAlbum}/>
-
+aa
           <Route path="/" exact component={NewAlbum}/>
 
            </Container>
            </Segment>
 
-          
+          aa
           <Route path="/" exact component={AlbumsList}/>
-
+bb
           <Segment>
             <Route
               path="/albums/:albumId"
@@ -728,7 +729,6 @@ function App() {
         </Grid.Column>
       </Grid>
 
-      </AmplifyAuthenticator>
 
     </Router>
   )

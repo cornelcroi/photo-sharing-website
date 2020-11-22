@@ -127,7 +127,7 @@
                         "MinTTL": 60,
                         "Compress": true
                     },
-                    "DefaultRootObject": "index.html",
+                    "DefaultRootObject": "main.html",
                     "CustomErrorResponses": [
                         {
                             "ErrorCachingMinTTL": 300,
