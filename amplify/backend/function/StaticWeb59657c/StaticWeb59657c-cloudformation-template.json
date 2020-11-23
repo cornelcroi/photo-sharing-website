@@ -29,6 +29,10 @@
     "hostingS3AndCloudFrontHostingBucketName": {
       "Type": "String",
       "Default": "hostingS3AndCloudFrontHostingBucketName"
+    },
+    "cloudFrontUrl": {
+      "Type": "String",
+      "Default": "REPLACE_WITH_CLOUDFRONT_DOMAIN_NAME"
     }
   },
   "Conditions": {
@@ -90,6 +94,9 @@
             },
             "HOSTING_S3ANDCLOUDFRONT_HOSTINGBUCKETNAME": {
               "Ref": "hostingS3AndCloudFrontHostingBucketName"
+            },
+            "CLOUDFRONT_URL": {
+              "Ref": "cloudFrontUrl"
             }
           }
         },
@@ -103,8 +110,8 @@
         "Layers": [],
         "Timeout": "25",
         "Code": {
-          "S3Bucket": "amplify-manbehindlensadmin-dev-142455-deployment",
-          "S3Key": "amplify-builds/StaticWeb59657c-6d65687066627a4e766e-build.zip"
+          "S3Bucket": "amplify-manbehindlensadmin-dev-92428-deployment",
+          "S3Key": "amplify-builds/StaticWeb59657c-4968514a58394565652b-build.zip"
         }
       }
     },

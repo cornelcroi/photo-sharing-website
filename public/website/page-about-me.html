@@ -10,14 +10,14 @@
 	<head>
 
 		<!-- Title -->
-		<title>ManBehindLens.com - {ALBUM_NAME} | Street photography</title>
+		<title>ManBehindLens.com | Street photography</title>
 
 		<!-- Meta -->
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="description" content="{DESCRIPTION}">
-		<meta name="keywords" content="{KEYWORDS}" />
-		<meta name="author" content="manbehindlens.com">
+		<meta name="description" content="HTML5 Photography Portfolio Website Template by Themetorium">
+		<meta name="keywords" content="HTML5, CSS3, JavaScript, Bootsrtrap, Responsive, Photography, Portfolio, Template, Theme, Website, Themetorium" />
+		<meta name="author" content="themetorium.net">
 
 		<!-- Mobile Metas -->
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -63,7 +63,7 @@
 	<!-- =================
 	///// Begin body /////
 	================== -->
-	<body id="body" class="overflow-y-scroll"> <!-- overflow class is for isotope if needed -->
+	<body id="body">
 
 		<!-- Begin page preloader -->
 		<div id="preloader">
@@ -83,8 +83,8 @@
 
 				<!-- Begin logo -->
 				<div id="logo">
-					<a href="index.html" class="logo-dark"><img src="assets/img/logo-dark.png" alt="logo"></a>
-					<a href="index.html" class="logo-light"><img src="assets/img/logo-light.png" alt="logo"></a>
+					<a href="/" class="logo-dark"><img src="assets/img/logo-dark.png" alt="logo"></a>
+					<a href="/" class="logo-light"><img src="assets/img/logo-light.png" alt="logo"></a>
 				</div>
 				<!-- End logo -->
 
@@ -110,12 +110,14 @@
 						<div class="collapse navbar-collapse" id="navbar-collapse-1">
 							<ul class="nav navbar-nav navbar-right">
 
+								
+
 								<li class="nav-item">
-									<a class="nav-link" href="index.html">HOME</a>
+									<a class="nav-link" href="/">HOME</a>
 								</li>
 
 								<li class="nav-item">
-									<a class="nav-link" href="albums.html">Portfolio</a>
+									<a class="nav-link" href="album-list.html">Portfolio</a>
 								</li>
 								
 
@@ -153,18 +155,18 @@
 				===============================
 				* Use class "parallax" to enable parallax effect.
 				-->
-				<div class="page-header-image parallax bg-image" style="background-image: url(assets/img/headings/heading-3.jpg); background-position: 50% 50%;"></div>
+				<div class="page-header-image parallax bg-image" style="background-image: url(assets/img/headings/heading-6.jpg); background-position: 50% 50%;"></div>
 				<!-- End page header image -->
 
 				<!-- Element cover -->
 				<div class="cover page-header-cover"></div>
 
 				<!-- Begin page header info -->
-				<div class="container-fluid page-header-content no-padding text-center">
+				<div class="container page-header-content no-padding max-width-800 text-center">
 					<div class="row">
-						<div class="col-md-12">
+						<div class="col-lg-12">
 
-							<h1 class="album-title">{ALBUM_NAME}</h1>
+							<h1 class="album-title">About Me</h1>
 							
 
 						</div> <!-- /.col -->
@@ -176,121 +178,53 @@
 			<!-- End page header section -->
 
 
-			<!-- ===============================================
-			///// Begin content section (portfolio single) /////
-			================================================ -->
-			<section id="content-section" class="portfolio-single portfolio-single-5">
+			<!-- ================================
+			/////// Begin content section ///////
+			================================= -->
+			<section id="content-section" class="page page-about-me">
 
-				<!-- Begin content wrap -->
-				<div class="content-wrap">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
 
-					<div class="container full-width"> <!-- Use class "max-width-1200" or "full-width" -->
-						<div class="row f-height">
+							<!-- Begin content wrap -->
+							<div class="content-wrap">
+								<div class="row">
+									<div class="col-md-8">
 
-							<div class="col-left col-md-4 col-lg-3">
+										<h3>ManBehindLens</h3>
+										<h6>Amateur Photographer</h6>
 
-								<!-- Begin portfolio-info -->
-								<div class="portfolio-info">
-									<div class="portfolio-info-inner">
-
-
-										<!-- Begin portfolio meta -->
-										<div class="album-meta">
-											<span class="photos-count">{PICTURES_NB} Photos</span> /
-											<span class="photos-views">{DATE}</span>
-										</div>
-										<!-- End portfolio meta -->
+										<p>Integer nec rhoncus lacus. Vestibulum suscipit tristique cursus. Nunc tempor, leo ornare dignissim laoreet, ex ligula imperdiet metus, a pellentesque lectus sem eu nunc. Donec malesuada id velit eget laoreet. Nullam posuere diam nec dolor volutpat bibendum. Aliquam efficitur id sapien in feugiat.</p>
 
 										
 
-										<!-- Begin portfolio description -->
-										<div class="album-description margin-top-20">
-											<div class="al-desc-inner">
-												<p>{DESCRIPTION}</p>
-
-											
-											</div>
-
-											
-										</div>
-										<!-- End portfolio description -->
-
-										<!-- Begin portfolio atr -->
-										<div class="portfolio-atr margin-top-50">
-											<ul class="list-unstyled">
-												
-												
-												{ALBUM_LABELS}
-												
-												<!-- Begin portfolio share -->
-												<li class="portfolio-share">
-													<h4 class="head">Share:</h4>
-													<span class="info"><a href="#0" title="Share to Facebook"><i class="fab fa-facebook-f"></i></a></span>
-													<span class="info"><a href="#0" title="Share to Instagram"><i class="fab fa-instagram"></i></a></span>
-												</li>
-												<!-- End portfolio share -->
-
+										<div class="social-icons margin-top-40 margin-bottom-30">
+											<h6 class="head">Find me on:</h6>
+											<ul>
+												<li><a target="_blank" href="https://www.facebook.com" title="Follow me on Facebook"><i class="fab fa-facebook-f"></i></a></li>
+												<li><a target="_blank" href="https://twitter.com/" title="Follow me on Twitter"><i class="fab fa-twitter"></i></a></li>
+												<li><a target="_blank" href="https://www.pinterest.com" title="Follow me on Pinterest"><i class="fab fa-pinterest-p"></i></a></li>
+												<li><a target="_blank" href="https://www.instagram.com" title="Follow me on Instagram"><i class="fab fa-instagram"></i></a></li>
+												<!-- shange "your@email.com" to your email -->
+												<li><a target="_blank" href="mailto:your@email.com" title="Contact me"><i class="fas fa-envelope"></i></a></li>
 											</ul>
 										</div>
-										<!-- End portfolio atr -->
 
-									</div> <!-- /.portfolio-info-inner -->
-								</div>
-								<!-- End portfolio-info -->
+									</div> <!-- /.col -->
 
-							</div> <!-- /.col -->
+									<div class="col-md-4">
+										
+										<img src="assets/img/team/team-1.jpg" alt="image">
 
-							<div class="col-right col-md-8 col-lg-9">
+									</div> <!-- /.col -->
+								</div> <!-- /.row -->
+							</div>
+							<!-- End content wrap -->
 
-								<!-- Begin isotope
-								===================
-								* Use classes "gutter-1", "gutter-2" or "gutter-3" to add more space between items.
-								* Use class "col-1", "col-2", "col-3", "col-4", "col-5" or "col-6" for columns.
-								-->
-								<div class="isotope gutter-2 col-4">
-
-									<!-- Begin gallery top content -->
-									<div class="gallery-top-content margin-bottom-25">
-
-										<!-- Begin album attributes -->
-										<ul class="album-attributes">
-
-											
-
-											
-											
-										</ul>
-										<!-- End album attributes -->
-
-									</div>
-									<!-- End gallery top content -->
-									
-
-									<!-- Begin isotope items (album single items)
-									=============================================== 
-									* Use classes "hover-center", "hover-boxed", "hover-dark", "hover-simple" to change album single item hover variations.
-									* Note1: For grid layout make sure that your images are the same dimensions.
-									* Note2: For masonry layout make sure that your images are the different dimensions.
-									-->
-									<div id="gallery" class="isotope-items-wrap lightgallery">
-
-										<!-- Grid sizer (do not remove!!!) -->
-										<div class="grid-sizer"></div>
-
-										{PICTURES_LIST}
-
-									</div>
-									<!-- End isotope items wrap -->
-
-								</div>
-								<!-- End isotope -->
-
-							</div> <!-- /.col -->
-						</div> <!-- /.row -->
-					</div> <!-- /.container -->
-
-				</div>
-				<!-- End content wrap -->
+						</div> <!-- /.col -->
+					</div> <!-- /.row -->
+				</div> <!-- /.container -->
 
 			</section>
 			<!-- End content section -->
@@ -304,15 +238,19 @@
 
 							<div class="col-sm-6">
 								<div class="copyright">
-									&copy; 2020 ManBehindLens.com / All rights reserved
+									&copy; Agatha / All rights reserved
 								</div>
 							</div> <!-- /.col -->
 
 							<div class="col-sm-6">
 								<div class="social-icons">
 									<ul>
-										<li><a target="_blank" href="https://www.facebook.com/manbehindlenscom" title="Follow me on Facebook"><i class="fab fa-facebook-f"></i></a></li>
-										<li><a target="_blank" href="https://www.instagram.com/manbehindlenscom" title="Follow me on Instagram"><i class="fab fa-instagram"></i></a></li>
+										<li><a target="_blank" href="https://www.facebook.com" title="Follow us on Facebook"><i class="fab fa-facebook-f"></i></a></li>
+										<li><a target="_blank" href="https://twitter.com/" title="Follow us on Twitter"><i class="fab fa-twitter"></i></a></li>
+										<li><a target="_blank" href="https://www.pinterest.com" title="Follow us on Pinterest"><i class="fab fa-pinterest-p"></i></a></li>
+										<li><a target="_blank" href="https://www.instagram.com" title="Follow us on Instagram"><i class="fab fa-instagram"></i></a></li>
+										<!-- shange "your@email.com" to your email -->
+										<li><a target="_blank" href="mailto:your@email.com" title="Contact Us"><i class="fas fa-envelope"></i></a></li>
 									</ul>
 								</div>
 							</div> <!-- /.col -->
@@ -324,7 +262,7 @@
 			<!-- End footer -->
 
 
-      </div>
+		</div>
 		<!-- End body content -->
 
 		<!-- Scroll to top button -->

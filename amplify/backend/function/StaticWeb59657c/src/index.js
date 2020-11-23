@@ -100,7 +100,7 @@ query ListAlbums(
 }
 `;
 
-
+const PICTURES_BASEPATH = process.env.CLOUDFRONT_URL + '/';
 exports.handler = async (event, context, callback) => {
    
    
@@ -122,8 +122,8 @@ exports.handler = async (event, context, callback) => {
     const BUCKET = process.env.HOSTING_S3ANDCLOUDFRONT_HOSTINGBUCKETNAME;
 
     
-    const album_galery_templateFile = 'albums-gallery-template.html';
-    const albums_templateFile = 'albums-template.html';
+    const album_galery_templateFile = 'website/albums-gallery-template.html';
+    const albums_templateFile = 'website/albums-template.html';
     var coverPictureurl = "assets/img/img-1.jpg";
 
     //ALBUM LIST
@@ -144,7 +144,7 @@ exports.handler = async (event, context, callback) => {
       const albumsFileFromS3 = await S3.getObject(paramsAlbumGalery).promise();
       var albums_templateHTML = albumsFileFromS3.Body.toString('utf-8');
 
-        const result = await client.query({           
+        const albumListResult = await client.query({           
             query: listAlbums,
             limit: 999            
         })
@@ -152,32 +152,32 @@ exports.handler = async (event, context, callback) => {
         let i=0;
         var albumHTML = "";
         var photoListHTML = "";
-        while (result.data.listAlbums.items.length>i) {
+        while (albumListResult.data.listAlbums.items.length>i) {
             photoListHTML = "";
 
-            const result2 = await client.query({           
+            const photoByAlbumListResult = await client.query({           
                 query: listPhotosByAlbum,
-                variables: {albumId: result.data.listAlbums.items[i].id },
+                variables: {albumId: albumListResult.data.listAlbums.items[i].id },
                 limit: 999            
             });
             
             let j=0;
             
-            while (result2.data.listPhotosByAlbum.items.length>j) {
+            while (photoByAlbumListResult.data.listPhotosByAlbum.items.length>j) {
 
                 photoListHTML += `
                       <div class="isotope-item fashion">
 
                       <!-- Begin album single item -->
                       <div class="album-single-item">
-                        <img class="asi-img" src="${result2.data.listPhotosByAlbum.items[j].thumbnail.key}" alt="image">
+                        <img class="asi-img" src="${PICTURES_BASEPATH}${photoByAlbumListResult.data.listPhotosByAlbum.items[j].thumbnail.key}" alt="image">
                         <!-- Begin item cover -->
                         <div class="asi-cover">
-                          <a class="asi-link lg-trigger" href="${result2.data.listPhotosByAlbum.items[j].fullsize.key}"
-                          data-exthumbnail="${result2.data.listPhotosByAlbum.items[j].thumbnail.key}"
+                          <a class="asi-link lg-trigger" href="${PICTURES_BASEPATH}${photoByAlbumListResult.data.listPhotosByAlbum.items[j].fullsize.key}"
+                          data-exthumbnail="${PICTURES_BASEPATH}${photoByAlbumListResult.data.listPhotosByAlbum.items[j].thumbnail.key}"
                           ` +
-                          (result2.data.listPhotosByAlbum.items[j].exifcamera ? ` data-sub-html="<p>${result2.data.listPhotosByAlbum.items[j].exifcamera}</p><p>${result2.data.listPhotosByAlbum.items[j].exiflens}</p>"> ` : ``)
-                          + ` 
+                          (photoByAlbumListResult.data.listPhotosByAlbum.items[j].exifcamera ? ` data-sub-html="<p>${photoByAlbumListResult.data.listPhotosByAlbum.items[j].exifcamera}</p><p>${photoByAlbumListResult.data.listPhotosByAlbum.items[j].exiflens}</p>" ` : ``)
+                          + ` >
                           </a>
                         </div>
                         <!-- End item cover -->
@@ -188,17 +188,17 @@ exports.handler = async (event, context, callback) => {
 
                 `;
 
-                if(result2.data.listPhotosByAlbum.items[j].cover === true)
-                    coverPictureurl=result2.data.listPhotosByAlbum.items[j].middlesize.key;
+                if(photoByAlbumListResult.data.listPhotosByAlbum.items[j].cover === true)
+                    coverPictureurl=photoByAlbumListResult.data.listPhotosByAlbum.items[j].middlesize.key;
                 j++
             }
 
           var labels = "";
           var keywords = "";
 
-          if(result.data.listAlbums.items[i].labels){
+          if(albumListResult.data.listAlbums.items[i].labels){
 
-            var label_array = result.data.listAlbums.items[i].labels.split(" ");
+            var label_array = albumListResult.data.listAlbums.items[i].labels.split(" ");
             var jj= 0;
             labels += `<li> <h4 class="head">Labels:</h4>`;
             
@@ -213,10 +213,10 @@ exports.handler = async (event, context, callback) => {
           
             album_gallery_templateHTML_i = album_gallery_templateHTML.toString().replace(/\{PICTURES_LIST\}/g, photoListHTML);
             
-            album_gallery_templateHTML_i = album_gallery_templateHTML_i.toString().replace(/\{PICTURES_NB\}/g, result2.data.listPhotosByAlbum.items.length);
-            album_gallery_templateHTML_i = album_gallery_templateHTML_i.toString().replace(/\{DESCRIPTION\}/g, result.data.listAlbums.items[i].description);
-            album_gallery_templateHTML_i = album_gallery_templateHTML_i.toString().replace(/\{DATE\}/g, result.data.listAlbums.items[i].date);
-            album_gallery_templateHTML_i = album_gallery_templateHTML_i.toString().replace(/\{ALBUM_NAME\}/g, result.data.listAlbums.items[i].name);
+            album_gallery_templateHTML_i = album_gallery_templateHTML_i.toString().replace(/\{PICTURES_NB\}/g, photoByAlbumListResult.data.listPhotosByAlbum.items.length);
+            album_gallery_templateHTML_i = album_gallery_templateHTML_i.toString().replace(/\{DESCRIPTION\}/g, albumListResult.data.listAlbums.items[i].description);
+            album_gallery_templateHTML_i = album_gallery_templateHTML_i.toString().replace(/\{DATE\}/g, albumListResult.data.listAlbums.items[i].date);
+            album_gallery_templateHTML_i = album_gallery_templateHTML_i.toString().replace(/\{ALBUM_NAME\}/g, albumListResult.data.listAlbums.items[i].name);
             album_gallery_templateHTML_i = album_gallery_templateHTML_i.toString().replace(/\{ALBUM_LABELS\}/g, labels);
             
             album_gallery_templateHTML_i = album_gallery_templateHTML_i.toString().replace(/\{KEYWORDS\}/g, keywords);
@@ -225,7 +225,7 @@ exports.handler = async (event, context, callback) => {
               S3.putObject({
                 Body: album_gallery_templateHTML_i,
                 Bucket: BUCKET,
-                Key: "albums-gallery-" + i + ".html",
+                Key: "website/albums-gallery-" + i + ".html",
                 ContentType: 'text/html',
     
               }).promise(), 
@@ -242,11 +242,11 @@ exports.handler = async (event, context, callback) => {
 											<div class="album-list-item">
 												<a class="ali-link" href="albums-gallery-${i}.html">
 													<div class="ali-img-wrap">
-														<img class="ali-img" src="${coverPictureurl}" alt="image">
+														<img class="ali-img" src="${PICTURES_BASEPATH}${coverPictureurl}" alt="image">
 													</div>
 													<div class="ali-caption">
-														<h2 class="ali-title">${result.data.listAlbums.items[i].name}</h2>
-														<div class="ali-meta">${result2.data.listPhotosByAlbum.items.length} photos · ${result.data.listAlbums.items[i].date}</div>
+														<h2 class="ali-title">${albumListResult.data.listAlbums.items[i].name}</h2>
+														<div class="ali-meta">${photoByAlbumListResult.data.listPhotosByAlbum.items.length} photos · ${albumListResult.data.listAlbums.items[i].date}</div>
 													</div>
 												</a>
 												<a href="#0" class="album-share" title="Share this album" data-toggle="modal" data-target="#modal-76532457">
@@ -298,7 +298,7 @@ exports.handler = async (event, context, callback) => {
           S3.putObject({
             Body: albums_templateHTML,
             Bucket: BUCKET,
-            Key: "albums.html",
+            Key: "website/albums.html",
             ContentType: 'text/html',
 
           }).promise(), 

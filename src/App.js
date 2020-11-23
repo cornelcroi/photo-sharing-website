@@ -24,7 +24,7 @@ import * as subscriptions from './graphql/subscriptions'
 
 Amplify.configure(aws_exports);
 
-const NO_COVER_IMAGE = "assets/img/no_cover.jpg"
+const NO_COVER_IMAGE = "img/no_cover.jpg"
 
 
 function makeComparator(key, order = 'asc') {
@@ -677,42 +677,41 @@ console.log("xxxx");
   
 
 function App() {
-
+  console.log(process.env.PUBLIC_URL);
   return (
     
     <Router>
 
     <AmplifyAuthenticator usernameAlias="email">
-    <AmplifySignIn slot="sign-in" usernameAlias="email" />
+    <AmplifySignIn slot="sign-in"  usernameAlias="email" />
     <AmplifySignUp slot="sign-up" usernameAlias="email" formFields={[{type : 'email'},{type : 'password'}]}/>
     
   
 
     <AmplifyGreetings slot="greetings" />
-    </AmplifyAuthenticator>
 
       <Grid padded>
         <Grid.Column>
-sdddsd
+
         <Segment>
       
       
       
          <Container style={{padding: 10}}>
 
-         <Route path="/" exact component={PublishAlbum}/>
-aa
-          <Route path="/" exact component={NewAlbum}/>
+         <Route path={`${process.env.PUBLIC_URL}/`} exact component={PublishAlbum}/>
+
+          <Route path={`${process.env.PUBLIC_URL}/`} exact component={NewAlbum}/>
 
            </Container>
            </Segment>
 
-          aa
-          <Route path="/" exact component={AlbumsList}/>
-bb
+          
+          <Route  path={`${process.env.PUBLIC_URL}/`}  exact component={AlbumsList}/>
+
           <Segment>
             <Route
-              path="/albums/:albumId"
+              path={`${process.env.PUBLIC_URL}/albums/:albumId`}
               render={() => <div>
               <NavLink to='/'><Button color='blue'  content='Back to albums lists' icon='left arrow' labelPosition='left' /></NavLink>
             </div>}/>
@@ -721,7 +720,7 @@ bb
         
 
           <Route
-            path="/albums/:albumId"
+            path={`${process.env.PUBLIC_URL}/albums/:albumId`}
             render={props => <AlbumDetails id={props.match.params.albumId}/>}/>
           
           
@@ -729,6 +728,7 @@ bb
         </Grid.Column>
       </Grid>
 
+      </AmplifyAuthenticator>
 
     </Router>
   )

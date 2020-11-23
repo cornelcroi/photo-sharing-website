@@ -73,7 +73,7 @@
                 }
             }
         },
-        "CloudFrontDistribution": {
+        "CloudFrontDistributionAdmin": {
             "Type": "AWS::CloudFront::Distribution",
             "DependsOn": [
                 "S3Bucket",
@@ -122,12 +122,91 @@
                             "QueryString": "false"
                         },
                         "ViewerProtocolPolicy": "redirect-to-https",
-                        "DefaultTTL": 86400,
-                        "MaxTTL": 31536000,
-                        "MinTTL": 60,
+                        "DefaultTTL": 0,
+                        "MaxTTL": 0,
+                        "MinTTL": 0,
                         "Compress": true
                     },
-                    "DefaultRootObject": "main.html",
+                    "DefaultRootObject": "index.html",
+                    "CustomErrorResponses": [
+                        {
+                            "ErrorCachingMinTTL": 300,
+                            "ErrorCode": 400,
+                            "ResponseCode": 200,
+                            "ResponsePagePath": "/"
+                        },
+                        {
+                            "ErrorCachingMinTTL": 300,
+                            "ErrorCode": 403,
+                            "ResponseCode": 200,
+                            "ResponsePagePath": "/"
+                        },
+                        {
+                            "ErrorCachingMinTTL": 300,
+                            "ErrorCode": 404,
+                            "ResponseCode": 200,
+                            "ResponsePagePath": "/"
+                        }
+                    ]
+                }
+            }
+        },
+        "CloudFrontDistributionStatic": {
+            "Type": "AWS::CloudFront::Distribution",
+            "DependsOn": [
+                "S3Bucket",
+                "OriginAccessIdentity"
+            ],
+            "Properties": {
+                "DistributionConfig": {
+                    "HttpVersion": "http2",
+                    "Origins": [
+                        {
+                            "DomainName": {
+                                "Fn::GetAtt": [
+                                    "S3Bucket",
+                                    "DomainName"
+                                ]
+                            },
+                            "Id": "hostingS3Bucket",
+                            "OriginPath" : "/website",
+                            "S3OriginConfig": {
+                                "OriginAccessIdentity": {
+                                    "Fn::Join": [
+                                        "",
+                                        [
+                                            "origin-access-identity/cloudfront/",
+                                            {
+                                                "Ref": "OriginAccessIdentity"
+                                            }
+                                        ]
+                                    ]
+                                }
+                            }
+                        }
+                    ],
+                    "Enabled": "true",
+                    "DefaultCacheBehavior": {
+                        "AllowedMethods": [
+                            "DELETE",
+                            "GET",
+                            "HEAD",
+                            "OPTIONS",
+                            "PATCH",
+                            "POST",
+                            "PUT"
+                        ],
+                        "TargetOriginId": "hostingS3Bucket",
+                        "ForwardedValues": {
+                            "QueryString": "false"
+                        },
+                        "ViewerProtocolPolicy": "redirect-to-https",
+                        "DefaultTTL": 0,
+                        "MaxTTL": 0,
+                        "MinTTL": 0,
+                        "Compress": true
+                    },
+                    "DefaultRootObject": "index.html",
                     "CustomErrorResponses": [
                         {
                             "ErrorCachingMinTTL": 300,
@@ -232,13 +311,13 @@
         },
         "CloudFrontDistributionID": {
             "Value": {
-                "Ref": "CloudFrontDistribution"
+                "Ref": "CloudFrontDistributionAdmin"
             }
         },
         "CloudFrontDomainName": {
             "Value": {
                 "Fn::GetAtt": [
-                    "CloudFrontDistribution",
+                    "CloudFrontDistributionAdmin",
                     "DomainName"
                 ]
             }
@@ -251,7 +330,7 @@
                         "https://",
                         {
                             "Fn::GetAtt": [
-                                "CloudFrontDistribution",
+                                "CloudFrontDistributionAdmin",
                                 "DomainName"
                             ]
                         }
