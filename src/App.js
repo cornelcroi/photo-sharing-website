@@ -98,7 +98,7 @@ const NewAlbum = () => {
             <Form.Input name="name" value={name} onChange={(e) => setName(e.target.value)} fluid label='Name' placeholder='Album name' />
             </Form.Group>
             <Form.Input name="name" value={date} onChange={(e) => setDate(e.target.value)} fluid label='Date' placeholder='Album date' />
-            <Form.Input name="labels" value={labels} onChange={(e) => setLabels(e.target.value)} fluid label='Labels' placeholder='Album labels' />
+            <Form.Input name="labels" value={labels} onChange={(e) => setLabels(e.target.value)} fluid label='Labels' placeholder='You may enter many labels separated by a space' />
             
             
             <Form.TextArea name="description" value={description}  onChange={(e) => setDescription(e.target.value)} label='Description' placeholder='Album description' />
@@ -160,7 +160,7 @@ console.log("xxxx");
         console.log("result.data.listAlbums.items[j]="+result.data.listAlbums.items[j].labels);
         var found = result.data.listAlbums.items[j].photos.items.find(element => element.cover === true);
         if(found){
-          result.data.listAlbums.items[j].cover = aws_exports.aws_content_delivery_url + "/" + found.thumbnail.key;;
+          result.data.listAlbums.items[j].cover = aws_exports.aws_content_delivery_url + "/" + found.middlesize.key;;
 
         }else{
           result.data.listAlbums.items[j].cover = NO_COVER_IMAGE;
@@ -358,7 +358,7 @@ console.log("xxxx");
             
 
             <Form.Group widths='equal'>
-            <Form.Input name="date" value={labels} onChange={(e) => setLabels(e.target.value)} fluid label='Labels' placeholder='Album labels' />
+            <Form.Input name="date" value={labels} onChange={(e) => setLabels(e.target.value)} fluid label='Labels' placeholder='You may enter many labels separated by a space' />
             </Form.Group>
             
             <Form.TextArea name="description" value={description}  onChange={(e) => setDescription(e.target.value)} label='Description' placeholder='Album description' />

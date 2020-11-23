@@ -18,7 +18,7 @@ export const listAlbumsWithPhotos = /* GraphQL */ `
           items {
             id
             cover
-            thumbnail {
+            middlesize {
               key
             }
             bucket
