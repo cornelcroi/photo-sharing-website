@@ -166,7 +166,7 @@ exports.handler = async (event, context, callback) => {
             while (photoByAlbumListResult.data.listPhotosByAlbum.items.length>j) {
 
                 photoListHTML += `
-                      <div class="isotope-item fashion">
+                      <div class="isotope-item">
 
                       <!-- Begin album single item -->
                       <div class="album-single-item">
@@ -236,7 +236,7 @@ exports.handler = async (event, context, callback) => {
             albumHTML += `
 
 
-            <div class="isotope-item fashion">
+            <div class="isotope-item">
 
 											<!-- Begin album list item -->
 											<div class="album-list-item">
