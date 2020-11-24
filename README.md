@@ -15,7 +15,25 @@ static photo gallery to share pictures without needing to run, maintain (or pay 
 ## How to use it
 
 1. Clone the repository
+
+
+```
+git clone REPO_URL
+```
+Install node libraries
 ```
 npm install
 ```
-3. Deploy the site with the AWS Amplify Console
+
+Configure your AWS 
+```
+amplify init
+```
+Publish the application
+```
+amplify publish
+```
+
+Go to url to test it out
+
+
