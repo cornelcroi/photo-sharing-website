@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "manbehindlensadmin84970f75_identitypool_84970f75",
+    "identityPoolName": "photosharing84970f75_identitypool_84970f75",
     "allowUnauthenticatedIdentities": false,
     "resourceNameTruncated": "manbeh84970f75",
-    "userPoolName": "manbehindlensadmin84970f75_userpool_84970f75",
+    "userPoolName": "photosharing84970f75_userpool_84970f75",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -31,7 +31,7 @@
     "userpoolClientLambdaRole": "manbeh84970f75_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
     "sharedId": "84970f75",
-    "resourceName": "manbehindlensadmin84970f75",
+    "resourceName": "photosharing84970f75",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [

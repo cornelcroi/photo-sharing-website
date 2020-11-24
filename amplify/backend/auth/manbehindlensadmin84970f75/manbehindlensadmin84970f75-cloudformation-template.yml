@@ -340,7 +340,7 @@ Resources:
   # Always created
     Type: AWS::Cognito::IdentityPool
     Properties: 
-      IdentityPoolName: !If [ShouldNotCreateEnvResources, 'manbehindlensadmin84970f75_identitypool_84970f75', !Join ['',['manbehindlensadmin84970f75_identitypool_84970f75', '__', !Ref env]]]
+      IdentityPoolName: !If [ShouldNotCreateEnvResources, 'photosharing84970f75_identitypool_84970f75', !Join ['',['photosharing84970f75_identitypool_84970f75', '__', !Ref env]]]
       
       CognitoIdentityProviders:
         - ClientId:  !Ref UserPoolClient

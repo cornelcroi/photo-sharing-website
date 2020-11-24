@@ -1,6 +1,6 @@
 {
   "auth": {
-    "manbehindlensadmin84970f75": {
+    "photosharing84970f75": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
@@ -8,7 +8,7 @@
     }
   },
   "api": {
-    "manbehindlensadmin": {
+    "photosharing": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
       "output": {
@@ -16,7 +16,7 @@
           "defaultAuthentication": {
             "authenticationType": "AMAZON_COGNITO_USER_POOLS",
             "userPoolConfig": {
-              "userPoolId": "authmanbehindlensadmin84970f75"
+              "userPoolId": "authphotosharing84970f75"
             }
           },
           "additionalAuthenticationProviders": [
@@ -36,7 +36,7 @@
       "dependsOn": [
         {
           "category": "api",
-          "resourceName": "manbehindlensadmin",
+          "resourceName": "photosharing",
           "attributes": [
             "GraphQLAPIIdOutput",
             "GraphQLAPIEndpointOutput"
@@ -58,7 +58,7 @@
       "dependsOn": [
         {
           "category": "api",
-          "resourceName": "manbehindlensadmin",
+          "resourceName": "photosharing",
           "attributes": [
             "GraphQLAPIIdOutput",
             "GraphQLAPIEndpointOutput"

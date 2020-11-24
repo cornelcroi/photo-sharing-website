@@ -10,13 +10,13 @@
     "env": {
       "Type": "String"
     },
-    "apimanbehindlensadminGraphQLAPIIdOutput": {
+    "apiphotosharingGraphQLAPIIdOutput": {
       "Type": "String",
-      "Default": "apimanbehindlensadminGraphQLAPIIdOutput"
+      "Default": "apiphotosharingGraphQLAPIIdOutput"
     },
-    "apimanbehindlensadminGraphQLAPIEndpointOutput": {
+    "apiphotosharingGraphQLAPIEndpointOutput": {
       "Type": "String",
-      "Default": "apimanbehindlensadminGraphQLAPIEndpointOutput"
+      "Default": "apiphotosharingGraphQLAPIEndpointOutput"
     },
     "storages3871f7e84BucketName": {
       "Type": "String",
@@ -80,11 +80,11 @@
             "REGION": {
               "Ref": "AWS::Region"
             },
-            "API_MANBEHINDLENSADMIN_GRAPHQLAPIIDOUTPUT": {
-              "Ref": "apimanbehindlensadminGraphQLAPIIdOutput"
+            "API_PHOTOSHARING_GRAPHQLAPIIDOUTPUT": {
+              "Ref": "apiphotosharingGraphQLAPIIdOutput"
             },
-            "API_MANBEHINDLENSADMIN_GRAPHQLAPIENDPOINTOUTPUT": {
-              "Ref": "apimanbehindlensadminGraphQLAPIEndpointOutput"
+            "API_PHOTOSHARING_GRAPHQLAPIENDPOINTOUTPUT": {
+              "Ref": "apiphotosharingGraphQLAPIEndpointOutput"
             },
             "STORAGE_S3871F7E84_BUCKETNAME": {
               "Ref": "storages3871f7e84BucketName"
@@ -110,7 +110,7 @@
         "Layers": [],
         "Timeout": "25",
         "Code": {
-          "S3Bucket": "amplify-manbehindlensadmin-dev-92428-deployment",
+          "S3Bucket": "amplify-photosharing-dev-92428-deployment",
           "S3Key": "amplify-builds/StaticWeb59657c-4968514a58394565652b-build.zip"
         }
       }
@@ -121,12 +121,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "manbehindlensadminLambdaRole6055ec64",
+            "photosharingLambdaRole6055ec64",
             {
               "Fn::Join": [
                 "",
                 [
-                  "manbehindlensadminLambdaRole6055ec64",
+                  "photosharingLambdaRole6055ec64",
                   "-",
                   {
                     "Ref": "env"
@@ -238,7 +238,7 @@
                       },
                       ":apis/",
                       {
-                        "Ref": "apimanbehindlensadminGraphQLAPIIdOutput"
+                        "Ref": "apiphotosharingGraphQLAPIIdOutput"
                       },
                       "/*"
                     ]

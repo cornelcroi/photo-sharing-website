@@ -1,5 +1,5 @@
 projects:
-  manbehindlensadmin:
+  photosharing:
     schemaPath: src/graphql/schema.json
     includes:
       - src/graphql/**/*.js

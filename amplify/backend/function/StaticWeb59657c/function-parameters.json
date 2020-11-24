@@ -1,7 +1,7 @@
 {
   "permissions": {
     "api": {
-      "manbehindlensadmin": [
+      "photosharing": [
         "create",
         "read",
         "update",

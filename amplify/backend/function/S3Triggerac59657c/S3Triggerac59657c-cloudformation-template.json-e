@@ -5,13 +5,13 @@
     "env": {
       "Type": "String"
     },
-    "apimanbehindlensadminGraphQLAPIIdOutput": {
+    "apiphotosharingGraphQLAPIIdOutput": {
       "Type": "String",
-      "Default": "apimanbehindlensadminGraphQLAPIIdOutput"
+      "Default": "apiphotosharingGraphQLAPIIdOutput"
     },
-    "apimanbehindlensadminGraphQLAPIEndpointOutput": {
+    "apiphotosharingGraphQLAPIEndpointOutput": {
       "Type": "String",
-      "Default": "apimanbehindlensadminGraphQLAPIEndpointOutput"
+      "Default": "apiphotosharingGraphQLAPIEndpointOutput"
     }
   },
   "Conditions": {
@@ -59,11 +59,11 @@
             "REGION": {
               "Ref": "AWS::Region"
             },
-            "API_MANBEHINDLENSADMIN_GRAPHQLAPIIDOUTPUT": {
-              "Ref": "apimanbehindlensadminGraphQLAPIIdOutput"
+            "API_PHOTOSHARING_GRAPHQLAPIIDOUTPUT": {
+              "Ref": "apiphotosharingGraphQLAPIIdOutput"
             },
-            "API_MANBEHINDLENSADMIN_GRAPHQLAPIENDPOINTOUTPUT": {
-              "Ref": "apimanbehindlensadminGraphQLAPIEndpointOutput"
+            "API_PHOTOSHARING_GRAPHQLAPIENDPOINTOUTPUT": {
+              "Ref": "apiphotosharingGraphQLAPIEndpointOutput"
             }
           }
         },
@@ -76,7 +76,7 @@
         "Runtime": "nodejs10.x",
         "Timeout": "25",
         "Code": {
-          "S3Bucket": "amplify-manbehindlensadmin-master-210410-deployment",
+          "S3Bucket": "amplify-photosharing-master-210410-deployment",
           "S3Key": "amplify-builds/S3Triggerac59657c-655641466a7a4f47654f-build.zip"
         },
         "Layers": []
@@ -227,7 +227,7 @@
                       },
                       ":apis/",
                       {
-                        "Ref": "apimanbehindlensadminGraphQLAPIIdOutput"
+                        "Ref": "apiphotosharingGraphQLAPIIdOutput"
                       },
                       "/*"
                     ]
