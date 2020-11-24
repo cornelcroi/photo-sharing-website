@@ -17,6 +17,7 @@ static photo gallery to share pictures without needing to run, maintain (or pay 
 1. Clone the repository
 
 
+
 ```
 git clone REPO_URL
 ```
