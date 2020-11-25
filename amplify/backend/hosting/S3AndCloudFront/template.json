@@ -40,17 +40,7 @@
                                     "-",
                                     {
                                         "Ref": "env"
-                                    },
-                                    {
-                                        "Fn::Sub": [
-                                        "${account}",
-                                        {
-                                          "account": {
-                                            "Ref": "AWS::AccountId"
-                                          }
-                                        }
-                                      ]
-                                    },
+                                    },                                    
                                     "-",
                                     {
                                         "Fn::Select": [
