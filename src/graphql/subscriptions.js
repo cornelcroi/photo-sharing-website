@@ -8,7 +8,6 @@ export const onCreateAlbum = /* GraphQL */ `
       name
       description
       date
-      labels
       createdAt
       updatedAt
       owner
@@ -37,7 +36,6 @@ export const onUpdateAlbum = /* GraphQL */ `
       name
       description
       date
-      labels
       createdAt
       updatedAt
       owner
@@ -66,7 +64,6 @@ export const onDeleteAlbum = /* GraphQL */ `
       name
       description
       date
-      labels
       createdAt
       updatedAt
       owner
@@ -120,7 +117,6 @@ export const onCreatePhoto = /* GraphQL */ `
         name
         description
         date
-        labels
         createdAt
         updatedAt
         owner
@@ -164,7 +160,6 @@ export const onUpdatePhoto = /* GraphQL */ `
         name
         description
         date
-        labels
         createdAt
         updatedAt
         owner
@@ -208,7 +203,6 @@ export const onDeletePhoto = /* GraphQL */ `
         name
         description
         date
-        labels
         createdAt
         updatedAt
         owner

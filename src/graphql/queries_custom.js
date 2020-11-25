@@ -9,7 +9,6 @@ export const listAlbumsWithPhotos = /* GraphQL */ `
         id
         name
         description
-        labels
         date
         createdAt
         updatedAt

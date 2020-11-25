@@ -56,7 +56,6 @@ const NewAlbum = () => {
   
   const [name, setName] = useState('')
   const [date, setDate] = useState('')
-  const [labels, setLabels] = useState('')
   const [description, setDescription] = useState('');
   const [open, setOpen] = useState(false)
   
@@ -65,14 +64,12 @@ const NewAlbum = () => {
     API.graphql(graphqlOperation(mutations.createAlbum, {input: {
       name,
       date,
-      labels,
       description
       
       }}))
     setName('')
     setDescription('');
     setDate('');
-    setLabels('');
     
     setOpen(false);
   }
@@ -98,7 +95,6 @@ const NewAlbum = () => {
             <Form.Input name="name" value={name} onChange={(e) => setName(e.target.value)} fluid label='Name' placeholder='Album name' />
             </Form.Group>
             <Form.Input name="name" value={date} onChange={(e) => setDate(e.target.value)} fluid label='Date' placeholder='Album date' />
-            <Form.Input name="labels" value={labels} onChange={(e) => setLabels(e.target.value)} fluid label='Labels' placeholder='You may enter many labels separated by a space' />
             
             
             <Form.TextArea name="description" value={description}  onChange={(e) => setDescription(e.target.value)} label='Description' placeholder='Album description' />
@@ -146,7 +142,6 @@ const AlbumsList = () => {
   const [id, setId] = useState('')  
   const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
-  const [labels, setLabels] = useState('');
   const [open, setOpen] = useState(false)
 console.log("xxxx");
       
@@ -157,7 +152,6 @@ console.log("xxxx");
 
       let j=0;
       while (result.data.listAlbums.items.length>j) {
-        console.log("result.data.listAlbums.items[j]="+result.data.listAlbums.items[j].labels);
         var found = result.data.listAlbums.items[j].photos.items.find(element => element.cover === true);
         if(found){
           result.data.listAlbums.items[j].cover = aws_exports.aws_content_delivery_url + "/" + found.middlesize.key;;
@@ -240,12 +234,11 @@ console.log("xxxx");
   
   const albumItems = () => {
 
-    const openModify = async(id, name, date, labels, desc) => {
+    const openModify = async(id, name, date, desc) => {
       setOpen(true);
       setName(name)
       setDate(date)
       setDescription(desc)
-      setLabels(labels)
       setId(id)
     }
 
@@ -268,9 +261,6 @@ console.log("xxxx");
                   <Card.Description>
                   {album.description}
                   </Card.Description>
-                  <Card.Meta>
-                  {album.labels}
-                  </Card.Meta>
                 </Card.Content>
                 
                 <Card.Content extra>
@@ -280,7 +270,7 @@ console.log("xxxx");
                     }}>
                       Delete
                     </Button>
-                    <Button basic color='green' onClick={() => openModify(album.id, album.name, album.date, album.labels, album.description )}>
+                    <Button basic color='green' onClick={() => openModify(album.id, album.name, album.date, album.description )}>
                       Modify
                     </Button>
                   </div>
@@ -302,7 +292,6 @@ console.log("xxxx");
       id: id,
       name: name,
       date: date,
-      labels,
       description: description
 
     }
@@ -311,7 +300,6 @@ console.log("xxxx");
 
     setName('');
     setDate('');
-    setLabels('');
     setDescription('');
     setId('');
     
@@ -357,10 +345,6 @@ console.log("xxxx");
             </Form.Group>
             
 
-            <Form.Group widths='equal'>
-            <Form.Input name="date" value={labels} onChange={(e) => setLabels(e.target.value)} fluid label='Labels' placeholder='You may enter many labels separated by a space' />
-            </Form.Group>
-            
             <Form.TextArea name="description" value={description}  onChange={(e) => setDescription(e.target.value)} label='Description' placeholder='Album description' />
             
             <Form.Button type="submit"  color='green' >Save</Form.Button>
