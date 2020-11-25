@@ -299,46 +299,8 @@
                 "Ref": "S3Bucket"
             }
         },
-        "WebsiteURL": {
-            "Value": {
-                "Fn::GetAtt": [
-                    "S3Bucket",
-                    "WebsiteURL"
-                ]
-            },
-            "Description": "URL for website hosted on S3"
-        },
-        "S3BucketSecureURL": {
-            "Value": {
-                "Fn::Join": [
-                    "",
-                    [
-                        "https://",
-                        {
-                            "Fn::GetAtt": [
-                                "S3Bucket",
-                                "DomainName"
-                            ]
-                        }
-                    ]
-                ]
-            },
-            "Description": "Name of S3 bucket to hold website content"
-        },
-        "CloudFrontDistributionID": {
-            "Value": {
-                "Ref": "CloudFrontDistributionAdmin"
-            }
-        },
-        "CloudFrontDomainName": {
-            "Value": {
-                "Fn::GetAtt": [
-                    "CloudFrontDistributionAdmin",
-                    "DomainName"
-                ]
-            }
-        },
-        "CloudFrontSecureURL": {
+        "AdminURL": {
+            "Description": "URL of the admin website",
             "Value": {
                 "Fn::Join": [
                     "",
@@ -354,10 +316,23 @@
                 ]
             }
         },
-        "CloudFrontOriginAccessIdentity": {
+        "StaticWebsiteURL": {
+            "Description": "URL of the static website",
             "Value": {
-                "Ref": "OriginAccessIdentity"
+                "Fn::Join": [
+                    "",
+                    [
+                        "https://",
+                        {
+                            "Fn::GetAtt": [
+                                "CloudFrontDistributionStatic",
+                                "DomainName"
+                            ]
+                        }
+                    ]
+                ]
             }
         }
+        
     }
 }

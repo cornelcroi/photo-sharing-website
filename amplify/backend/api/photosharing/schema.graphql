@@ -31,6 +31,7 @@ type Photo
     middlesize: PhotoS3Info!
     exifcamera: String
     exiflens: String
+    labels: [String]
     cover: Boolean!
     createdAt: AWSDateTime
     updatedAt: AWSDateTime
@@ -40,11 +41,12 @@ type PhotoS3Info {
     key: String!
     width: Int!
     height: Int!
+
 }
 
 input CreatePhotoInput {
 	id: ID
-    owner: String
+  owner: String
 	albumId: ID!
 	bucket: String!
 	fullsize: PhotoS3InfoInput!
@@ -52,6 +54,7 @@ input CreatePhotoInput {
   middlesize: PhotoS3InfoInput!
   exifcamera: String
   exiflens: String
+  labels: [String]
   cover: Boolean!
 
 

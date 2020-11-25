@@ -515,7 +515,10 @@ console.log("xxxx");
         return (props.photos.map(photo => {
 
           const picUrl = aws_exports.aws_content_delivery_url + "/" + photo.thumbnail.key
-          
+          var picLabels="";
+          if(photo.labels){
+            picLabels=photo.labels.join(', ');
+          }
             return ( 
 
             
@@ -531,7 +534,9 @@ console.log("xxxx");
                 <Card.Meta>
                 {photo.exiflens} 
                 </Card.Meta>
-                
+                <Card.Description>
+                {picLabels} 
+                </Card.Description>
                 <Card.Description>
                 <div>
               {photo.cover && photo.cover===true ? 

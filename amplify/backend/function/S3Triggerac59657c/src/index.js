@@ -22,6 +22,7 @@ const AWSAppSyncClient = require('aws-appsync').default;
 const uuidv4 = require('uuid/v4');
 const gql = require('graphql-tag');
 var exifparser = require("exif-parser");
+const Rekognition = new AWS.Rekognition();
 
 
 /*
@@ -40,6 +41,22 @@ const MIDDLESIZE_WIDTH = 961;
 const MIDDLESIZE_HEIGHT = 591;
 
 let client = null
+
+async function getLabelNames(bucketName, key) {
+  let params = {
+    Image: {
+      S3Object: {
+        Bucket: bucketName, 
+        Name: key
+      }
+    }, 
+    MaxLabels: 5, 
+    MinConfidence: 80
+  };
+  const detectionResult = await Rekognition.detectLabels(params).promise();
+  const labelNames = detectionResult.Labels.map((l) => l.Name.toLowerCase()); 
+  return labelNames;
+}
 
 
 async function storePhotoInfo(item) {
@@ -76,10 +93,13 @@ async function storePhotoInfo(item) {
         }
         exifcamera
         exiflens
-        cover
+        labels
+        cover        
       }
     }
   `;
+
+  
 
   console.log('trying to createphoto with input', JSON.stringify(item))
 	const result = await client.mutate({ 
@@ -128,6 +148,7 @@ async function resize(photoBody, bucketName, key) {
 
   const DEST_BUCKET = process.env.HOSTING_S3ANDCLOUDFRONT_HOSTINGBUCKETNAME;
 
+
   //TODO add more sizes
 
   
@@ -173,7 +194,7 @@ async function resize(photoBody, bucketName, key) {
 			key: fullsizeKey(originalPhotoName),
 			width: originalPhotoDimensions.width,
 			height: originalPhotoDimensions.height
-		}
+    }
 	};
 };
 
@@ -189,6 +210,10 @@ async function processRecord(record) {
 
   const originalPhoto = await S3.getObject({ Bucket: bucketName, Key: key }).promise()
   
+  const labelNames = await getLabelNames(bucketName, key);
+  console.log(labelNames, labelNames)
+
+
 	const metadata = originalPhoto.Metadata
   console.log('metadata', JSON.stringify(metadata))
   console.log('resize')
@@ -232,6 +257,7 @@ async function processRecord(record) {
     },
     exifcamera: metadataCamera,
     exiflens: metadataLens,
+    labels: labelNames,
     cover: "false"
   }
 

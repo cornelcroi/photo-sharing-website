@@ -48,6 +48,7 @@ export const getAlbum = /* GraphQL */ `
           bucket
           exifcamera
           exiflens
+          labels
           cover
           createdAt
           updatedAt
@@ -81,6 +82,7 @@ export const getPhoto = /* GraphQL */ `
       }
       exifcamera
       exiflens
+      labels
       cover
       createdAt
       updatedAt
@@ -129,6 +131,7 @@ export const listPhotos = /* GraphQL */ `
         }
         exifcamera
         exiflens
+        labels
         cover
         createdAt
         updatedAt
@@ -184,6 +187,7 @@ export const listPhotosByAlbum = /* GraphQL */ `
         }
         exifcamera
         exiflens
+        labels
         cover
         createdAt
         updatedAt
