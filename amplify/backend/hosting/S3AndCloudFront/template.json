@@ -40,7 +40,33 @@
                                     "-",
                                     {
                                         "Ref": "env"
-                                    }
+                                    },
+                                    {
+                                        "Fn::Sub": [
+                                        "${account}",
+                                        {
+                                          "account": {
+                                            "Ref": "AWS::AccountId"
+                                          }
+                                        }
+                                      ]
+                                    },
+                                    "-",
+                                    {
+                                        "Fn::Select": [
+                                            3,
+                                            {
+                                                "Fn::Split": [
+                                                    "-",
+                                                    {
+                                                        "Ref": "AWS::StackName"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                      },
+                                      "-",
+                                      "hosting"
                                 ]
                             ]
                         }
