@@ -11,7 +11,7 @@ static photo gallery to share pictures without needing to run, maintain (or pay 
 
 ## Architecture Overview
 
-![](public/website/assets/img/manbehindlens)
+![](public/website/assets/img/manbehindlens.png)
 
 
 ## How to use it
