@@ -87,14 +87,14 @@ const NewAlbum = () => {
                     labelPosition='left'/>}
                     
     >
-      <Modal.Header>New albumxx</Modal.Header>
+      <Modal.Header>New album</Modal.Header>
       <Modal.Content image>
         <Modal.Description>
       
             <Form.Group widths='equal'>
-            <Form.Input name="name" value={name} onChange={(e) => setName(e.target.value)} fluid label='Name' placeholder='Album name' />
+              <Form.Input name="name" value={name} onChange={(e) => setName(e.target.value)} fluid label='Name' placeholder='Album name' />
+              <Form.Input name="name" value={date} onChange={(e) => setDate(e.target.value)} fluid label='Date' placeholder='Album date' />
             </Form.Group>
-            <Form.Input name="name" value={date} onChange={(e) => setDate(e.target.value)} fluid label='Date' placeholder='Album date' />
             
             
             <Form.TextArea name="description" value={description}  onChange={(e) => setDescription(e.target.value)} label='Description' placeholder='Album description' />
@@ -338,10 +338,7 @@ console.log("xxxx");
       
             <Form.Group widths='equal'>
             <Form.Input name="name" value={name} onChange={(e) => setName(e.target.value)} fluid label='Name' placeholder='Album name' />
-            </Form.Group>
-            
-            <Form.Group widths='equal'>
-            <Form.Input name="date" value={date} onChange={(e) => setDate(e.target.value)} fluid label='Date' placeholder='Album date' />
+            <Form.Input name="date" value={date} onChange={(e) => setDate(e.target.value)} fluid label='Date' placeholder='Album date' />            
             </Form.Group>
             
 
