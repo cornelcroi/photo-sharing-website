@@ -6,16 +6,26 @@
 ## Goal
 
 Build a self-contained, declarative infrastructure, static photo gallery to share pictures without needing to run, maintain (or pay for) servers.
-The application has 2 modules
-- **Admin** with the following features:
-    - Allow the admin user sign in
-    - Store data about albums, photos
-    - Upload photos
-    - Automatically creates photo different thumbnails to be used on the static website
-    - Automatically detects relevant labels for each uploaded photo
-    - Generates the static website based on all metadata stored inside DynamoDB
-- **Static website**
-    - Is being generated on demand by a AWS Lambda
+
+
+TODO - create video demo like https://github.com/jpsim/AWSPics
+
+## Key points
+
+
+- The application has 2 modules
+    - **Admin** with the following features:
+        - Allow the admin user sign in
+        - Store data about albums, photos
+        - Upload photos
+        - Automatically creates photo different thumbnails to be used on the static website
+        - Automatically detects relevant labels for each uploaded photo
+        - Generates the static website based on all metadata stored inside DynamoDB
+    - **Static website**
+        - Is being generated on demand by a AWS Lambda
+- CloudFront is used to serve the reactjs application and the static website
+- Direct access to the S3 Web Bucket is blocked. All traffic must passe through CloudFront
+- To resize the pictures use Sharp library is used
 
 
 ## The architecture
@@ -103,6 +113,11 @@ amplify publish
 
 
 All the source code is available in my GitHub.
+
+
+- 2 CloudFront distributions pointing to the same S3 Bucket are used:
+    - one to serve the reactjs application
+    - the second one to serve the static website
 
 
 ## Resources
