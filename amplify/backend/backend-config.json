@@ -103,5 +103,21 @@
       "service": "S3AndCloudFront",
       "providerPlugin": "awscloudformation"
     }
+  },
+  "boostrap": {
+    "adminuser": {
+      "service": "cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+         "category": "auth",
+         "resourceName": "photosharing84970f75", 
+         "attributes": [
+            "UserPoolId"
+          ]
+        }
+      ]
+      
+    }
   }
 }

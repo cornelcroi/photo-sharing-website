@@ -1,0 +1,22 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'Create Admin user'
+Parameters:
+  AdminEmail:
+    Type: String
+  authphotosharing84970f75UserPoolId:
+    Type: String
+Outputs:
+  CognitoUserPoolArn:
+    Value:
+      Fn::GetAtt: CognitoUserPool.Arn
+Resources:
+  CognitoUserPoolAdmin:
+    Type: AWS::Cognito::UserPoolUser
+    Properties:
+      Username: admin
+      DesiredDeliveryMediums:
+        - EMAIL
+      UserPoolId: "eu-west-1_n4jBiT2c8"
+      UserAttributes:
+        - Name: email
+          Value: cornel.croitoru@gmail.commm
