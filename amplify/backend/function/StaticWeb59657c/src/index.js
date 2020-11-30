@@ -87,7 +87,6 @@ query ListAlbums(
       name
       date
       description
-      labels
       createdAt
       updatedAt
       owner
@@ -100,7 +99,7 @@ query ListAlbums(
 }
 `;
 
-const PICTURES_BASEPATH = process.env.CLOUDFRONT_URL + '/';
+const PICTURES_BASEPATH = process.env.HOSTING_S3ANDCLOUDFRONT_HOSTINGBUCKETNAME_CLOUDFRONTSECUREURL + '/';
 exports.handler = async (event, context, callback) => {
    
    
@@ -195,7 +194,7 @@ exports.handler = async (event, context, callback) => {
 
           var labels = "";
           var keywords = "";
-
+/*
           if(albumListResult.data.listAlbums.items[i].labels){
 
             var label_array = albumListResult.data.listAlbums.items[i].labels.split(" ");
@@ -210,7 +209,7 @@ exports.handler = async (event, context, callback) => {
 
             labels += `</li>`;
           }
-          
+          */
             album_gallery_templateHTML_i = album_gallery_templateHTML.toString().replace(/\{PICTURES_LIST\}/g, photoListHTML);
             
             album_gallery_templateHTML_i = album_gallery_templateHTML_i.toString().replace(/\{PICTURES_NB\}/g, photoByAlbumListResult.data.listPhotosByAlbum.items.length);

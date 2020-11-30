@@ -75,7 +75,8 @@
           "category": "hosting",
           "resourceName": "S3AndCloudFront",
           "attributes": [
-            "HostingBucketName"
+            "HostingBucketName",
+            "CloudFrontSecureURL"
           ]
         }
       ]
@@ -110,14 +111,13 @@
       "providerPlugin": "awscloudformation",
       "dependsOn": [
         {
-         "category": "auth",
-         "resourceName": "photosharing84970f75", 
-         "attributes": [
+          "category": "auth",
+          "resourceName": "photosharing84970f75",
+          "attributes": [
             "UserPoolId"
           ]
         }
       ]
-      
     }
   }
 }
