@@ -129,7 +129,7 @@ const PublishAlbum = () => {
                     labelPosition='left' 
                     onClick={publish}
                     disabled={publishInProgress}
-                    content={publishInProgress ? 'generating...' : 'Generate HTML'}
+                    content={publishInProgress ? 'Generating...' : 'Generate HTML'}
                     />
   )
 }

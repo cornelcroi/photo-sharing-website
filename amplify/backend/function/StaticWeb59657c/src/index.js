@@ -157,9 +157,12 @@ exports.handler = async (event, context, callback) => {
         var albumHTML = "";
         var photoListHTML = "";
         
-        var labels = `<li> <h4 class="head">Tags:</h4>`;
-        var allLabels = new Array()
+        
         while (albumListResult.data.listAlbums.items.length>i) {
+
+          var labels = `<li> <h4 class="head">TAGS:</h4>\n`;
+          var allLabels = new Array()
+
             photoListHTML = "";
 
             const photoByAlbumListResult = await client.query({           
@@ -211,18 +214,20 @@ exports.handler = async (event, context, callback) => {
           
           var keywords = "";
           var uniqueLabels = allLabels.filter(onlyUnique);
-          if(uniqueLabels.length>30){
-            uniqueLabels = uniqueLabels.slice(0, 30);
+          if(uniqueLabels.length>20){
+            uniqueLabels = uniqueLabels.slice(0, 20);
           }
           var m = 0;
           var comma = "";
           while (uniqueLabels.length>m) {
 
             comma = m!=uniqueLabels.length-1 ? "," : "";
-            labels += `<span class="info">${uniqueLabels[m]}${comma}</span> `;
-            keywords += `${uniqueLabels[m]}${comma}`;
+            labels += `<span class="info"><a href="#">${uniqueLabels[m]}${comma}</a></span> \n`;
+            keywords += `${uniqueLabels[m]} ${comma}`;
             m++;
           }
+
+          labels += `</li> \n`;
 
    
             album_gallery_templateHTML_i = album_gallery_templateHTML.toString().replace(/\{PICTURES_LIST\}/g, photoListHTML);

@@ -111,7 +111,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-photosharing-sandbox-201409-deployment",
-          "S3Key": "amplify-builds/StaticWeb59657c-6f744741546868327174-build.zip"
+          "S3Key": "amplify-builds/StaticWeb59657c-705964507a4447526833-build.zip"
         }
       }
     },
