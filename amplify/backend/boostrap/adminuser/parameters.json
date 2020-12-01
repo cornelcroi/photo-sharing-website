@@ -1,8 +1,8 @@
 {
     "authphotosharing84970f75UserPoolId": {  
-       "Fn::GetAtt": [
-          "photosharing84970f75",  
-          "Outputs.UserPoolId"
-       ]
+        "Fn::GetAtt": [
+            "authphotosharing84970f75",
+            "Outputs.UserPoolId"
+        ]
     }
 }

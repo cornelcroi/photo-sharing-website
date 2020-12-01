@@ -56,6 +56,7 @@ const listPhotosByAlbum = gql`
         }
         exifcamera
         exiflens
+        labels
         cover
         createdAt
         updatedAt
@@ -98,6 +99,10 @@ query ListAlbums(
   }
 }
 `;
+
+function onlyUnique(value, index, self) {
+  return self.indexOf(value) === index;
+}
 
 const PICTURES_BASEPATH = process.env.HOSTING_S3ANDCLOUDFRONT_HOSTINGBUCKETNAME_CLOUDFRONTSECUREURL + '/';
 exports.handler = async (event, context, callback) => {
@@ -151,6 +156,9 @@ exports.handler = async (event, context, callback) => {
         let i=0;
         var albumHTML = "";
         var photoListHTML = "";
+        
+        var labels = `<li> <h4 class="head">Tags:</h4>`;
+        var allLabels = new Array()
         while (albumListResult.data.listAlbums.items.length>i) {
             photoListHTML = "";
 
@@ -163,6 +171,14 @@ exports.handler = async (event, context, callback) => {
             let j=0;
             
             while (photoByAlbumListResult.data.listPhotosByAlbum.items.length>j) {
+
+              photoByAlbumListResult.data.listPhotosByAlbum.items[j].labels.forEach(element => {
+                console.log("label="+element);
+                allLabels.push(element);
+                
+              } );
+
+
 
                 photoListHTML += `
                       <div class="isotope-item">
@@ -192,24 +208,23 @@ exports.handler = async (event, context, callback) => {
                 j++
             }
 
-          var labels = "";
+          
           var keywords = "";
-/*
-          if(albumListResult.data.listAlbums.items[i].labels){
-
-            var label_array = albumListResult.data.listAlbums.items[i].labels.split(" ");
-            var jj= 0;
-            labels += `<li> <h4 class="head">Labels:</h4>`;
-            
-            for (jj = 0; jj < label_array.length; jj++) {
-              labels += `<span class="info">#${label_array[jj]}</span> `;
-              keywords += `${label_array[jj]}, `;
-
-            }
-
-            labels += `</li>`;
+          var uniqueLabels = allLabels.filter(onlyUnique);
+          if(uniqueLabels.length>30){
+            uniqueLabels = uniqueLabels.slice(0, 30);
           }
-          */
+          var m = 0;
+          var comma = "";
+          while (uniqueLabels.length>m) {
+
+            comma = m!=uniqueLabels.length-1 ? "," : "";
+            labels += `<span class="info">${uniqueLabels[m]}${comma}</span> `;
+            keywords += `${uniqueLabels[m]}${comma}`;
+            m++;
+          }
+
+   
             album_gallery_templateHTML_i = album_gallery_templateHTML.toString().replace(/\{PICTURES_LIST\}/g, photoListHTML);
             
             album_gallery_templateHTML_i = album_gallery_templateHTML_i.toString().replace(/\{PICTURES_NB\}/g, photoByAlbumListResult.data.listPhotosByAlbum.items.length);
