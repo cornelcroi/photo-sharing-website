@@ -669,8 +669,7 @@ function App() {
     <Router>
 
     <AmplifyAuthenticator usernameAlias="email">
-    <AmplifySignIn slot="sign-in"  usernameAlias="email" />
-    <AmplifySignUp slot="sign-up" usernameAlias="email" formFields={[{type : 'email'},{type : 'password'}]}/>
+    <AmplifySignIn slot="sign-in"  usernameAlias="email" hideSignUp/>
     
   
 
