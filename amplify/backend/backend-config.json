@@ -106,8 +106,8 @@
     }
   },
   "boostrap": {
-    "adminuser": {
-      "service": "cognito",
+    "cognito": {
+      "service": "adminuser",
       "providerPlugin": "awscloudformation",
       "dependsOn": [
         {
