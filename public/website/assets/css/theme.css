@@ -1113,7 +1113,7 @@ section {
 	
 	margin-bottom: 10px;
 	font-size: 36px;
-	font-weight: 300;
+	font-weight: 500;
 	letter-spacing: 2px;
 	margin-right: -10px;
 }
@@ -1150,7 +1150,9 @@ section {
 
 /* intro text */
 .intro-text {
-	font-size: 14px;
+	font-size: 18px;
+	text-shadow: 0px 0px black;
+	font-weight: 500;
 }
 
 /* intro bottons */
