@@ -11,7 +11,7 @@ Resources:
   CognitoUserPoolAdmin:
     Type: AWS::Cognito::UserPoolUser
     Properties:
-      Username: admin
+      Username: !Ref emailaddress
       DesiredDeliveryMediums:
         - EMAIL
       UserPoolId: !Ref authphotosharing84970f75UserPoolId

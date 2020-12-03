@@ -110,8 +110,8 @@
         "Layers": [],
         "Timeout": "25",
         "Code": {
-          "S3Bucket": "amplify-photosharing-dev-204426-deployment",
-          "S3Key": "amplify-builds/StaticWeb59657c-705964507a4447526833-build.zip"
+          "S3Bucket": "amplify-photosharing-dev-210643-deployment",
+          "S3Key": "amplify-builds/StaticWeb59657c-37383069396c58456835-build.zip"
         }
       }
     },

@@ -176,7 +176,6 @@ exports.handler = async (event, context, callback) => {
             while (photoByAlbumListResult.data.listPhotosByAlbum.items.length>j) {
 
               photoByAlbumListResult.data.listPhotosByAlbum.items[j].labels.forEach(element => {
-                console.log("label="+element);
                 allLabels.push(element);
                 
               } );
@@ -206,8 +205,11 @@ exports.handler = async (event, context, callback) => {
 
                 `;
 
-                if(photoByAlbumListResult.data.listPhotosByAlbum.items[j].cover === true)
-                    coverPictureurl=photoByAlbumListResult.data.listPhotosByAlbum.items[j].middlesize.key;
+                if(photoByAlbumListResult.data.listPhotosByAlbum.items[j].cover === true){
+                  coverPictureurl=photoByAlbumListResult.data.listPhotosByAlbum.items[j].middlesize.key;
+                }
+                    
+
                 j++
             }
 
@@ -239,12 +241,13 @@ exports.handler = async (event, context, callback) => {
             album_gallery_templateHTML_i = album_gallery_templateHTML_i.toString().replace(/\{ALBUM_LABELS\}/g, labels);
             
             album_gallery_templateHTML_i = album_gallery_templateHTML_i.toString().replace(/\{KEYWORDS\}/g, keywords);
+            album_gallery_templateHTML_i = album_gallery_templateHTML_i.toString().replace(/\{ALBUM_COVER_IMAGE\}/g, PICTURES_BASEPATH + coverPictureurl);
             
             await Promise.all([
               S3.putObject({
                 Body: album_gallery_templateHTML_i,
                 Bucket: BUCKET,
-                Key: "website/albums-gallery-" + i + ".html",
+                Key: "website/albums-gallery-" + (i+1) + ".html",
                 ContentType: 'text/html',
     
               }).promise(), 
@@ -259,7 +262,7 @@ exports.handler = async (event, context, callback) => {
 
 											<!-- Begin album list item -->
 											<div class="album-list-item">
-												<a class="ali-link" href="albums-gallery-${i}.html">
+												<a class="ali-link" href="albums-gallery-${i+1}.html">
 													<div class="ali-img-wrap">
 														<img class="ali-img" src="${PICTURES_BASEPATH}${coverPictureurl}" alt="image">
 													</div>
@@ -272,32 +275,7 @@ exports.handler = async (event, context, callback) => {
 													<i class="fas fa-share-alt"></i>
 												</a>
 
-												<!-- Begin album share modal -->
-												<div id="modal-76532457" class="modal fade" tabindex="-1" role="dialog">
-													<div class="modal-dialog modal-center">
-														<div class="modal-content">
-															<div class="modal-header">
-																<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-																<h4 class="modal-title">Share to:</h4>
-															</div>
-															<div class="modal-body text-center">
-																<!-- Begin modal share -->
-																<div class="modal-share">
-																	<ul>
-																		<li><a href="#0" class="btn btn-social-min btn-facebook btn-rounded-full"><i class="fab fa-facebook-f"></i></a></li>
-																		<li><a href="#0" class="btn btn-social-min btn-twitter btn-rounded-full"><i class="fab fa-twitter"></i></a></li>
-																		<li><a href="#0" class="btn btn-social-min btn-google btn-rounded-full"><i class="fab fa-google-plus-g"></i></a></li>
-																		<li><a href="#0" class="btn btn-social-min btn-pinterest btn-rounded-full"><i class="fab fa-pinterest-p"></i></a></li>
-																		<li><a href="#0" class="btn btn-social-min btn-instagram btn-rounded-full"><i class="fab fa-instagram"></i></a></li>
-																	</ul>
-																	<input class="grab-link" type="text" readonly="" value="https://your-site.com/albums-gallery-${i}.html" onclick="this.select()">
-																</div>
-																<!-- End modal share -->
-															</div>
-														</div><!-- /.modal-content -->
-													</div><!-- /.modal-dialog -->
-												</div>
-												<!-- End album share modal -->
+												
 
 											</div>
 											<!-- End album list item -->

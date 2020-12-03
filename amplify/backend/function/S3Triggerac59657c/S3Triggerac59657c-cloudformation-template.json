@@ -90,7 +90,7 @@
         "Runtime": "nodejs10.x",
         "Timeout": "25",
         "Code": {
-          "S3Bucket": "amplify-photosharing-dev-204426-deployment",
+          "S3Bucket": "amplify-photosharing-dev-210643-deployment",
           "S3Key": "amplify-builds/S3Triggerac59657c-65696a6563733569454f-build.zip"
         },
         "Layers": [
