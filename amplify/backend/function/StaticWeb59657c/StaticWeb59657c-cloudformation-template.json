@@ -30,13 +30,9 @@
       "Type": "String",
       "Default": "hostingS3AndCloudFrontHostingBucketName"
     },
-    "imagesbasepath": {
+    "hostingS3AndCloudFrontCloudFrontSecureURL": {
       "Type": "String",
-      "Default": "imagesbasepath"
-    },
-    "imagesdomainname": {
-      "Type": "String",
-      "Default": "imagesdomainname"
+      "Default": "hostingS3AndCloudFrontCloudFrontSecureURL"
     }
   },
   "Conditions": {
@@ -99,11 +95,8 @@
             "HOSTING_S3ANDCLOUDFRONT_HOSTINGBUCKETNAME": {
               "Ref": "hostingS3AndCloudFrontHostingBucketName"
             },
-            "HOSTING_S3ANDCLOUDFRONT_HOSTINGBUCKETNAME_CLOUDFRONTSECUREURL": {
-              "Ref": "imagesbasepath"
-            },
-            "IMAGES_DOMAIN_NAME": {
-              "Ref": "imagesdomainname"
+            "IMAGES_BASE_PATH": {
+              "Ref": "hostingS3AndCloudFrontCloudFrontSecureURL"
             }
           }
         },
@@ -118,7 +111,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-photosharing-dev-210643-deployment",
-          "S3Key": "amplify-builds/StaticWeb59657c-37383069396c58456835-build.zip"
+          "S3Key": "amplify-builds/StaticWeb59657c-726e4b7233547a712b73-build.zip"
         }
       }
     },

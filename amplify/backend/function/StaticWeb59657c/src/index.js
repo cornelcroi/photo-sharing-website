@@ -128,30 +128,55 @@ exports.handler = async (event, context, callback) => {
     
     const album_galery_templateFile = 'website/albums-gallery-template.html';
     const albums_templateFile = 'website/albums-template.html';
+    const album_item_template = 'website/album-item-template.html';
+    const photo_item_template = 'website/photo-item-template.html';
+
     var coverPictureurl = "assets/img/img-1.jpg";
 
+
     //ALBUM LIST
-    const paramsAlbumList = 
+    var params = 
       {
         Bucket: BUCKET, // a path to your Bucket
         Key: album_galery_templateFile // a key (literally a path to your file)
       }
-      const albumFileFromS3 = await S3.getObject(paramsAlbumList).promise();
-      var album_gallery_templateHTML = albumFileFromS3.Body.toString('utf-8');
+      const albumListFromS3 = await S3.getObject(params).promise();
+      var album_gallery_templateHTML = albumListFromS3.Body.toString('utf-8');
       
-      //ALBUM GALERY
-      const paramsAlbumGalery = 
+    //ALBUM GALERY
+    params = 
       {
         Bucket: BUCKET, // a path to your Bucket
         Key: albums_templateFile // a key (literally a path to your file)
       }
-      const albumsFileFromS3 = await S3.getObject(paramsAlbumGalery).promise();
-      var albums_templateHTML = albumsFileFromS3.Body.toString('utf-8');
+    const albumsGalleryFromS3 = await S3.getObject(params).promise();
+    var albums_templateHTML = albumsGalleryFromS3.Body.toString('utf-8');
 
-        const albumListResult = await client.query({           
+
+    //ALBUM_ITEM
+    params = 
+    {
+      Bucket: BUCKET, // a path to your Bucket
+      Key: album_item_template // a key (literally a path to your file)
+    }
+    const albumItemFromS3 = await S3.getObject(params).promise();
+    var albumItem_templateHTML = albumItemFromS3.Body.toString('utf-8');
+
+
+    //PHOTO_ITEM
+    params = 
+    {
+      Bucket: BUCKET, // a path to your Bucket
+      Key: photo_item_template // a key (literally a path to your file)
+    }
+    const photoItemFromS3 = await S3.getObject(params).promise();
+    var photoItem_templateHTML = photoItemFromS3.Body.toString('utf-8');
+
+
+    const albumListResult = await client.query({           
             query: listAlbums,
             limit: 999            
-        })
+      })
 
         let i=0;
         var albumHTML = "";
@@ -181,29 +206,12 @@ exports.handler = async (event, context, callback) => {
               } );
 
 
-
-                photoListHTML += `
-                      <div class="isotope-item">
-
-                      <!-- Begin album single item -->
-                      <div class="album-single-item">
-                        <img class="asi-img" src="${PICTURES_BASEPATH}${photoByAlbumListResult.data.listPhotosByAlbum.items[j].thumbnail.key}" alt="image">
-                        <!-- Begin item cover -->
-                        <div class="asi-cover">
-                          <a class="asi-link lg-trigger" href="${PICTURES_BASEPATH}${photoByAlbumListResult.data.listPhotosByAlbum.items[j].fullsize.key}"
-                          data-exthumbnail="${PICTURES_BASEPATH}${photoByAlbumListResult.data.listPhotosByAlbum.items[j].thumbnail.key}"
-                          ` +
-                          (photoByAlbumListResult.data.listPhotosByAlbum.items[j].exifcamera ? ` data-sub-html="<p>${photoByAlbumListResult.data.listPhotosByAlbum.items[j].exifcamera}</p><p>${photoByAlbumListResult.data.listPhotosByAlbum.items[j].exiflens}</p>" ` : ``)
-                          + ` >
-                          </a>
-                        </div>
-                        <!-- End item cover -->
-                      </div>
-                      <!-- End album single item -->
-
-                    </div>
-
-                `;
+              var current_photoItem_templateHTML = photoItem_templateHTML.toString().replace(/\{PHOTO_THUMBNAIL_URL\}/g, PICTURES_BASEPATH + photoByAlbumListResult.data.listPhotosByAlbum.items[j].thumbnail.key);
+              current_photoItem_templateHTML = current_photoItem_templateHTML.toString().replace(/\{PHOTO_FULLSIZE_URL\}/g, PICTURES_BASEPATH + photoByAlbumListResult.data.listPhotosByAlbum.items[j].fullsize.key);
+              current_photoItem_templateHTML = current_photoItem_templateHTML.toString().replace(/\{EXIF_CAMERA\}/g, photoByAlbumListResult.data.listPhotosByAlbum.items[j].exifcamera);
+              current_photoItem_templateHTML = current_photoItem_templateHTML.toString().replace(/\{EXIF_LENS\}/g, photoByAlbumListResult.data.listPhotosByAlbum.items[j].exiflens);
+              
+              photoListHTML += current_photoItem_templateHTML;
 
                 if(photoByAlbumListResult.data.listPhotosByAlbum.items[j].cover === true){
                   coverPictureurl=photoByAlbumListResult.data.listPhotosByAlbum.items[j].middlesize.key;
@@ -255,34 +263,14 @@ exports.handler = async (event, context, callback) => {
               
             ]);
 
-            albumHTML += `
+           var albumItem_templateHTML_i = albumItem_templateHTML.toString().replace(/\{ALBUM_LINK\}/g, `albums-gallery-${i+1}.html`);
+           albumItem_templateHTML_i = albumItem_templateHTML_i.toString().replace(/\{ALBUM_COVER\}/g, PICTURES_BASEPATH + coverPictureurl);
+           albumItem_templateHTML_i = albumItem_templateHTML_i.toString().replace(/\{ALBUM_NAME\}/g, albumListResult.data.listAlbums.items[i].name);
+           albumItem_templateHTML_i = albumItem_templateHTML_i.toString().replace(/\{ALBUM_PHOTOS\}/g, photoByAlbumListResult.data.listPhotosByAlbum.items.length);
+           albumItem_templateHTML_i = albumItem_templateHTML_i.toString().replace(/\{ALBUM_DATE\}/g, albumListResult.data.listAlbums.items[i].date);
 
+           albumHTML += albumItem_templateHTML_i;
 
-            <div class="isotope-item">
-
-											<!-- Begin album list item -->
-											<div class="album-list-item">
-												<a class="ali-link" href="albums-gallery-${i+1}.html">
-													<div class="ali-img-wrap">
-														<img class="ali-img" src="${PICTURES_BASEPATH}${coverPictureurl}" alt="image">
-													</div>
-													<div class="ali-caption">
-														<h2 class="ali-title">${albumListResult.data.listAlbums.items[i].name}</h2>
-														<div class="ali-meta">${photoByAlbumListResult.data.listPhotosByAlbum.items.length} photos · ${albumListResult.data.listAlbums.items[i].date}</div>
-													</div>
-												</a>
-												<a href="#0" class="album-share" title="Share this album" data-toggle="modal" data-target="#modal-76532457">
-													<i class="fas fa-share-alt"></i>
-												</a>
-
-												
-
-											</div>
-											<!-- End album list item -->
-
-                    </div>
-                    
-                `;
               labels = "";
               
             i++;
@@ -291,6 +279,8 @@ exports.handler = async (event, context, callback) => {
         albums_templateHTML = albums_templateHTML
         .toString()
         .replace(/\{ALBUMS_LIST\}/g, albumHTML);
+
+
         await Promise.all([
           S3.putObject({
             Body: albums_templateHTML,

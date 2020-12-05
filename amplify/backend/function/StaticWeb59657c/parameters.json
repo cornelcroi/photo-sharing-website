@@ -1,5 +1,5 @@
 {
-    "imagesbasepath": {  
+    "hostingS3AndCloudFrontCloudFrontSecureURL": {  
        "Fn::GetAtt": [
           "hostingS3AndCloudFront",  
           "Outputs.CloudFrontSecureURL"
