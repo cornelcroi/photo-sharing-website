@@ -30,9 +30,13 @@
       "Type": "String",
       "Default": "hostingS3AndCloudFrontHostingBucketName"
     },
-    "hostingS3AndCloudFrontCloudFrontSecureURL": {
+    "imagesbasepath": {
       "Type": "String",
-      "Default": "hostingS3AndCloudFrontCloudFrontSecureURL"
+      "Default": "imagesbasepath"
+    },
+    "imagesdomainname": {
+      "Type": "String",
+      "Default": "imagesdomainname"
     }
   },
   "Conditions": {
@@ -96,7 +100,10 @@
               "Ref": "hostingS3AndCloudFrontHostingBucketName"
             },
             "HOSTING_S3ANDCLOUDFRONT_HOSTINGBUCKETNAME_CLOUDFRONTSECUREURL": {
-              "Ref": "hostingS3AndCloudFrontCloudFrontSecureURL"
+              "Ref": "imagesbasepath"
+            },
+            "IMAGES_DOMAIN_NAME": {
+              "Ref": "imagesdomainname"
             }
           }
         },

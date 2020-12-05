@@ -104,7 +104,7 @@ function onlyUnique(value, index, self) {
   return self.indexOf(value) === index;
 }
 
-const PICTURES_BASEPATH = process.env.HOSTING_S3ANDCLOUDFRONT_HOSTINGBUCKETNAME_CLOUDFRONTSECUREURL + '/';
+const PICTURES_BASEPATH = process.env.IMAGES_BASE_PATH + '/';
 exports.handler = async (event, context, callback) => {
    
    
