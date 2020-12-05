@@ -33,6 +33,10 @@
     "hostingS3AndCloudFrontCloudFrontSecureURL": {
       "Type": "String",
       "Default": "hostingS3AndCloudFrontCloudFrontSecureURL"
+    },
+    "theme": {
+      "Type": "String",
+      "Default": "theme"
     }
   },
   "Conditions": {
@@ -97,6 +101,9 @@
             },
             "IMAGES_BASE_PATH": {
               "Ref": "hostingS3AndCloudFrontCloudFrontSecureURL"
+            },
+            "THEME": {
+              "Ref": "theme"
             }
           }
         },
@@ -111,7 +118,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-photosharing-dev-210643-deployment",
-          "S3Key": "amplify-builds/StaticWeb59657c-726e4b7233547a712b73-build.zip"
+          "S3Key": "amplify-builds/StaticWeb59657c-3647544d65786567486f-build.zip"
         }
       }
     },

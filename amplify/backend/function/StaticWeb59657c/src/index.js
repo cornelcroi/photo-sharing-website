@@ -13,11 +13,9 @@ const AWS = require('aws-sdk');
 const S3 = new AWS.S3({ signatureVersion: 'v4' });
 const AUTH_TYPE = require('aws-appsync').AUTH_TYPE;
 const AWSAppSyncClient = require('aws-appsync').default;
-const uuidv4 = require('uuid/v4');
 const gql = require('graphql-tag');
 
 let client = null
-
 
 
 const listPhotosByAlbum = gql`
@@ -105,6 +103,7 @@ function onlyUnique(value, index, self) {
 }
 
 const PICTURES_BASEPATH = process.env.IMAGES_BASE_PATH + '/';
+const THEME = process.env.THEME;
 exports.handler = async (event, context, callback) => {
    
    
@@ -126,12 +125,12 @@ exports.handler = async (event, context, callback) => {
     const BUCKET = process.env.HOSTING_S3ANDCLOUDFRONT_HOSTINGBUCKETNAME;
 
     
-    const album_galery_templateFile = 'website/albums-gallery-template.html';
-    const albums_templateFile = 'website/albums-template.html';
-    const album_item_template = 'website/album-item-template.html';
-    const photo_item_template = 'website/photo-item-template.html';
+    const album_galery_templateFile = THEME + '/albums-gallery-template.html';
+    const albums_templateFile       = THEME + '/albums-template.html';
+    const album_item_template       = THEME + '/album-item-template.html';
+    const photo_item_template       = THEME + '/photo-item-template.html';
 
-    var coverPictureurl = "assets/img/img-1.jpg";
+    var coverPictureurl             = "assets/img/img-1.jpg";
 
 
     //ALBUM LIST
@@ -255,7 +254,7 @@ exports.handler = async (event, context, callback) => {
               S3.putObject({
                 Body: album_gallery_templateHTML_i,
                 Bucket: BUCKET,
-                Key: "website/albums-gallery-" + (i+1) + ".html",
+                Key: THEME+"/albums-gallery-" + (i+1) + ".html",
                 ContentType: 'text/html',
     
               }).promise(), 
@@ -285,7 +284,7 @@ exports.handler = async (event, context, callback) => {
           S3.putObject({
             Body: albums_templateHTML,
             Bucket: BUCKET,
-            Key: "website/albums.html",
+            Key: THEME + "/albums.html",
             ContentType: 'text/html',
 
           }).promise(), 

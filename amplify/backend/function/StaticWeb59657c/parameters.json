@@ -4,5 +4,6 @@
           "hostingS3AndCloudFront",  
           "Outputs.CloudFrontSecureURL"
        ]
-    }
+    },
+    "theme": "website"
 }
