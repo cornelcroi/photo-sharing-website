@@ -91,7 +91,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-photosharing-dev-210643-deployment",
-          "S3Key": "amplify-builds/S3Triggerac59657c-65696a6563733569454f-build.zip"
+          "S3Key": "amplify-builds/S3Triggerac59657c-54315a4a5a692f426833-build.zip"
         },
         "Layers": [
           {

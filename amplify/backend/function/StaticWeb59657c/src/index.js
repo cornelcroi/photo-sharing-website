@@ -232,8 +232,6 @@ exports.handler = async (event, context, callback) => {
         m++;
       }
 
-
-
       album_gallery_templateHTML_i = album_gallery_templateHTML.toString().replace(/\{PICTURES_LIST\}/g, photoListHTML);
 
       album_gallery_templateHTML_i = album_gallery_templateHTML_i.toString().replace(/\{PICTURES_NB\}/g, photoByAlbumListResult.data.listPhotosByAlbum.items.length);
@@ -241,7 +239,6 @@ exports.handler = async (event, context, callback) => {
       album_gallery_templateHTML_i = album_gallery_templateHTML_i.toString().replace(/\{DATE\}/g, albumListResult.data.listAlbums.items[i].date);
       album_gallery_templateHTML_i = album_gallery_templateHTML_i.toString().replace(/\{ALBUM_NAME\}/g, albumListResult.data.listAlbums.items[i].name);
       album_gallery_templateHTML_i = album_gallery_templateHTML_i.toString().replace(/\{ALBUM_LABELS\}/g, labels);
-
       album_gallery_templateHTML_i = album_gallery_templateHTML_i.toString().replace(/\{KEYWORDS\}/g, keywords);
       album_gallery_templateHTML_i = album_gallery_templateHTML_i.toString().replace(/\{ALBUM_COVER_IMAGE\}/g, PICTURES_BASEPATH + coverPictureurl);
 
