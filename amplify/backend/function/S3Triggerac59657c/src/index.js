@@ -1,9 +1,9 @@
 /* Amplify Params - DO NOT EDIT
-	API_PHOTOSHARING_GRAPHQLAPIENDPOINTOUTPUT
-	API_PHOTOSHARING_GRAPHQLAPIIDOUTPUT
-	ENV
-	HOSTING_S3ANDCLOUDFRONT_HOSTINGBUCKETNAME
-	REGION
+  API_PHOTOSHARING_GRAPHQLAPIENDPOINTOUTPUT
+  API_PHOTOSHARING_GRAPHQLAPIIDOUTPUT
+  ENV
+  HOSTING_S3ANDCLOUDFRONT_HOSTINGBUCKETNAME
+  REGION
 Amplify Params - DO NOT EDIT *//* Amplify Params - DO NOT EDIT
 You can access the following resource attributes as environment variables from your Lambda function
 var environment = process.env.ENV
@@ -46,15 +46,15 @@ async function getLabelNames(bucketName, key) {
   let params = {
     Image: {
       S3Object: {
-        Bucket: bucketName, 
+        Bucket: bucketName,
         Name: key
       }
-    }, 
-    MaxLabels: 5, 
+    },
+    MaxLabels: 5,
     MinConfidence: 80
   };
   const detectionResult = await Rekognition.detectLabels(params).promise();
-  const labelNames = detectionResult.Labels.map((l) => l.Name.toLowerCase()); 
+  const labelNames = detectionResult.Labels.map((l) => l.Name.toLowerCase());
   return labelNames;
 }
 
@@ -99,29 +99,29 @@ async function storePhotoInfo(item) {
     }
   `;
 
-  
+
 
   console.log('trying to createphoto with input', JSON.stringify(item))
-	const result = await client.mutate({ 
-      mutation: createPhoto,
-      variables: { input: item },
-      fetchPolicy: 'no-cache'
-    })
+  const result = await client.mutate({
+    mutation: createPhoto,
+    variables: { input: item },
+    fetchPolicy: 'no-cache'
+  })
 
   console.log('result', JSON.stringify(result))
   return result
-  }
+}
 
 function thumbnailKey(filename) {
-	return `public/resized/${filename}`;
+  return `public/resized/${filename}`;
 }
 
 function middlesizeKey(filename) {
-	return `public/middlesize/${filename}`;
+  return `public/middlesize/${filename}`;
 }
 
 function fullsizeKey(filename) {
-	return `public/fullsize/${filename}`;
+  return `public/fullsize/${filename}`;
 }
 
 function getRandomArbitrary(min, max) {
@@ -130,11 +130,11 @@ function getRandomArbitrary(min, max) {
 
 function resizePicture(photo, width, height) {
 
-	return Sharp(photo).resize(width, height).toBuffer();
+  return Sharp(photo).resize(width, height).toBuffer();
 }
 
 async function resize(photoBody, bucketName, key) {
-  
+
   const thumbnailWidth = THUMBNAIL_WIDTH;
   const thumbnailHeight = THUMBNAIL_HEIGHT + getRandomArbitrary(50, 400);
 
@@ -148,106 +148,97 @@ async function resize(photoBody, bucketName, key) {
 
   const DEST_BUCKET = process.env.HOSTING_S3ANDCLOUDFRONT_HOSTINGBUCKETNAME;
 
-
-  //TODO add more sizes
-
-  
-	await Promise.all([
-		S3.putObject({
-			Body: thumbnail,
-			Bucket: DEST_BUCKET,
-			Key: thumbnailKey(originalPhotoName),
-    }).promise(),
-    
+  await Promise.all([
     S3.putObject({
-			Body: middlesize,
-			Bucket: DEST_BUCKET,
-			Key: middlesizeKey(originalPhotoName),
-		}).promise(),
+      Body: thumbnail,
+      Bucket: DEST_BUCKET,
+      Key: thumbnailKey(originalPhotoName),
+    }).promise(),
 
-		S3.copyObject({
-			Bucket: DEST_BUCKET,
-			CopySource: bucketName + '/' + key,
-			Key: fullsizeKey(originalPhotoName),
-		}).promise(),
-	]);
+    S3.putObject({
+      Body: middlesize,
+      Bucket: DEST_BUCKET,
+      Key: middlesizeKey(originalPhotoName),
+    }).promise(),
 
-	await S3.deleteObject({
-		Bucket: bucketName,
-		Key: key
-	}).promise();
+    S3.copyObject({
+      Bucket: DEST_BUCKET,
+      CopySource: bucketName + '/' + key,
+      Key: fullsizeKey(originalPhotoName),
+    }).promise(),
+  ]);
 
-	return {
-		photoId: originalPhotoName,
-		
-		thumbnail: {
-			key: thumbnailKey(originalPhotoName),
-			width: thumbnailWidth,
-			height: thumbnailHeight
-		},
+  await S3.deleteObject({
+    Bucket: bucketName,
+    Key: key
+  }).promise();
+
+  return {
+    photoId: originalPhotoName,
+
+    thumbnail: {
+      key: thumbnailKey(originalPhotoName),
+      width: thumbnailWidth,
+      height: thumbnailHeight
+    },
     middlesize: {
-			key: middlesizeKey(originalPhotoName),
-			width: MIDDLESIZE_WIDTH,
-			height: MIDDLESIZE_HEIGHT
-		},
-		fullsize: {
-			key: fullsizeKey(originalPhotoName),
-			width: originalPhotoDimensions.width,
-			height: originalPhotoDimensions.height
+      key: middlesizeKey(originalPhotoName),
+      width: MIDDLESIZE_WIDTH,
+      height: MIDDLESIZE_HEIGHT
+    },
+    fullsize: {
+      key: fullsizeKey(originalPhotoName),
+      width: originalPhotoDimensions.width,
+      height: originalPhotoDimensions.height
     }
-	};
+  };
 };
 
 async function processRecord(record) {
-	const bucketName = record.s3.bucket.name;
+  const bucketName = record.s3.bucket.name;
   const key = decodeURIComponent(record.s3.object.key.replace(/\+/g, " "));
   const DEST_BUCKET = process.env.HOSTING_S3ANDCLOUDFRONT_HOSTINGBUCKETNAME;
 
-  console.log('processRecord', JSON.stringify(record))
-
   if (record.eventName !== "ObjectCreated:Put" && record.eventName !== "ObjectCreated:CompleteMultipartUpload") { console.log('Is not a new file'); return; }
-  if (! key.includes('upload/')) { console.log('Does not look like an upload from user'); return; }
+  if (!key.includes('upload/')) { console.log('Does not look like an upload from user'); return; }
 
   const originalPhoto = await S3.getObject({ Bucket: bucketName, Key: key }).promise()
-  
+
   const labelNames = await getLabelNames(bucketName, key);
   console.log(labelNames, labelNames)
 
 
-	const metadata = originalPhoto.Metadata
-  console.log('metadata', JSON.stringify(metadata))
-  console.log('resize')
-	const sizes = await resize(originalPhoto.Body, bucketName, key);    
-  console.log('sizes', JSON.stringify(sizes))
-  var metadataLens=""
-  var metadataCamera="";
+  const metadata = originalPhoto.Metadata
+  const sizes = await resize(originalPhoto.Body, bucketName, key);
+  var metadataLens = ""
+  var metadataCamera = "";
   var exifData = exifparser.create(originalPhoto.Body).parse();
   if (exifData.tags.ExposureTime
-      && exifData.tags.FNumber
-      && exifData.tags.ISO
-      && exifData.tags.FocalLength
-      && exifData.tags.LensModel) {
+    && exifData.tags.FNumber
+    && exifData.tags.ISO
+    && exifData.tags.FocalLength
+    && exifData.tags.LensModel) {
 
-      var exposure = 1/parseFloat(exifData.tags.ExposureTime);
+    var exposure = 1 / parseFloat(exifData.tags.ExposureTime);
 
-      metadataCamera = "1/"+ exposure +" sec at f / " + String(exifData.tags.FNumber) + ", ISO " + String(exifData.tags.ISO);
-      metadataLens = String(exifData.tags.FocalLength) +" mm ("+ String(exifData.tags.LensModel) +")";
+    metadataCamera = "1/" + exposure + " sec at f / " + String(exifData.tags.FNumber) + ", ISO " + String(exifData.tags.ISO);
+    metadataLens = String(exifData.tags.FocalLength) + " mm (" + String(exifData.tags.LensModel) + ")";
 
   }
-	const id = uuidv4();
-	const item = {
-		id: id,
-		owner: metadata.owner,
-		albumId: metadata.albumid,
+  const id = uuidv4();
+  const item = {
+    id: id,
+    owner: metadata.owner,
+    albumId: metadata.albumid,
     bucket: DEST_BUCKET,
     thumbnail: {
       width: sizes.thumbnail.width,
-      height: sizes.thumbnail.height, 
+      height: sizes.thumbnail.height,
       key: sizes.thumbnail.key,
     },
     middlesize: {
       width: sizes.middlesize.width,
-      height: sizes.middlesize.height, 
+      height: sizes.middlesize.height,
       key: sizes.middlesize.key,
     },
     fullsize: {
@@ -262,7 +253,7 @@ async function processRecord(record) {
   }
 
   console.log(JSON.stringify(metadata), JSON.stringify(sizes), JSON.stringify(item))
-	await storePhotoInfo(item);
+  await storePhotoInfo(item);
 }
 
 
@@ -278,15 +269,15 @@ exports.handler = async (event, context, callback) => {
     },
     disableOffline: true
   });
- 
-	try {
-		event.Records.forEach(processRecord);
+
+  try {
+    event.Records.forEach(processRecord);
     callback(null, { status: 'Photo Processed' });
-    
-	}
-	catch (err) {
-		console.error(err);
-		callback(err);
-	}
+
+  }
+  catch (err) {
+    console.error(err);
+    callback(err);
+  }
 };
 
