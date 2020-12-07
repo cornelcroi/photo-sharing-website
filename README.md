@@ -187,16 +187,16 @@ aws cognito-idp admin-confirm-sign-up \
 
 
 ## Concept
-1. build ReactJs web application using AWS Amplify to allow authenticated users to create albums, upload photos and store everything in DynamoDB
-2. create a static website and copy it to a subfolder inside /public folder
-3. create 4 html templates
+1. a ReactJs web application using AWS Amplify to allow authenticated users to create albums, upload photos and store everything in DynamoDB
+2. a static website and copy it to a subfolder inside /public folder
+3. 4 html templates
 ```
   /albums-gallery-template.html                                       <-- Jupyter notebook which provides
   /albums-template.html                                               <-- Jupyter notebook which provides
   /album-item-template.html                                           <-- Jupyter notebook which provides
   /photo-item-template.html                                           <-- Jupyter notebook which provides  
 ```
-4. use AWS Lambda to generate static files using html templates and using  based on data stored in DynamoDB
+4. AWS Lambda to generate static files using html templates and using  based on data stored in DynamoDB
 
 
 ## Advantages of static website
