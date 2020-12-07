@@ -165,41 +165,48 @@ aws cognito-idp admin-confirm-sign-up \
     └── setupTests.js                                                 <-- Jupyter notebook which provides
 ```
 
-## Key points
-
-- The application has 2 parts
-    - **React application** Full-Stack React Application using AWS Amplify
-        - Administration module for the public website
-        - Allows following operations to be executed by authenticated admin user
-          - Create albums, add name, add description
-          - Upload/delete photos
-            - Automatically creates 3 sizes
-            - AI-powered object tagging using Amazon Rekognition for each uploaded photo
-          - Generate the static website based on data stored in DynamoDB
-          - One CloudDistribution points to the root folder of hosting S3 bucket
-          - One CloudFront distribution points to website subfolder where the static website sits
-    - **Static website**
-        - is generated on demand by a AWS Lambda
-        - sits in public/website folder
-        - is deployed by react application
-        - Out-of-the-box, most generators provide amazing speed and performance benefits compared to their dynamic counterparts.
 
 
 
 ## Concept
-1. a ReactJs web application using AWS Amplify to allow authenticated users to create albums, upload photos and store everything in DynamoDB
-2. a static website and copy it to a subfolder inside /public folder
-3. 4 html templates
-```
-  /albums-gallery-template.html                                       <-- Jupyter notebook which provides
-  /albums-template.html                                               <-- Jupyter notebook which provides
-  /album-item-template.html                                           <-- Jupyter notebook which provides
-  /photo-item-template.html                                           <-- Jupyter notebook which provides  
-```
-4. AWS Lambda to generate static files using html templates and using  based on data stored in DynamoDB
+
+1. Create ReactJs web application to allow authenticated users to create albums, upload photos and store everything in DynamoDB
+2. Put a static website with html template files in a subfolder of reactjs application
+and copy it to a subfolder inside /public folder
+3. Create AWS Lambda to generate static files using html templates and using  based on data stored in DynamoDB
 
 
-## Advantages of static website
+
+
+## Key points
+
+  - full-Stack ReactJs Application developped using AWS Amplify
+  - single admin user created at deployment 
+  - automatically creating photo thumbnails
+  - automatically detecting relevant labels for each uploaded photo and display these labels on album gallery page
+  - static website is generated on demand by a AWS Lambda
+  - static websit sits in public/website folder
+  - 4 html templates
+  ```
+    /albums-gallery-template.html                                       <-- Jupyter notebook which provides
+    /albums-template.html                                               <-- Jupyter notebook which provides
+    /album-item-template.html                                           <-- Jupyter notebook which provides
+    /photo-item-template.html                                           <-- Jupyter notebook which provides  
+  ```
+  - each html template contains variable to be replaced by lambda
+  ```html
+    <div class="ali-caption">
+      <h2 class="ali-title">{ALBUM_NAME}</h2>
+      <div class="ali-meta">{ALBUM_PHOTOS} photos · {ALBUM_DATE}</div>
+    </div>
+  ```
+  - amplify selected hosting option is S3 with CloudFront using HTTPS
+    - the created CloudDistribution points to the root folder of hosting S3 bucket
+    - add a second CloudFront distribution to point to ./public/website folder where the static website sits
+
+    
+
+## When to use pre rendered static website
 
 - to change website theme, just replace the content inside /public/website folders
 - pre-rendered static HTML of static sites loads much faster than the pages on a dynamic site. Fast websites are really important for a good user experience, and also for boosting your site in search engine rankings.
@@ -207,6 +214,7 @@ aws cognito-idp admin-confirm-sign-up \
 - Static site generators reduce site complexity. That, in turn, improves speed and reliability, and smooths the developer experience.
 - You don’t have to worry about database-toppling traffic spikes.
 - you can host your site with a content delivery network that scales with your site’s traffic.
+
 
 ## Costs
 Less than a cup of coffee per month
