@@ -111,119 +111,86 @@ aws cognito-idp admin-confirm-sign-up \
 
 
 
+
+## Repository structure 
+
+
+```bash
+.
+├── README.md                                                         <-- This file    
+├── amplify                                                           <-- Jupyter notebook which provides
+│   └── backend                                                       <-- Jupyter notebook which provides  
+│       ├── api                                                       <-- Jupyter notebook which provides
+│       │   └── photosharing                                          <-- Jupyter notebook which provides
+│       ├── auth                                                      <-- Jupyter notebook which provides
+│       │   └── photosharing84970f75                                  <-- Jupyter notebook which provides
+│       ├── backend-config.json                                       <-- Jupyter notebook which provides
+│       ├── boostrap                                                  <-- Jupyter notebook which provides
+│       │   └── adminuser                                             <-- Jupyter notebook which provides
+│       ├── function                                                  <-- Jupyter notebook which provides
+│       │   ├── S3Triggerac59657c                                     <-- Jupyter notebook which provides
+│       │   └── StaticWeb59657c                                       <-- Jupyter notebook which provides  
+│       ├── hosting                                                   <-- Jupyter notebook which provides
+│       │   └── S3AndCloudFront                                       <-- Jupyter notebook which provides
+│       ├── storage                                                   <-- Jupyter notebook which provides  
+│       │   └── s3871f7e84                                            <-- Jupyter notebook which provides
+│       └── tags.json                                                 <-- Jupyter notebook which provides
+├── package-lock.json                                                 <-- Jupyter notebook which provides
+├── package.json                                                      <-- Jupyter notebook which provides  
+├── public                                                            <-- Jupyter notebook which provides  
+│   ├── favicon.ico                                                   <-- Jupyter notebook which provides
+│   ├── img                                                           <-- Jupyter notebook which provides
+│   ├── index.html                                                    <-- Jupyter notebook which provides                             
+│   └── website                                                       <-- Jupyter notebook which provides
+│       ├── album-item-template.html                                  <-- Jupyter notebook which provides
+│       ├── albums-assets                                             <-- Jupyter notebook which provides
+│       ├── albums-gallery-1.html                                     <-- Jupyter notebook which provides
+│       ├── albums-gallery-template.html                              <-- Jupyter notebook which provides
+│       ├── albums-template.html                                      <-- Jupyter notebook which provides  
+│       ├── albums.html                                               <-- Jupyter notebook which provides
+│       ├── assets                                                    <-- Jupyter notebook which provides
+│       ├── gallery-assets                                            <-- Jupyter notebook which provides
+│       ├── images                                                    <-- Jupyter notebook which provides
+│       ├── index.html                                                <-- Jupyter notebook which provides
+│       └── photo-item-template.html                                  <-- Jupyter notebook which provides
+├── scripts                                                           <-- Jupyter notebook which provides
+├── src                                                               <-- Jupyter notebook which provides
+    ├── App.css                                                       <-- Jupyter notebook which provides  
+    ├── App.js                                                        <-- Jupyter notebook which provides
+    ├── graphql                                                       <-- Jupyter notebook which provides
+    ├── index.css                                                     <-- Jupyter notebook which provides  
+    ├── index.js                                                      <-- Jupyter notebook which provides
+    ├── logo.svg                                                      <-- Jupyter notebook which provides
+    ├── reportWebVitals.js                                            <-- Jupyter notebook which provides
+    └── setupTests.js                                                 <-- Jupyter notebook which provides
+```
+
+## Key points
+
+- The application has 2 parts
+    - **React app - Admin** with the following features:
+        - Allows operations to be executed only by authenticated admin user
+          - Create albums and add data about albums
+          - Upload photos
+            - Automatically creates 3 sizes
+            - Automatically detects relevant labels for each uploaded photo using Amazon Rekognition
+          - Generate the static website based on data stored in DynamoDB
+          - A second CloudFront distribution is added that points to the hosting bucket to subfolder website where the static website mock sits
+    - **Static html website**
+        - is generated on demand by a AWS Lambda
+        - website folder - mocked website
+- CloudFront is used to serve the reactjs application and the static website
+- To resize the pictures use Sharp library is used
+
 - 2 CloudFront distributions pointing to the same S3 Bucket are used:
     - one to serve the reactjs application
     - the second one to serve the static website
 
 
-## Repository structure 
-## Key points
+## Credits
 
-```bash
-.
-├── README.md                                               
-├── amplify
-│   └── backend
-│       ├── api
-│       │   └── photosharing
-│       │       ├── parameters.json
-│       │       ├── schema.graphql
-│       │       ├── stacks
-│       │       │   └── CustomResources.json
-│       │       └── transform.conf.json
-│       ├── auth
-│       │   └── photosharing84970f75
-│       │       ├── manbehindlensadmin84970f75-cloudformation-template.yml
-│       │       └── parameters.json
-│       ├── backend-config.json
-│       ├── boostrap
-│       │   └── adminuser
-│       │       ├── parameters.json
-│       │       └── template.yml
-│       ├── function
-│       │   ├── S3Triggerac59657c
-│       │   │   ├── S3Triggerac59657c-cloudformation-template.json
-│       │   │   ├── S3Triggerac59657c-cloudformation-template.json-e
-│       │   │   ├── amplify.state
-│       │   │   ├── function-parameters.json
-│       │   │   ├── parameters.json
-│       │   │   └── src
-│       │   │       ├── event.json
-│       │   │       ├── index.js
-│       │   │       ├── package-lock.json
-│       │   │       └── package.json
-│       │   └── StaticWeb59657c
-│       │       ├── StaticWeb59657c-cloudformation-template.json
-│       │       ├── amplify.state
-│       │       ├── function-parameters.json
-│       │       ├── parameters.json
-│       │       └── src
-│       │           ├── event.json
-│       │           ├── index.js
-│       │           ├── package-lock.json
-│       │           └── package.json
-│       ├── hosting
-│       │   └── S3AndCloudFront
-│       │       ├── parameters.json
-│       │       └── template.json
-│       ├── storage
-│       │   └── s3871f7e84
-│       │       ├── parameters.json
-│       │       ├── s3-cloudformation-template.json
-│       │       ├── s3-cloudformation-template.json-e
-│       │       └── storage-params.json
-│       └── tags.json
-├── package-lock.json
-├── package.json
-├── public
-│   ├── favicon.ico
-│   ├── img
-│   │   └── no_cover.jpg
-│   ├── index.html
-│   ├── robots.txt
-│   └── website
-│       ├── album-item-template.html
-│       ├── albums-assets
-│       ├── albums-gallery-1.html
-│       ├── albums-gallery-template.html
-│       ├── albums-template.html
-│       ├── albums.html
-│       ├── assets
-│       ├── gallery-assets
-│       ├── images
-│       ├── index.html
-│       └── photo-item-template.html
-├── scripts
-├── src
-    ├── App.css
-    ├── App.js
-    ├── graphql
-    ├── index.css
-    ├── index.js
-    ├── logo.svg
-    ├── reportWebVitals.js
-    └── setupTests.js
-```
-
-
-- The application has 2 modules
-    - **Admin** with the following features:
-        - Allow the admin user sign in
-        - Store data about albums, photos
-        - Upload photos
-        - Automatically creates photo different thumbnails to be used on the static website
-        - Automatically detects relevant labels for each uploaded photo
-        - Generates the static website based on all metadata stored inside DynamoDB
-    - **Static website**
-        - Is being generated on demand by a AWS Lambda
-- CloudFront is used to serve the reactjs application and the static website
-- Direct access to the S3 Web Bucket is blocked. All traffic must passe through CloudFront
-- To resize the pictures use Sharp library is used
-
-
-
-## Resources
-
-- [Create sharp layer for AWS Lambda](https://aws.amazon.com/blogs/compute/using-lambda-layers-to-simplify-your-development-process)
-- [Build a Photo-Sharing Web App with AWS Amplify Workshop](https://amplify-workshop.go-aws.com/)
+[Multiverse HTML template](https://html5up.net/multiverse)
+[Lens HTML template](https://html5up.net/lens)
+[Build a Photo-Sharing Web App with AWS Amplify Workshop](https://amplify-workshop.go-aws.com/)
+[Create sharp layer for AWS Lambda](https://aws.amazon.com/blogs/compute/using-lambda-layers-to-simplify-your-development-process)
 
