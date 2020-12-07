@@ -1,7 +1,6 @@
 # ManBehindLens.com
 
-> Build and host a React application for the a serverless photo sharing website
-
+Public photo gallery.
 
 ## Goal
 
@@ -10,22 +9,6 @@ Build a self-contained, declarative infrastructure, static photo gallery to shar
 
 TODO - create video demo like https://github.com/jpsim/AWSPics
 
-## Key points
-
-
-- The application has 2 modules
-    - **Admin** with the following features:
-        - Allow the admin user sign in
-        - Store data about albums, photos
-        - Upload photos
-        - Automatically creates photo different thumbnails to be used on the static website
-        - Automatically detects relevant labels for each uploaded photo
-        - Generates the static website based on all metadata stored inside DynamoDB
-    - **Static website**
-        - Is being generated on demand by a AWS Lambda
-- CloudFront is used to serve the reactjs application and the static website
-- Direct access to the S3 Web Bucket is blocked. All traffic must passe through CloudFront
-- To resize the pictures use Sharp library is used
 
 
 ## The architecture
@@ -126,12 +109,117 @@ aws cognito-idp admin-confirm-sign-up \
   --username admin@example.com
 ```
 
-All the source code is available in my GitHub.
 
 
 - 2 CloudFront distributions pointing to the same S3 Bucket are used:
     - one to serve the reactjs application
     - the second one to serve the static website
+
+
+## Repository structure 
+## Key points
+
+```bash
+.
+├── README.md                                               
+├── amplify
+│   └── backend
+│       ├── api
+│       │   └── photosharing
+│       │       ├── parameters.json
+│       │       ├── schema.graphql
+│       │       ├── stacks
+│       │       │   └── CustomResources.json
+│       │       └── transform.conf.json
+│       ├── auth
+│       │   └── photosharing84970f75
+│       │       ├── manbehindlensadmin84970f75-cloudformation-template.yml
+│       │       └── parameters.json
+│       ├── backend-config.json
+│       ├── boostrap
+│       │   └── adminuser
+│       │       ├── parameters.json
+│       │       └── template.yml
+│       ├── function
+│       │   ├── S3Triggerac59657c
+│       │   │   ├── S3Triggerac59657c-cloudformation-template.json
+│       │   │   ├── S3Triggerac59657c-cloudformation-template.json-e
+│       │   │   ├── amplify.state
+│       │   │   ├── function-parameters.json
+│       │   │   ├── parameters.json
+│       │   │   └── src
+│       │   │       ├── event.json
+│       │   │       ├── index.js
+│       │   │       ├── package-lock.json
+│       │   │       └── package.json
+│       │   └── StaticWeb59657c
+│       │       ├── StaticWeb59657c-cloudformation-template.json
+│       │       ├── amplify.state
+│       │       ├── function-parameters.json
+│       │       ├── parameters.json
+│       │       └── src
+│       │           ├── event.json
+│       │           ├── index.js
+│       │           ├── package-lock.json
+│       │           └── package.json
+│       ├── hosting
+│       │   └── S3AndCloudFront
+│       │       ├── parameters.json
+│       │       └── template.json
+│       ├── storage
+│       │   └── s3871f7e84
+│       │       ├── parameters.json
+│       │       ├── s3-cloudformation-template.json
+│       │       ├── s3-cloudformation-template.json-e
+│       │       └── storage-params.json
+│       └── tags.json
+├── package-lock.json
+├── package.json
+├── public
+│   ├── favicon.ico
+│   ├── img
+│   │   └── no_cover.jpg
+│   ├── index.html
+│   ├── robots.txt
+│   └── website
+│       ├── album-item-template.html
+│       ├── albums-assets
+│       ├── albums-gallery-1.html
+│       ├── albums-gallery-template.html
+│       ├── albums-template.html
+│       ├── albums.html
+│       ├── assets
+│       ├── gallery-assets
+│       ├── images
+│       ├── index.html
+│       └── photo-item-template.html
+├── scripts
+├── src
+    ├── App.css
+    ├── App.js
+    ├── graphql
+    ├── index.css
+    ├── index.js
+    ├── logo.svg
+    ├── reportWebVitals.js
+    └── setupTests.js
+```
+
+
+- The application has 2 modules
+    - **Admin** with the following features:
+        - Allow the admin user sign in
+        - Store data about albums, photos
+        - Upload photos
+        - Automatically creates photo different thumbnails to be used on the static website
+        - Automatically detects relevant labels for each uploaded photo
+        - Generates the static website based on all metadata stored inside DynamoDB
+    - **Static website**
+        - Is being generated on demand by a AWS Lambda
+- CloudFront is used to serve the reactjs application and the static website
+- Direct access to the S3 Web Bucket is blocked. All traffic must passe through CloudFront
+- To resize the pictures use Sharp library is used
+
 
 
 ## Resources
