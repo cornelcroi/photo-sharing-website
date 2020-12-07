@@ -1,10 +1,10 @@
 # ManBehindLens.com
 
-Public photo gallery.
+Your own photosharing site
 
 ## Goal
 
-Build a self-contained, declarative infrastructure, static photo gallery to share pictures without needing to run, maintain (or pay for) servers.
+Build a static photosharing site to share your pictures without needing to run, maintain servers.
 
 
 TODO - create video demo like https://github.com/jpsim/AWSPics
@@ -29,7 +29,7 @@ TODO - create video demo like https://github.com/jpsim/AWSPics
 
 
 ## Prerequisites
-
+- Create an AWS account
 - [Install the Amplify CLI](https://docs.amplify.aws/cli/start/install#install-the-amplify-cli)
 - [Configure Amplify](https://docs.amplify.aws/cli/start/install#configure-the-amplify-cli)
 - [Install npm](https://www.npmjs.com/get-npm)
@@ -168,23 +168,49 @@ aws cognito-idp admin-confirm-sign-up \
 ## Key points
 
 - The application has 2 parts
-    - **React app - Admin** with the following features:
-        - Allows operations to be executed only by authenticated admin user
-          - Create albums and add data about albums
-          - Upload photos
+    - **React application** Full-Stack React Application using AWS Amplify
+        - Administration module for the public website
+        - Allows following operations to be executed by authenticated admin user
+          - Create albums, add name, add description
+          - Upload/delete photos
             - Automatically creates 3 sizes
-            - Automatically detects relevant labels for each uploaded photo using Amazon Rekognition
+            - AI-powered object tagging using Amazon Rekognition for each uploaded photo
           - Generate the static website based on data stored in DynamoDB
-          - A second CloudFront distribution is added that points to the hosting bucket to subfolder website where the static website mock sits
-    - **Static html website**
+          - One CloudDistribution points to the root folder of hosting S3 bucket
+          - One CloudFront distribution points to website subfolder where the static website sits
+    - **Static website**
         - is generated on demand by a AWS Lambda
-        - website folder - mocked website
-- CloudFront is used to serve the reactjs application and the static website
-- To resize the pictures use Sharp library is used
+        - sits in public/website folder
+        - is deployed by react application
+        - Out-of-the-box, most generators provide amazing speed and performance benefits compared to their dynamic counterparts.
 
-- 2 CloudFront distributions pointing to the same S3 Bucket are used:
-    - one to serve the reactjs application
-    - the second one to serve the static website
+
+
+## Concept
+1. build ReactJs web application using AWS Amplify to allow authenticated users to create albums, upload photos and store everything in DynamoDB
+2. create a static website and copy it to a subfolder inside /public folder
+3. create 4 html templates
+```
+  /albums-gallery-template.html                                       <-- Jupyter notebook which provides
+  /albums-template.html                                               <-- Jupyter notebook which provides
+  /album-item-template.html                                           <-- Jupyter notebook which provides
+  /photo-item-template.html                                           <-- Jupyter notebook which provides  
+```
+4. use AWS Lambda to generate static files using html templates and using  based on data stored in DynamoDB
+
+
+## Advantages of static website
+
+- to change website theme, just replace the content inside /public/website folders
+- pre-rendered static HTML of static sites loads much faster than the pages on a dynamic site. Fast websites are really important for a good user experience, and also for boosting your site in search engine rankings.
+- Since there are no dynamic scripts running on a static site, and every page is pre-rendered, your site is less likely to go down when there’s a traffic spike.
+- Static site generators reduce site complexity. That, in turn, improves speed and reliability, and smooths the developer experience.
+- You don’t have to worry about database-toppling traffic spikes.
+- you can host your site with a content delivery network that scales with your site’s traffic.
+
+## Costs
+Less than a cup of coffee per month
+
 
 
 ## Credits
