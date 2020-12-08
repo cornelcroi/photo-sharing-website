@@ -40,7 +40,7 @@ and copy it to a subfolder inside /public folder
   ```
 **3. Customize the application**
 
-- Create a sharp layer for Lambda
+- Sharp layer for Lambda
 
   - The application resizes images using the Sharp npm library
   - Follow [this tutorial](https://aws.amazon.com/blogs/compute/using-lambda-layers-to-simplify-your-development-process) to create a sharp layer.
@@ -87,7 +87,7 @@ and copy it to a subfolder inside /public folder
                 }
               ]
       ```
-- Use your email address for admin user
+- Admin user email
 
 **4. Deploy the stack to your AWS account**
   - Initialize your Amplify powered cloud application
