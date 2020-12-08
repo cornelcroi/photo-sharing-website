@@ -42,12 +42,9 @@ and copy it to a subfolder inside /public folder
 
 - Sharp layer for Lambda
 
-  - The application resizes images using the Sharp npm library
+  - The application resizes images using the `sharp npm` library
   - Follow [this tutorial](https://aws.amazon.com/blogs/compute/using-lambda-layers-to-simplify-your-development-process) to create a sharp layer.
-  - Run this command to list available layers
-    ```bash 
-    aws lambda list-layers
-    ``` 
+  - Run this command to list available layers `aws lambda list-layers` 
   - You should have a result like this 
     ```
     {
