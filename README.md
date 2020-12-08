@@ -182,10 +182,10 @@ and copy it to a subfolder inside /public folder
 
   - full-Stack ReactJs Application developped using AWS Amplify
   - single admin user created at deployment 
-  - automatically creating photo thumbnails
-  - automatically detecting relevant labels for each uploaded photo and display these labels on album gallery page
+  - automatically creates photo thumbnails
+  - automatically detects relevant labels for each uploaded photo and display these labels on album gallery page
   - static website is generated on demand by a AWS Lambda
-  - static websit sits in public/website folder
+  - static websit sits in `./public/website` folder
   - 4 html templates
   ```
     /albums-gallery-template.html                                       <-- Jupyter notebook which provides
@@ -195,20 +195,19 @@ and copy it to a subfolder inside /public folder
   ```
   - each html template contains variable to be replaced by lambda
   ```html
-    <div class="ali-caption">
-      <h2 class="ali-title">{ALBUM_NAME}</h2>
-      <div class="ali-meta">{ALBUM_PHOTOS} photos · {ALBUM_DATE}</div>
+    <div>
+      <h2>{ALBUM_NAME}</h2>
+      <div>{ALBUM_PHOTOS} photos · {ALBUM_DATE}</div>
     </div>
   ```
   - amplify selected hosting option is S3 with CloudFront using HTTPS
     - the created CloudDistribution points to the root folder of hosting S3 bucket
-    - add a second CloudFront distribution to point to ./public/website folder where the static website sits
+    - add a second CloudFront distribution to point to `/website` subfolder in the hosting S3 Bucket (where the static website sits)
 
     
 
-## When to use pre rendered static website
+## When to use pre rendered static website ?
 
-- to change website theme, just replace the content inside /public/website folders
 - pre-rendered static HTML of static sites loads much faster than the pages on a dynamic site. Fast websites are really important for a good user experience, and also for boosting your site in search engine rankings.
 - Since there are no dynamic scripts running on a static site, and every page is pre-rendered, your site is less likely to go down when there’s a traffic spike.
 - Static site generators reduce site complexity. That, in turn, improves speed and reliability, and smooths the developer experience.
