@@ -38,7 +38,7 @@ and copy it to a subfolder inside /public folder
   ```
   npm install
   ```
-**3. Preliminary operationn**
+**3. Preliminary operations**
 
 - Sharp layer for Lambda
 
