@@ -37,8 +37,7 @@ npm install
 
 - The application resizes images using the Sharp npm library
 - Follow [this tutorial](https://aws.amazon.com/blogs/compute/using-lambda-layers-to-simplify-your-development-process) to create a sharp layer.
-- After the deployment completes run this command to see the available layers:
-
+- Run this command to list available layers
 ```bash 
 aws lambda list-layers
 ``` 
@@ -62,11 +61,10 @@ You should have a result like this
             }
         }
     ]
-}```
+}
+```
 
-and look the value of `LayerVersionArn` 
-
-- Update the layer name and version
+- Update the layer name and version using the values from `LayerVersionArn` 
 
 Open the file `amplify/backend/function/S3Triggerac59657c/S3Triggerac59657c-cloudformation-template.json` and put the name and the version number from your AWS account instead of the values found `SHARP_LAYER_NAME` and `SHARP_VERSION`.
 ```
