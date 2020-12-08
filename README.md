@@ -110,64 +110,6 @@ aws cognito-idp admin-confirm-sign-up \
 ```
 
 
-
-
-## Repository structure 
-
-
-```bash
-.
-├── README.md                                                         <-- This file    
-├── amplify                                                           <-- Jupyter notebook which provides
-│   └── backend                                                       <-- Jupyter notebook which provides  
-│       ├── api                                                       <-- Jupyter notebook which provides
-│       │   └── photosharing                                          <-- Jupyter notebook which provides
-│       ├── auth                                                      <-- Jupyter notebook which provides
-│       │   └── photosharing84970f75                                  <-- Jupyter notebook which provides
-│       ├── backend-config.json                                       <-- Jupyter notebook which provides
-│       ├── boostrap                                                  <-- Jupyter notebook which provides
-│       │   └── adminuser                                             <-- Jupyter notebook which provides
-│       ├── function                                                  <-- Jupyter notebook which provides
-│       │   ├── S3Triggerac59657c                                     <-- Jupyter notebook which provides
-│       │   └── StaticWeb59657c                                       <-- Jupyter notebook which provides  
-│       ├── hosting                                                   <-- Jupyter notebook which provides
-│       │   └── S3AndCloudFront                                       <-- Jupyter notebook which provides
-│       ├── storage                                                   <-- Jupyter notebook which provides  
-│       │   └── s3871f7e84                                            <-- Jupyter notebook which provides
-│       └── tags.json                                                 <-- Jupyter notebook which provides
-├── package-lock.json                                                 <-- Jupyter notebook which provides
-├── package.json                                                      <-- Jupyter notebook which provides  
-├── public                                                            <-- Jupyter notebook which provides  
-│   ├── favicon.ico                                                   <-- Jupyter notebook which provides
-│   ├── img                                                           <-- Jupyter notebook which provides
-│   ├── index.html                                                    <-- Jupyter notebook which provides                             
-│   └── website                                                       <-- Jupyter notebook which provides
-│       ├── album-item-template.html                                  <-- Jupyter notebook which provides
-│       ├── albums-assets                                             <-- Jupyter notebook which provides
-│       ├── albums-gallery-1.html                                     <-- Jupyter notebook which provides
-│       ├── albums-gallery-template.html                              <-- Jupyter notebook which provides
-│       ├── albums-template.html                                      <-- Jupyter notebook which provides  
-│       ├── albums.html                                               <-- Jupyter notebook which provides
-│       ├── assets                                                    <-- Jupyter notebook which provides
-│       ├── gallery-assets                                            <-- Jupyter notebook which provides
-│       ├── images                                                    <-- Jupyter notebook which provides
-│       ├── index.html                                                <-- Jupyter notebook which provides
-│       └── photo-item-template.html                                  <-- Jupyter notebook which provides
-├── scripts                                                           <-- Jupyter notebook which provides
-├── src                                                               <-- Jupyter notebook which provides
-    ├── App.css                                                       <-- Jupyter notebook which provides  
-    ├── App.js                                                        <-- Jupyter notebook which provides
-    ├── graphql                                                       <-- Jupyter notebook which provides
-    ├── index.css                                                     <-- Jupyter notebook which provides  
-    ├── index.js                                                      <-- Jupyter notebook which provides
-    ├── logo.svg                                                      <-- Jupyter notebook which provides
-    ├── reportWebVitals.js                                            <-- Jupyter notebook which provides
-    └── setupTests.js                                                 <-- Jupyter notebook which provides
-```
-
-
-
-
 ## Concept
 
 1. Create ReactJs web application to allow authenticated users to create albums, upload photos and store everything in DynamoDB
@@ -180,12 +122,12 @@ and copy it to a subfolder inside /public folder
 
 ## Key points
 
-  - full-Stack ReactJs Application developped using AWS Amplify
+  - full-stack ReactJs Application developped using AWS Amplify
   - single admin user created at deployment 
   - automatically creates photo thumbnails
   - automatically detects relevant labels for each uploaded photo and display these labels on album gallery page
   - static website is generated on demand by a AWS Lambda
-  - static websit sits in `./public/website` folder
+  - static website sits in `./public/website` folder
   - 4 html templates
   ```
     /albums-gallery-template.html                                       <-- template for an album gallery page
