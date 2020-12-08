@@ -222,8 +222,8 @@ Less than a cup of coffee per month
 
 ## Credits
 
-[Multiverse HTML template](https://html5up.net/multiverse)
-[Lens HTML template](https://html5up.net/lens)
-[Build a Photo-Sharing Web App with AWS Amplify Workshop](https://amplify-workshop.go-aws.com/)
-[Create sharp layer for AWS Lambda](https://aws.amazon.com/blogs/compute/using-lambda-layers-to-simplify-your-development-process)
+- [Multiverse HTML template](https://html5up.net/multiverse)
+- [Lens HTML template](https://html5up.net/lens)
+- [Build a Photo-Sharing Web App with AWS Amplify Workshop](https://amplify-workshop.go-aws.com/)
+- [Create sharp layer for AWS Lambda](https://aws.amazon.com/blogs/compute/using-lambda-layers-to-simplify-your-development-process)
 
