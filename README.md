@@ -31,13 +31,13 @@ and copy it to a subfolder inside /public folder
 
 **1. Clone the repository**
 
-```
-git clone REPO_URL
-```
+  ```
+  git clone REPO_URL
+  ```
 **2. Installs the dependencies**
-```
-npm install
-```
+  ```
+  npm install
+  ```
 **3. Customize the application**
 
 - Create a sharp layer for Lambda
@@ -96,20 +96,17 @@ npm install
   - Deploy the stack to your AWS account
 
     - Initialize your Amplify powered cloud application
-
-    ```
-    amplify init
-    ```
+      ```
+      amplify init
+      ```
     - Provisions cloud resources with the local developments run
-    ```
-    amplify push
-    ```
-
+      ```
+      amplify push
+      ```
     - Publish static assets to Amazon S3
-
-    ```
-    amplify publish
-    ```
+      ```
+      amplify publish
+      ```
 Enjoy !
 
 
