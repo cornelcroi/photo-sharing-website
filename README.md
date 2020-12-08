@@ -119,7 +119,7 @@ Enjoy !
     /album-item-template.html                                           <-- template for one album used in list of albums page
     /photo-item-template.html                                           <-- template for one photo used on album gallery page
   ```
-  - each html template contains variable to be replaced by lambda
+  - each html template contains variable to be replaced by lambda like the following html piece of code
   ```html
     <div>
       <h2>{ALBUM_NAME}</h2>
