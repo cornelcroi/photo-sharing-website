@@ -15,7 +15,7 @@ TODO - create video demo like https://github.com/jpsim/AWSPics
 
 
 ## Prerequisites
-- Create an AWS account
+- [Create an AWS account](https://aws.amazon.com/fr/premiumsupport/knowledge-center/create-and-activate-aws-account/)
 - [Install the Amplify CLI](https://docs.amplify.aws/cli/start/install#install-the-amplify-cli)
 - [Configure Amplify](https://docs.amplify.aws/cli/start/install#configure-the-amplify-cli)
 - [Install npm](https://www.npmjs.com/get-npm)
