@@ -33,11 +33,11 @@ git clone REPO_URL
 npm install
 ```
 
-**Create [sharp layer](https://aws.amazon.com/blogs/compute/using-lambda-layers-to-simplify-your-development-process) for Lambda**
+**3. Create [sharp layer](https://aws.amazon.com/blogs/compute/using-lambda-layers-to-simplify-your-development-process) for Lambda**
 
 After the deployment completes, the new Lambda layer is available to use. Run this command to see the available layers:
 
-**Update the layer name and version**
+Update the layer name and version
 
 Run `aws lambda list-layers` and look the value of `LayerArn` 
 
@@ -59,22 +59,22 @@ Open the file `amplify/backend/function/S3Triggerac59657c/S3Triggerac59657c-clou
           }
         ]
 ```
-**Initialization your Amplify powered cloud application**
+**4. Initialization your Amplify powered cloud application**
 
 ```
 amplify init
 ```
-
-To provisions cloud resources with the local developments run
+**5. Provisions cloud resources with the local developments run**
 ```
 amplify push
 ```
 
-Runs amplify push, publishes a static assets to Amazon S3.
-Build all your local back-end and front-end resources (if you have a hosting category added) and provision it in the cloud.
+**6. publishes a static assets to Amazon S3.**
+
 ```
 amplify publish
 ```
+Enjoy !
 
 ## Concept
 
