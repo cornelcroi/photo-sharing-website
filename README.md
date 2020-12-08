@@ -135,6 +135,16 @@ Enjoy !
     - the created CloudDistribution points to the root folder of hosting S3 bucket
     - add a second CloudFront distribution to point to `/website` subfolder in the hosting S3 Bucket (where the static website sits)
 
+
+
+## Why to use pre rendered static website ?
+
+- pre-rendered static HTML of static sites loads much faster than the pages on a dynamic site. Fast websites are really important for a good user experience, and also for boosting your site in search engine rankings.
+- Since there are no dynamic scripts running on a static site, and every page is pre-rendered, your site is less likely to go down when there’s a traffic spike.
+- Static site generators reduce site complexity. That, in turn, improves speed and reliability, and smooths the developer experience.
+- You don’t have to worry about database-toppling traffic spikes.
+- you can host your site with a content delivery network that scales with your site’s traffic.
+
  ## Tools
 
 - The  [AWS Amplify JavaScript library](https://docs.amplify.aws/), to connect our front end to cloud resources
@@ -147,16 +157,7 @@ Enjoy !
 - [AWS Lambda](https://aws.amazon.com/lambda/), to **create photo thumbnails** asynchronously in the cloud & to **generate the static website** on demand
 - [Amazon Rekognition](https://aws.amazon.com/rekognition/), to detect 5 labels for each uploaded photo
    
-
-## When to use pre rendered static website ?
-
-- pre-rendered static HTML of static sites loads much faster than the pages on a dynamic site. Fast websites are really important for a good user experience, and also for boosting your site in search engine rankings.
-- Since there are no dynamic scripts running on a static site, and every page is pre-rendered, your site is less likely to go down when there’s a traffic spike.
-- Static site generators reduce site complexity. That, in turn, improves speed and reliability, and smooths the developer experience.
-- You don’t have to worry about database-toppling traffic spikes.
-- you can host your site with a content delivery network that scales with your site’s traffic.
-
-
+   
 ## Costs
 Less than a cup of coffee per month
 
