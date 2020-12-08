@@ -84,17 +84,21 @@ Open the file `amplify/backend/function/S3Triggerac59657c/S3Triggerac59657c-clou
           }
         ]
 ```
-**4. Initialize your Amplify powered cloud application**
+**4. Use your email address for admin user**
+
+**5. Deploy the stack to your AWS account**
+
+- Initialize your Amplify powered cloud application
 
 ```
 amplify init
 ```
-**5. Provisions cloud resources with the local developments run**
+- Provisions cloud resources with the local developments run
 ```
 amplify push
 ```
 
-**6. Publish static assets to Amazon S3.**
+- Publish static assets to Amazon S3
 
 ```
 amplify publish
