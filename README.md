@@ -32,77 +32,78 @@ git clone REPO_URL
 ```
 npm install
 ```
+**3. Customize the application**
 
-**3. Create a sharp layer for Lambda**
+- Create a sharp layer for Lambda
 
-- The application resizes images using the Sharp npm library
-- Follow [this tutorial](https://aws.amazon.com/blogs/compute/using-lambda-layers-to-simplify-your-development-process) to create a sharp layer.
-- Run this command to list available layers
-```bash 
-aws lambda list-layers
-``` 
+  - The application resizes images using the Sharp npm library
+  - Follow [this tutorial](https://aws.amazon.com/blogs/compute/using-lambda-layers-to-simplify-your-development-process) to create a sharp layer.
+  - Run this command to list available layers
+  ```bash 
+  aws lambda list-layers
+  ``` 
 
-You should have a result like this 
-```
-{
-    "Layers": [
-        {
-            "LayerName": "Sharp",
-            "LayerArn": "arn:aws:lambda:AWS_REGION:ACCOUNT_ID:layer:Sharp",
-            "LatestMatchingVersion": {
-                "LayerVersionArn": "arn:aws:lambda:AWS_REGION:ACCOUNT_ID:layer:Sharp:1",
-                "Version": 5,
-                "Description": "Sharp NPM package.",
-                "CreatedDate": "2020-12-06T12:27:23.068+0000",
-                "CompatibleRuntimes": [
-                    "nodejs12.x"
-                ],
-                "LicenseInfo": "Available under the Apache-2.0 license."
-            }
-        }
-    ]
-}
-```
+  You should have a result like this 
+  ```
+  {
+      "Layers": [
+          {
+              "LayerName": "Sharp",
+              "LayerArn": "arn:aws:lambda:AWS_REGION:ACCOUNT_ID:layer:Sharp",
+              "LatestMatchingVersion": {
+                  "LayerVersionArn": "arn:aws:lambda:AWS_REGION:ACCOUNT_ID:layer:Sharp:1",
+                  "Version": 5,
+                  "Description": "Sharp NPM package.",
+                  "CreatedDate": "2020-12-06T12:27:23.068+0000",
+                  "CompatibleRuntimes": [
+                      "nodejs12.x"
+                  ],
+                  "LicenseInfo": "Available under the Apache-2.0 license."
+              }
+          }
+      ]
+  }
+  ```
 
-- Update the layer name and version using the values from `LayerVersionArn` 
+  - Update the layer name and version using the values from `LayerVersionArn` 
 
 Open the file `amplify/backend/function/S3Triggerac59657c/S3Triggerac59657c-cloudformation-template.json` and put the name and the version number from your AWS account instead of the values found `SHARP_LAYER_NAME` and `SHARP_VERSION`.
-```
-"Layers": [
-          {
-            "Fn::Sub": [
-              "arn:aws:lambda:${region}:${account}:layer:SHARP_LAYER_NAME:SHARP_VERSION",
-              {
-                "region": {
-                  "Ref": "AWS::Region"
-                },
-                "account": {
-                  "Ref": "AWS::AccountId"
+  ```
+  "Layers": [
+            {
+              "Fn::Sub": [
+                "arn:aws:lambda:${region}:${account}:layer:SHARP_LAYER_NAME:SHARP_VERSION",
+                {
+                  "region": {
+                    "Ref": "AWS::Region"
+                  },
+                  "account": {
+                    "Ref": "AWS::AccountId"
+                  }
                 }
-              }
-            ]
-          }
-        ]
-```
-**4. Use your email address for admin user**
+              ]
+            }
+          ]
+  ```
+  - Use your email address for admin user
 
-**5. Deploy the stack to your AWS account**
+  - Deploy the stack to your AWS account
 
-- Initialize your Amplify powered cloud application
+    - Initialize your Amplify powered cloud application
 
-```
-amplify init
-```
-- Provisions cloud resources with the local developments run
-```
-amplify push
-```
+    ```
+    amplify init
+    ```
+    - Provisions cloud resources with the local developments run
+    ```
+    amplify push
+    ```
 
-- Publish static assets to Amazon S3
+    - Publish static assets to Amazon S3
 
-```
-amplify publish
-```
+    ```
+    amplify publish
+    ```
 Enjoy !
 
 ## Concept
