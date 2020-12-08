@@ -66,7 +66,7 @@ and copy it to a subfolder inside /public folder
         ]
     }
     ```
-  - Open the file `amplify/backend/function/S3Triggerac59657c/S3Triggerac59657c-cloudformation-template.json` and put `LAYER_NAME` and `LAYER_VERSION` from your AWS account instead of the values found `SHARP_LAYER_NAME` and `SHARP_VERSION`.
+  - Open the file `amplify/backend/function/S3Triggerac59657c/S3Triggerac59657c-cloudformation-template.json` and put `LAYER_NAME` and `LAYER_VERSION` instead of the variables `SHARP_LAYER_NAME` and `SHARP_VERSION`.
       ```
       "Layers": [
                 {
