@@ -90,8 +90,8 @@ and copy it to a subfolder inside /public folder
                 }
               ]
       ```
-  - Use your email address for admin user
-  
+- Use your email address for admin user
+
 **4. Deploy the stack to your AWS account**
   - Initialize your Amplify powered cloud application
     ```
