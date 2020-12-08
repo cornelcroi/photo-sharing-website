@@ -39,11 +39,32 @@ npm install
 - Follow [this tutorial](https://aws.amazon.com/blogs/compute/using-lambda-layers-to-simplify-your-development-process) to create a sharp layer.
 - After the deployment completes run this command to see the available layers:
 
-Run 
 ```bash 
 aws lambda list-layers
 ``` 
-and look the value of `LayerArn` 
+
+You should have a result like this 
+```
+{
+    "Layers": [
+        {
+            "LayerName": "Sharp",
+            "LayerArn": "arn:aws:lambda:AWS_REGION:ACCOUNT_ID:layer:Sharp",
+            "LatestMatchingVersion": {
+                "LayerVersionArn": "arn:aws:lambda:AWS_REGION:ACCOUNT_ID:layer:Sharp:1",
+                "Version": 5,
+                "Description": "Sharp NPM package.",
+                "CreatedDate": "2020-12-06T12:27:23.068+0000",
+                "CompatibleRuntimes": [
+                    "nodejs12.x"
+                ],
+                "LicenseInfo": "Available under the Apache-2.0 license."
+            }
+        }
+    ]
+}```
+
+and look the value of `LayerVersionArn` 
 
 - Update the layer name and version
 
