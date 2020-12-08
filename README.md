@@ -39,31 +39,31 @@ npm install
   - The application resizes images using the Sharp npm library
   - Follow [this tutorial](https://aws.amazon.com/blogs/compute/using-lambda-layers-to-simplify-your-development-process) to create a sharp layer.
   - Run this command to list available layers
-  ```bash 
-  aws lambda list-layers
-  ``` 
+    ```bash 
+    aws lambda list-layers
+    ``` 
 
   You should have a result like this 
-  ```
-  {
-      "Layers": [
-          {
-              "LayerName": "Sharp",
-              "LayerArn": "arn:aws:lambda:AWS_REGION:ACCOUNT_ID:layer:Sharp",
-              "LatestMatchingVersion": {
-                  "LayerVersionArn": "arn:aws:lambda:AWS_REGION:ACCOUNT_ID:layer:Sharp:1",
-                  "Version": 5,
-                  "Description": "Sharp NPM package.",
-                  "CreatedDate": "2020-12-06T12:27:23.068+0000",
-                  "CompatibleRuntimes": [
-                      "nodejs12.x"
-                  ],
-                  "LicenseInfo": "Available under the Apache-2.0 license."
-              }
-          }
-      ]
-  }
-  ```
+    ```
+    {
+        "Layers": [
+            {
+                "LayerName": "Sharp",
+                "LayerArn": "arn:aws:lambda:AWS_REGION:ACCOUNT_ID:layer:Sharp",
+                "LatestMatchingVersion": {
+                    "LayerVersionArn": "arn:aws:lambda:AWS_REGION:ACCOUNT_ID:layer:Sharp:1",
+                    "Version": 5,
+                    "Description": "Sharp NPM package.",
+                    "CreatedDate": "2020-12-06T12:27:23.068+0000",
+                    "CompatibleRuntimes": [
+                        "nodejs12.x"
+                    ],
+                    "LicenseInfo": "Available under the Apache-2.0 license."
+                }
+            }
+        ]
+    }
+    ```
 
   - Update the layer name and version using the values from `LayerVersionArn` 
 
