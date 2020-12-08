@@ -37,9 +37,13 @@ npm install
 
 After the deployment completes, the new Lambda layer is available to use. Run this command to see the available layers:
 
-Update the layer name and version
+Run 
+```bash 
+aws lambda list-layers
+``` 
+and look the value of `LayerArn` 
 
-Run `aws lambda list-layers` and look the value of `LayerArn` 
+Update the layer name and version
 
 Open the file `amplify/backend/function/S3Triggerac59657c/S3Triggerac59657c-cloudformation-template.json` and put the name and the version number from your AWS account instead of the values found `SHARP_LAYER_NAME` and `SHARP_VERSION`.
 ```
