@@ -59,7 +59,7 @@ Open the file `amplify/backend/function/S3Triggerac59657c/S3Triggerac59657c-clou
           }
         ]
 ```
-**4. Initialization your Amplify powered cloud application**
+**4. Initialize your Amplify powered cloud application**
 
 ```
 amplify init
@@ -69,7 +69,7 @@ amplify init
 amplify push
 ```
 
-**6. publishes a static assets to Amazon S3.**
+**6. Publish static assets to Amazon S3.**
 
 ```
 amplify publish
