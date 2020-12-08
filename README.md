@@ -188,10 +188,10 @@ and copy it to a subfolder inside /public folder
   - static websit sits in `./public/website` folder
   - 4 html templates
   ```
-    /albums-gallery-template.html                                       <-- Jupyter notebook which provides
-    /albums-template.html                                               <-- Jupyter notebook which provides
-    /album-item-template.html                                           <-- Jupyter notebook which provides
-    /photo-item-template.html                                           <-- Jupyter notebook which provides  
+    /albums-gallery-template.html                                       <-- template for an album gallery page
+    /albums-template.html                                               <-- template for list of albums page
+    /album-item-template.html                                           <-- template for one album used in list of albums page
+    /photo-item-template.html                                           <-- template for one photo used on album gallery page
   ```
   - each html template contains variable to be replaced by lambda
   ```html
