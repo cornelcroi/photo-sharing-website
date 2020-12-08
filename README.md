@@ -33,9 +33,9 @@ git clone REPO_URL
 npm install
 ```
 
-**3. Create [sharp layer](https://aws.amazon.com/blogs/compute/using-lambda-layers-to-simplify-your-development-process) for Lambda**
-
-After the deployment completes, the new Lambda layer is available to use. Run this command to see the available layers:
+**3. Create a sharp layer for Lambda**
+- Follow [this tutorial](https://aws.amazon.com/blogs/compute/using-lambda-layers-to-simplify-your-development-process) to create a sharp layer.
+- After the deployment completes run this command to see the available layers:
 
 Run 
 ```bash 
@@ -43,7 +43,7 @@ aws lambda list-layers
 ``` 
 and look the value of `LayerArn` 
 
-Update the layer name and version
+- Update the layer name and version
 
 Open the file `amplify/backend/function/S3Triggerac59657c/S3Triggerac59657c-cloudformation-template.json` and put the name and the version number from your AWS account instead of the values found `SHARP_LAYER_NAME` and `SHARP_VERSION`.
 ```
