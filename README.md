@@ -34,7 +34,8 @@ npm install
 ```
 
 **3. Create a sharp layer for Lambda**
-- The application resizes images using the Sharp npm library. This library uses libvips, which is written in C, so the compilation is operating system-specific. By creating a layer containing this library, it simplifies the packaging and deployment of the consuming Lambda function
+
+- The application resizes images using the Sharp npm library
 - Follow [this tutorial](https://aws.amazon.com/blogs/compute/using-lambda-layers-to-simplify-your-development-process) to create a sharp layer.
 - After the deployment completes run this command to see the available layers:
 
