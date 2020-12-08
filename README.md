@@ -91,21 +91,19 @@ and copy it to a subfolder inside /public folder
               ]
       ```
   - Use your email address for admin user
-
-  - Deploy the stack to your AWS account
-
-    - Initialize your Amplify powered cloud application
-      ```
-      amplify init
-      ```
-    - Provisions cloud resources with the local developments run
-      ```
-      amplify push
-      ```
-    - Publish static assets to Amazon S3
-      ```
-      amplify publish
-      ```
+**4. Deploy the stack to your AWS account**
+  - Initialize your Amplify powered cloud application
+    ```
+    amplify init
+    ```
+  - Provisions cloud resources with the local developments run
+    ```
+    amplify push
+    ```
+  - Publish static assets to Amazon S3
+    ```
+    amplify publish
+    ```
 Enjoy !
 
 
