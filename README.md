@@ -20,6 +20,12 @@ TODO - create video demo like https://github.com/jpsim/AWSPics
 - [Configure Amplify](https://docs.amplify.aws/cli/start/install#configure-the-amplify-cli)
 - [Install npm](https://www.npmjs.com/get-npm)
 
+## Concept
+
+1. Create ReactJs web application to allow authenticated users to create albums, upload photos and store everything in DynamoDB
+2. Put a static website with html template files in a subfolder of reactjs application
+and copy it to a subfolder inside /public folder
+3. Create AWS Lambda to generate static files using html templates and using  based on data stored in DynamoDB
 
 ## Instructions
 
@@ -105,14 +111,6 @@ npm install
     amplify publish
     ```
 Enjoy !
-
-## Concept
-
-1. Create ReactJs web application to allow authenticated users to create albums, upload photos and store everything in DynamoDB
-2. Put a static website with html template files in a subfolder of reactjs application
-and copy it to a subfolder inside /public folder
-3. Create AWS Lambda to generate static files using html templates and using  based on data stored in DynamoDB
-
 
 
 
