@@ -68,23 +68,23 @@ npm install
   - Update the layer name and version using the values from `LayerVersionArn` 
 
   - Open the file `amplify/backend/function/S3Triggerac59657c/S3Triggerac59657c-cloudformation-template.json` and put the name and the version number from your AWS account instead of the values found `SHARP_LAYER_NAME` and `SHARP_VERSION`.
-  ```
-  "Layers": [
-            {
-              "Fn::Sub": [
-                "arn:aws:lambda:${region}:${account}:layer:SHARP_LAYER_NAME:SHARP_VERSION",
+      ```
+      "Layers": [
                 {
-                  "region": {
-                    "Ref": "AWS::Region"
-                  },
-                  "account": {
-                    "Ref": "AWS::AccountId"
-                  }
+                  "Fn::Sub": [
+                    "arn:aws:lambda:${region}:${account}:layer:SHARP_LAYER_NAME:SHARP_VERSION",
+                    {
+                      "region": {
+                        "Ref": "AWS::Region"
+                      },
+                      "account": {
+                        "Ref": "AWS::AccountId"
+                      }
+                    }
+                  ]
                 }
               ]
-            }
-          ]
-  ```
+      ```
   - Use your email address for admin user
 
   - Deploy the stack to your AWS account
