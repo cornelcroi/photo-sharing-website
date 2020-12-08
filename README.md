@@ -1,31 +1,17 @@
 # ManBehindLens.com
 
-Your own photosharing site
+Static pre redered photosharing site
 
 ## Goal
 
-Build a static photosharing site to share your pictures without needing to run, maintain servers.
-
+Static photosharing site to share your pictures without needing to run or maintain servers.
 
 TODO - create video demo like https://github.com/jpsim/AWSPics
-
-
 
 ## The architecture
 
 ![](public/website/assets/img/manbehindlens.png)
 
-## Tools
-
-- The  [AWS Amplify JavaScript library](https://docs.amplify.aws/), to connect our front end to cloud resources
-- [Amazon Cognito](https://aws.amazon.com/cognito/), to handle admin sign up authorization
-- [Amazon Simple Storage Service (S3)](https://aws.amazon.com/s3/), to store and serve as many photos as I wish to upload,, to **host the reactjs app** assets for our app and to host the **static generated website**
-- [Amazon CloudFront](https://aws.amazon.com/fr/cloudfront/), to store and serve as many photos as our users care to upload, and to host the static assets for our app
-
-- [Amazon DynamoDB](https://aws.amazon.com/dynamodb/), to provide millisecond response times to API queries for album and photo data
-- [AWS AppSync](https://aws.amazon.com/appsync/), to host a GraphQL API for our front end
-- [AWS Lambda](https://aws.amazon.com/lambda/), to **create photo thumbnails** asynchronously in the cloud & to **generate the static website** on demand
-- [Amazon Rekognition](https://aws.amazon.com/rekognition/), to detect 5 labels for each uploaded photo
 
 
 ## Prerequisites
@@ -37,12 +23,12 @@ TODO - create video demo like https://github.com/jpsim/AWSPics
 
 ## Instructions
 
-**Clone the repository**
+**1. Clone the repository**
 
 ```
 git clone REPO_URL
 ```
-**Installs the dependencies**
+**2. Installs the dependencies**
 ```
 npm install
 ```
@@ -73,10 +59,7 @@ Open the file `amplify/backend/function/S3Triggerac59657c/S3Triggerac59657c-clou
           }
         ]
 ```
-**Run Amplify commands**
-
-The following command is a one-time initialization step for your Amplify powered cloud app. You run this once 'to connect your app with an AWS backend. This setup helps you with selecting your AWS Profile which would be used to provision cloud resources for your app.
-This command will initialize the AWS configuration and create a configuration file at the root of the application.
+**Initialization your Amplify powered cloud application**
 
 ```
 amplify init
@@ -129,7 +112,18 @@ and copy it to a subfolder inside /public folder
     - the created CloudDistribution points to the root folder of hosting S3 bucket
     - add a second CloudFront distribution to point to `/website` subfolder in the hosting S3 Bucket (where the static website sits)
 
-    
+ ## Tools
+
+- The  [AWS Amplify JavaScript library](https://docs.amplify.aws/), to connect our front end to cloud resources
+- [Amazon Cognito](https://aws.amazon.com/cognito/), to handle admin sign up authorization
+- [Amazon Simple Storage Service (S3)](https://aws.amazon.com/s3/), to store and serve as many photos as I wish to upload,, to **host the reactjs app** assets for our app and to host the **static generated website**
+- [Amazon CloudFront](https://aws.amazon.com/fr/cloudfront/), to store and serve as many photos as our users care to upload, and to host the static assets for our app
+
+- [Amazon DynamoDB](https://aws.amazon.com/dynamodb/), to provide millisecond response times to API queries for album and photo data
+- [AWS AppSync](https://aws.amazon.com/appsync/), to host a GraphQL API for our front end
+- [AWS Lambda](https://aws.amazon.com/lambda/), to **create photo thumbnails** asynchronously in the cloud & to **generate the static website** on demand
+- [Amazon Rekognition](https://aws.amazon.com/rekognition/), to detect 5 labels for each uploaded photo
+   
 
 ## When to use pre rendered static website ?
 
