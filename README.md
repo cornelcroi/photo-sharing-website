@@ -69,9 +69,6 @@ and copy it to a subfolder inside /public folder
         ]
     }
     ```
-
-  - Update the layer name and version using `LAYER_NAME` and `LAYER_VERSION`
-
   - Open the file `amplify/backend/function/S3Triggerac59657c/S3Triggerac59657c-cloudformation-template.json` and put the name and the version number from your AWS account instead of the values found `SHARP_LAYER_NAME` and `SHARP_VERSION`.
       ```
       "Layers": [
@@ -157,7 +154,7 @@ Enjoy !
 - [AWS Lambda](https://aws.amazon.com/lambda/), to **create photo thumbnails** asynchronously in the cloud & to **generate the static website** on demand
 - [Amazon Rekognition](https://aws.amazon.com/rekognition/), to detect 5 labels for each uploaded photo
    
-   
+
 ## Costs
 Less than a cup of coffee per month
 
