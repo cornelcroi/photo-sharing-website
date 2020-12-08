@@ -48,8 +48,7 @@ and copy it to a subfolder inside /public folder
     ```bash 
     aws lambda list-layers
     ``` 
-
-  You should have a result like this 
+  - You should have a result like this 
     ```
     {
         "Layers": [
@@ -57,7 +56,7 @@ and copy it to a subfolder inside /public folder
                 "LayerName": "Sharp",
                 "LayerArn": "arn:aws:lambda:AWS_REGION:ACCOUNT_ID:layer:Sharp",
                 "LatestMatchingVersion": {
-                    "LayerVersionArn": "arn:aws:lambda:AWS_REGION:ACCOUNT_ID:layer:Sharp:1",
+                    "LayerVersionArn": "arn:aws:lambda:AWS_REGION:ACCOUNT_ID:layer:LAYER_NAME:LAYER_VERSION",
                     "Version": 5,
                     "Description": "Sharp NPM package.",
                     "CreatedDate": "2020-12-06T12:27:23.068+0000",
@@ -71,7 +70,7 @@ and copy it to a subfolder inside /public folder
     }
     ```
 
-  - Update the layer name and version using the values from `LayerVersionArn` 
+  - Update the layer name and version using `LAYER_NAME` and `LAYER_VERSION`
 
   - Open the file `amplify/backend/function/S3Triggerac59657c/S3Triggerac59657c-cloudformation-template.json` and put the name and the version number from your AWS account instead of the values found `SHARP_LAYER_NAME` and `SHARP_VERSION`.
       ```
