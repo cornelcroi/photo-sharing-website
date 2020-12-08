@@ -85,6 +85,7 @@ and copy it to a subfolder inside /public folder
               ]
       ```
 - Admin user email
+  - put your email address in `amplify/backend/boostrap/adminuser/parameters.json`
 
 **4. Deploy the stack to your AWS account**
   - Initialize your Amplify powered cloud application
