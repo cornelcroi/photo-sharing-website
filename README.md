@@ -132,13 +132,21 @@ Enjoy !
 
 
 
-## Why to use pre rendered static website ?
+## Advantages of pre rendered static website ?
 
 - pre-rendered static HTML of static sites loads much faster than the pages on a dynamic site. Fast websites are really important for a good user experience, and also for boosting your site in search engine rankings.
-- Since there are no dynamic scripts running on a static site, and every page is pre-rendered, your site is less likely to go down when there’s a traffic spike.
 - Static site generators reduce site complexity. That, in turn, improves speed and reliability, and smooths the developer experience.
 - You don’t have to worry about database-toppling traffic spikes.
 - you can host your site with a content delivery network that scales with your site’s traffic.
+- costs
+- SEO
+- caching
+- better latency
+
+
+## Trade offs
+- 
+
 
  ## Tools
 
