@@ -1,4 +1,4 @@
-# Photosharing site
+# Photo-Sharing Web App
 
 Static pre redered photosharing site
 
@@ -22,9 +22,10 @@ TODO - create video demo like https://github.com/jpsim/AWSPics
 
 ## Concept
 
-1. ReactJs web application to allow authenticated users to create albums, upload photos and store everything in DynamoDB
-2. Static website with html template files inside `/public` folder of reactjs application
-3. AWS Lambda to generate static files using html templates and using  based on data stored in DynamoDB
+- ReactJs web application to allow authenticated users to create albums, upload photos and store everything in DynamoDB
+- Static website with html template files inside `/public` folder of reactjs application
+- AWS Lambda to generate static files using html templates and using  based on data stored in DynamoDB
+- Application built using AWS Amplify
 
 ## Instructions
 
@@ -68,7 +69,7 @@ Enjoy !
   - full-stack ReactJs Application developped using AWS Amplify
   - single admin user created at deployment 
   - automatically creates photo thumbnails
-  - automatically detects relevant labels for each uploaded photo and display these labels on album gallery page
+  - Amazon Rekognition used to automatically detects relevant labels for each uploaded photo and display these labels on album gallery page
   - static website is generated on demand by a AWS Lambda
   - static website sits in `./public/website` folder
   - 4 html templates
@@ -78,7 +79,7 @@ Enjoy !
     /album-item-template.html                                           <-- template for one album used in list of albums page
     /photo-item-template.html                                           <-- template for one photo used on album gallery page
   ```
-  - each html template contains variable to be replaced by lambda like the following html piece of code
+  - each html template contains variable to be replaced by lambda like the example bellow
   ```html
     <div>
       <h2>{ALBUM_NAME}</h2>
@@ -86,8 +87,8 @@ Enjoy !
     </div>
   ```
   - amplify selected hosting option is S3 with CloudFront using HTTPS
-    - the created CloudDistribution points to the root folder of hosting S3 bucket
-    - add a second CloudFront distribution to point to `/website` subfolder in the hosting S3 Bucket (where the static website sits)
+    - the default  CloudFront distribution points to the root folder of hosting S3 bucket
+    - the supplimentaryCloudFront distribution points to `/website` subfolder in the hosting S3 Bucket (where the static website sits)
 
 
 
