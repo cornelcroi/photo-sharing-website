@@ -40,52 +40,13 @@ and copy it to a subfolder inside /public folder
   ```
 **3. Preliminary operations**
 
-- Sharp layer for Lambda
-
-  - The application resizes images using the `sharp npm` library
-  - Follow [this tutorial](https://aws.amazon.com/blogs/compute/using-lambda-layers-to-simplify-your-development-process) to create a sharp layer.
-  - Run this command to list available layers `aws lambda list-layers` 
-  - You should have a result like this 
-    ```
-    {
-        "Layers": [
-            {
-                "LayerName": "Sharp",
-                "LayerArn": "arn:aws:lambda:AWS_REGION:ACCOUNT_ID:layer:Sharp",
-                "LatestMatchingVersion": {
-                    "LayerVersionArn": "arn:aws:lambda:AWS_REGION:ACCOUNT_ID:layer:LAYER_NAME:LAYER_VERSION",
-                    "Version": 5,
-                    "Description": "Sharp NPM package.",
-                    "CreatedDate": "2020-12-06T12:27:23.068+0000",
-                    "CompatibleRuntimes": [
-                        "nodejs12.x"
-                    ],
-                    "LicenseInfo": "Available under the Apache-2.0 license."
-                }
-            }
-        ]
-    }
-    ```
-  - Open the file `amplify/backend/function/S3Triggerac59657c/S3Triggerac59657c-cloudformation-template.json` and put `LAYER_NAME` and `LAYER_VERSION` instead of the variables `SHARP_LAYER_NAME` and `SHARP_VERSION`.
-      ```
-      "Layers": [
-                {
-                  "Fn::Sub": [
-                    "arn:aws:lambda:${region}:${account}:layer:SHARP_LAYER_NAME:SHARP_VERSION",
-                    {
-                      "region": {
-                        "Ref": "AWS::Region"
-                      },
-                      "account": {
-                        "Ref": "AWS::AccountId"
-                      }
-                    }
-                  ]
-                }
-              ]
-      ```
 - Admin user email
   - put your email address in `amplify/backend/boostrap/adminuser/parameters.json`
+
+- Sharp layer for Lambda
+  - The application resizes images using the `sharp npm` library
+> **_NOTE:_**  Note: This application uses eu-west-1 for the AWS Region. If you plan to deploy to a different Region, follow [this tutorial](https://aws.amazon.com/blogs/compute/using-lambda-layers-to-simplify-your-development-process) to create a sharp layer in that region and then update the layer arn in  `amplify/backend/function/S3TriggeraXXXX/S3TriggeraXXXX-cloudformation-template.json`
+
 
 **4. Deploy the stack to your AWS account**
   - Initialize your Amplify powered cloud application
