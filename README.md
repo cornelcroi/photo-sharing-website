@@ -41,11 +41,11 @@ and copy it to a subfolder inside /public folder
 **3. Preliminary operations**
 
 - Admin user email
-  - put your email address in `amplify/backend/boostrap/adminuser/parameters.json`
+  - replace `your_emailaddress@domain.com` with your own email address in `amplify/backend/boostrap/adminuser/parameters.json`
 
 - Sharp layer for Lambda
-  - The application resizes images using the `sharp npm` library
-> **_NOTE:_**  Note: This application uses eu-west-1 for the AWS Region. If you plan to deploy to a different Region, follow [this tutorial](https://aws.amazon.com/blogs/compute/using-lambda-layers-to-simplify-your-development-process) to create a sharp layer in that region and then update the layer arn in  `amplify/backend/function/S3TriggeraXXXX/S3TriggeraXXXX-cloudformation-template.json`
+  - The application resizes images using the `sharp` library
+  - The application uses eu-west-1 for the AWS Region. If you plan to deploy to a different Region, follow [this tutorial](https://aws.amazon.com/blogs/compute/using-lambda-layers-to-simplify-your-development-process) to create a sharp layer in that region and then update the layer arn in  `amplify/backend/function/S3TriggeraXXXX/S3TriggeraXXXX-cloudformation-template.json`
 
 
 **4. Deploy the stack to your AWS account**
@@ -133,4 +133,5 @@ Less than a cup of coffee per month
 - [Lens HTML template](https://html5up.net/lens)
 - [Build a Photo-Sharing Web App with AWS Amplify Workshop](https://amplify-workshop.go-aws.com/)
 - [Create sharp layer for AWS Lambda](https://aws.amazon.com/blogs/compute/using-lambda-layers-to-simplify-your-development-process)
+- [AWS Layer for Sharp ](https://github.com/woss/aws-lambda-layer-sharp)
 
