@@ -7,7 +7,7 @@ import API, {graphqlOperation} from '@aws-amplify/api'
 import Storage from '@aws-amplify/storage'
 import aws_exports from './aws-exports'
 
-import {AmplifyAuthenticator, AmplifySignIn, AmplifySignUp, AmplifyGreetings} from "@aws-amplify/ui-react";
+import {AmplifyAuthenticator, AmplifySignIn, AmplifyGreetings} from "@aws-amplify/ui-react";
 
 
 import {Divider,Container, Card, Image, Label, Modal,Button, Form, Grid, Header, Segment} from 'semantic-ui-react'
@@ -51,6 +51,17 @@ function makeComparator(key, order = 'asc') {
   };
 }
 
+function buildHTMLPageName(album_name, field){
+  //build album page name
+  var albumPageName = album_name.replace(/-/g, ' ');
+  albumPageName = albumPageName.replace(/  +/g, ' ');
+  albumPageName = albumPageName.replace(/[^\w\s]/gi, '')
+  albumPageName = albumPageName.replace(/\s/g, '-');
+  albumPageName = albumPageName.toLowerCase() + ".html";
+  document.getElementById(field).innerHTML = albumPageName;
+
+}
+
 
 const NewAlbum = () => {
   
@@ -92,10 +103,11 @@ const NewAlbum = () => {
         <Modal.Description>
       
             <Form.Group widths='equal'>
-              <Form.Input name="name" value={name} onChange={(e) => setName(e.target.value)} fluid label='Name' placeholder='Album name' />
+              <Form.Input name="name" value={name} onChange={(e) => {setName(e.target.value); buildHTMLPageName(e.target.value, 'create-html-name'); }} fluid label='Name' placeholder='Album name' />
               <Form.Input name="name" value={date} onChange={(e) => setDate(e.target.value)} fluid label='Date' placeholder='Album date' />
             </Form.Group>
-            
+            <b>Generated html page name</b> <div id="create-html-name"></div><br></br>
+
             
             <Form.TextArea name="description" value={description}  onChange={(e) => setDescription(e.target.value)} label='Description' placeholder='Album description' />
             
@@ -143,7 +155,6 @@ const AlbumsList = () => {
   const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
   const [open, setOpen] = useState(false)
-console.log("xxxx");
       
   useEffect(() => {
     async function fetchData() {
@@ -337,10 +348,11 @@ console.log("xxxx");
         <Modal.Description>
       
             <Form.Group widths='equal'>
-            <Form.Input name="name" value={name} onChange={(e) => setName(e.target.value)} fluid label='Name' placeholder='Album name' />
+            <Form.Input name="name" value={name} onChange={(e) => { setName(e.target.value); buildHTMLPageName(e.target.value, 'mod-html-name'); }} fluid label='Name' placeholder='Album name' />
             <Form.Input name="date" value={date} onChange={(e) => setDate(e.target.value)} fluid label='Date' placeholder='Album date' />            
             </Form.Group>
-            
+            <b>Generated html page name</b> <div id="mod-html-name"></div><br></br>
+
 
             <Form.TextArea name="description" value={description}  onChange={(e) => setDescription(e.target.value)} label='Description' placeholder='Album description' />
             

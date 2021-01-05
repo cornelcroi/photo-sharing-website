@@ -101,7 +101,6 @@ query ListAlbums(
 function onlyUnique(value, index, self) {
   return self.indexOf(value) === index;
 }
-
 const PICTURES_BASEPATH = process.env.IMAGES_BASE_PATH + '/';
 const THEME = process.env.THEME;
 exports.handler = async (event, context, callback) => {
@@ -226,11 +225,20 @@ exports.handler = async (event, context, callback) => {
       var comma = "";
       while (uniqueLabels.length > m) {
 
-        comma = m !== uniqueLabels.length - 1 ? "," : "";
+        comma = m !== uniqueLabels.length - 1 ? ", " : "";
         labels += `<span class="info"><a href="#">${uniqueLabels[m]}${comma}</a></span> \n`;
-        keywords += `${uniqueLabels[m]} ${comma}`;
+        keywords += `${uniqueLabels[m]}${comma}`;
         m++;
       }
+
+      //build album page name
+      var albumPageName = albumListResult.data.listAlbums.items[i].name.replace(/-/g, ' ');
+      albumPageName = albumPageName.replace(/  +/g, ' ');
+      albumPageName = albumPageName.replace(/[^\w\s]/gi, '')
+      albumPageName = albumPageName.replace(/\s/g, '-');
+      albumPageName = albumPageName.toLowerCase() + ".html";
+  
+
 
       album_gallery_templateHTML_i = album_gallery_templateHTML.toString().replace(/\{PICTURES_LIST\}/g, photoListHTML);
 
@@ -241,12 +249,13 @@ exports.handler = async (event, context, callback) => {
       album_gallery_templateHTML_i = album_gallery_templateHTML_i.toString().replace(/\{ALBUM_LABELS\}/g, labels);
       album_gallery_templateHTML_i = album_gallery_templateHTML_i.toString().replace(/\{KEYWORDS\}/g, keywords);
       album_gallery_templateHTML_i = album_gallery_templateHTML_i.toString().replace(/\{ALBUM_COVER_IMAGE\}/g, PICTURES_BASEPATH + coverPictureurl);
+      album_gallery_templateHTML_i = album_gallery_templateHTML_i.toString().replace(/\{PAGE_NAME\}/g, albumPageName);
 
       await Promise.all([
         S3.putObject({
           Body: album_gallery_templateHTML_i,
           Bucket: BUCKET,
-          Key: THEME + "/albums-gallery-" + (i + 1) + ".html",
+          Key: THEME + "/"+albumPageName,
           ContentType: 'text/html',
 
         }).promise(),
@@ -254,7 +263,7 @@ exports.handler = async (event, context, callback) => {
 
       ]);
 
-      var albumItem_templateHTML_i = albumItem_templateHTML.toString().replace(/\{ALBUM_LINK\}/g, `albums-gallery-${i + 1}.html`);
+      var albumItem_templateHTML_i = albumItem_templateHTML.toString().replace(/\{ALBUM_LINK\}/g, albumPageName);
       albumItem_templateHTML_i = albumItem_templateHTML_i.toString().replace(/\{ALBUM_COVER\}/g, PICTURES_BASEPATH + coverPictureurl);
       albumItem_templateHTML_i = albumItem_templateHTML_i.toString().replace(/\{ALBUM_NAME\}/g, albumListResult.data.listAlbums.items[i].name);
       albumItem_templateHTML_i = albumItem_templateHTML_i.toString().replace(/\{ALBUM_PHOTOS\}/g, photoByAlbumListResult.data.listPhotosByAlbum.items.length);
