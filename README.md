@@ -1,4 +1,4 @@
-# ManBehindLens.com
+# Photosharing site
 
 Static pre redered photosharing site
 
@@ -22,15 +22,13 @@ TODO - create video demo like https://github.com/jpsim/AWSPics
 
 ## Concept
 
-1. Create ReactJs web application to allow authenticated users to create albums, upload photos and store everything in DynamoDB
-2. Put a static website with html template files in a subfolder of reactjs application
-and copy it to a subfolder inside /public folder
-3. Create AWS Lambda to generate static files using html templates and using  based on data stored in DynamoDB
+1. ReactJs web application to allow authenticated users to create albums, upload photos and store everything in DynamoDB
+2. Static website with html template files inside `/public` folder of reactjs application
+3. AWS Lambda to generate static files using html templates and using  based on data stored in DynamoDB
 
 ## Instructions
 
 **1. Clone the repository**
-
   ```
   git clone REPO_URL
   ```
@@ -43,9 +41,9 @@ and copy it to a subfolder inside /public folder
 - Admin user email
   - replace `your_emailaddress@domain.com` with your own email address in `amplify/backend/boostrap/adminuser/parameters.json`
 
-- Sharp layer for Lambda
-  - The application resizes images using the `sharp` library
-  - The application uses eu-west-1 for the AWS Region. If you plan to deploy to a different Region, follow [this tutorial](https://aws.amazon.com/blogs/compute/using-lambda-layers-to-simplify-your-development-process) to create a sharp layer in that region and then update the layer arn in  `amplify/backend/function/S3TriggeraXXXX/S3TriggeraXXXX-cloudformation-template.json`
+- Image resize
+  - The application resizes images using the `sharp` library packaged as Lambda Layer
+  - The layer is deployed in `eu-west-1` AWS Region (from ). If you plan to deploy to a different Region, follow [this tutorial](https://aws.amazon.com/blogs/compute/using-lambda-layers-to-simplify-your-development-process) to create a sharp layer in that region and then update the layer arn in  `amplify/backend/function/S3TriggeraXXXX/S3TriggeraXXXX-cloudformation-template.json`
 
 
 **4. Deploy the stack to your AWS account**
