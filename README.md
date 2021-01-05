@@ -4,7 +4,7 @@ Static pre redered photosharing site
 
 ## Goal
 
-Static photosharing site to share your pictures without needing to run or maintain servers.
+Static photo-sharing web app to share publicly your pictures without needing to run or maintain servers
 
 TODO - create video demo like https://github.com/jpsim/AWSPics
 
@@ -22,10 +22,8 @@ TODO - create video demo like https://github.com/jpsim/AWSPics
 
 ## Concept
 
-- ReactJs web application to allow authenticated users to create albums, upload photos and store everything in DynamoDB
-- Static website with html template files inside `/public` folder of reactjs application
-- AWS Lambda to generate static files using html templates and using  based on data stored in DynamoDB
-- Application built using AWS Amplify
+- A static website 
+- A reactJs web application used to generate the static website on demand
 
 ## Instructions
 
@@ -66,6 +64,13 @@ Enjoy !
 
 ## Key points
 
+- ReactJs web application to allow authenticated users to create albums, upload photos and stored them in S3 and metadata in DynamoDB
+- Static website with html template files inside `/public` folder of reactjs application
+- AWS Lambda to generate static files using html templates and using data stored in DynamoDB
+- Application built using AWS Amplify
+
+
+
   - full-stack ReactJs Application developped using AWS Amplify
   - single admin user created at deployment 
   - automatically creates photo thumbnails
@@ -79,7 +84,7 @@ Enjoy !
     /album-item-template.html                                           <-- template for one album used in list of albums page
     /photo-item-template.html                                           <-- template for one photo used on album gallery page
   ```
-  - each html template contains variable to be replaced by lambda like the example bellow
+  - each html template contains variables to be replaced by lambda like the example bellow
   ```html
     <div>
       <h2>{ALBUM_NAME}</h2>
