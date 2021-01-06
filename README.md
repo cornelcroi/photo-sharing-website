@@ -6,8 +6,7 @@ Static pre redered photosharing site
 
 Static photo-sharing web app to share publicly your pictures without needing to run or maintain servers
 
-TODO - create video demo like https://github.com/jpsim/AWSPics
-
+[Demo](public/website/assets/output.gif)]
 ## The architecture
 
 ![](public/website/assets/img/manbehindlens.png)
@@ -22,8 +21,8 @@ TODO - create video demo like https://github.com/jpsim/AWSPics
 
 ## Concept
 
-- A static website 
-- A reactJs web application used to generate the static website on demand
+- A static website  -> publicly accesible web app
+- A reactJs web application used to generate the static website on demand -> password protected web app
 
 ## Instructions
 
