@@ -6,7 +6,7 @@ Static pre redered photosharing site
 
 Static photo-sharing web app to share publicly your pictures without needing to run or maintain servers
 
-[Demo](public/website/assets/output.gif)]
+[Demo](public/website/assets/output.gif)
 ## The architecture
 
 ![](public/website/assets/img/manbehindlens.png)
