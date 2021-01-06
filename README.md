@@ -6,7 +6,7 @@ Static pre redered photosharing site
 
 Static photo-sharing web app to share publicly your pictures without needing to run or maintain servers
 
-![](public/website/assets/output.gif)
+![](public/website/assets/out.gif)
 
 ## The architecture
 
