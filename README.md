@@ -1,17 +1,12 @@
-# Photo-Sharing Web App
+# Less than a cup of coffee per month photo-sharing web application
 
-Static pre redered photosharing site
+Static pre redered photo-sharing web app to share publicly your pictures without needing to run or maintain servers
 
-## Goal
-
-Static photo-sharing web app to share publicly your pictures without needing to run or maintain servers
-
-![](public/website/assets/out.gif)
+![](assets/out.gif)
 
 ## The architecture
 
 ![](public/website/assets/img/manbehindlens.png)
-
 
 
 ## Prerequisites
@@ -23,7 +18,7 @@ Static photo-sharing web app to share publicly your pictures without needing to 
 ## Concept
 
 - A static website  -> publicly accesible web app
-- A reactJs web application used to generate the static website on demand -> password protected web app
+- An admin web application  --> password protected web appplication, a reactJs web application used to generate the static website on demand
 
 ## Instructions
 
@@ -42,7 +37,7 @@ Static photo-sharing web app to share publicly your pictures without needing to 
 
 - Image resize
   - The application resizes images using the `sharp` library packaged as Lambda Layer
-  - The layer is deployed in `eu-west-1` AWS Region (from ). If you plan to deploy to a different Region, follow [this tutorial](https://aws.amazon.com/blogs/compute/using-lambda-layers-to-simplify-your-development-process) to create a sharp layer in that region and then update the layer arn in  `amplify/backend/function/S3TriggeraXXXX/S3TriggeraXXXX-cloudformation-template.json`
+  - The layer is deployed in `eu-west-1` AWS Region (from ) so you must deploy the application in this AWS Region. If you plan to deploy to a different Region, follow [this tutorial](https://aws.amazon.com/blogs/compute/using-lambda-layers-to-simplify-your-development-process) to create a sharp layer in that region and then update the layer arn in  `amplify/backend/function/S3TriggeraXXXX/S3TriggeraXXXX-cloudformation-template.json`
 
 
 **4. Deploy the stack to your AWS account**
@@ -109,10 +104,6 @@ Enjoy !
 - better latency
 
 
-## Trade offs
-- 
-
-
  ## Tools
 
 - The  [AWS Amplify JavaScript library](https://docs.amplify.aws/), to connect our front end to cloud resources
@@ -128,8 +119,6 @@ Enjoy !
 
 ## Costs
 Less than a cup of coffee per month
-
-
 
 ## Credits
 
