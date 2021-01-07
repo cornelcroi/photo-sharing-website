@@ -65,20 +65,16 @@ Enjoy !
 
 ## Key points
 
-- ReactJs web application to allow authenticated users to create albums, upload photos and stored them in S3 and metadata in DynamoDB
-- Static website with html template files inside `/public` folder of reactjs application
-- AWS Lambda to generate static files using html templates and using data stored in DynamoDB
-- Application built using AWS Amplify
-
-
-
+  - the reactJs web application to allow authenticated users to create albums, upload photos and stored them in S3 and metadata in DynamoDB
+  - a AWS Lambda generates the static files using html templates and using data stored in DynamoDB
+  - the application built using AWS Amplify
   - full-stack ReactJs Application developped using AWS Amplify
-  - single admin user created at deployment 
-  - automatically creates photo thumbnails
-  - Amazon Rekognition used to automatically detects relevant labels for each uploaded photo and display these labels on album gallery page
-  - static website is generated on demand by a AWS Lambda
+  - there is a single admin user created at first deployment 
+  - a AWS Lambda automatically creates photo thumbnails
+  - Amazon Rekognition is used to automatically detects relevant labels for each uploaded photo and display these labels on album gallery page
+  - static website (with html template files) is generated on demand by a AWS Lambda
   - static website sits in `./public/website` folder
-  - 4 html templates
+  - there a 4 html templates
   ```
     /albums-gallery-template.html                                       <-- template for an album gallery page
     /albums-template.html                                               <-- template for list of albums page
@@ -94,20 +90,19 @@ Enjoy !
   ```
   - amplify selected hosting option is S3 with CloudFront using HTTPS
     - the default  CloudFront distribution points to the root folder of hosting S3 bucket
-    - the supplimentaryCloudFront distribution points to `/website` subfolder in the hosting S3 Bucket (where the static website sits)
+    - the supplimentary CloudFront distribution points to `/website` subfolder in the hosting S3 Bucket (where the static website sits)
 
 
 
 ## Advantages of pre rendered static website ?
 
 - pre-rendered static HTML of static sites loads much faster than the pages on a dynamic site. Fast websites are really important for a good user experience, and also for boosting your site in search engine rankings.
-- Static site generators reduce site complexity. That, in turn, improves speed and reliability, and smooths the developer experience.
-- You don’t have to worry about database-toppling traffic spikes.
+- static site generators reduce site complexity. That, in turn, improves speed and reliability, and smooths the developer experience.
+- you don’t have to worry about database-toppling traffic spikes.
 - you can host your site with a content delivery network that scales with your site’s traffic.
-- costs
-- SEO
-- caching
-- better latency
+- lower costs
+- better SEO
+- good caching
 
 
  ## Tools
