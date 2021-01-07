@@ -5,7 +5,7 @@ Static pre redered photo-sharing website to share publicly your pictures without
 
 ## The architecture
 
-![](public/website/assets/img/manbehindlens.png)
+![](assets/photo_sharing_architecture.png)
 
 
 ## Prerequisites
@@ -21,7 +21,7 @@ Static pre redered photo-sharing website to share publicly your pictures without
 
 In the video bellow you can see how both works
 
-![](assets/out.gif)
+![](assets/photo_sharing_demo.gif)
 
 You have a [youtube version](https://www.youtube.com/watch?v=nm4GbKUhm9U&ab_channel=ManBehindLens) of this video in higher resolution.
 
@@ -81,7 +81,7 @@ Enjoy !
     /album-item-template.html                                           <-- template for one album used in list of albums page
     /photo-item-template.html                                           <-- template for one photo used on album gallery page
   ```
-  - each html template contains variables to be replaced by lambda like the example bellow
+  - each html template contains variables to be replaced by lambda like the piece of code bellow
   ```html
     <div>
       <h2>{ALBUM_NAME}</h2>
