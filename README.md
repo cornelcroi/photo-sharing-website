@@ -1,6 +1,6 @@
-# Less than a cup of coffee per month photo-sharing web application
+# Less than a cup of coffee per month photo-sharing website
 
-Static pre redered photo-sharing web app to share publicly your pictures without needing to run or maintain servers
+Static pre redered photo-sharing website to share publicly your pictures without needing to run or maintain servers
 
 ![](assets/out.gif)
 
@@ -18,7 +18,7 @@ Static pre redered photo-sharing web app to share publicly your pictures without
 ## Concept
 
 - A static website  -> publicly accesible web app
-- An admin web application  --> password protected web appplication, a reactJs web application used to generate the static website on demand
+- An admin web application  --> password protected web appplication (reactJs web application) used to generate the static website on demand
 
 ## Instructions
 
@@ -26,11 +26,7 @@ Static pre redered photo-sharing web app to share publicly your pictures without
   ```
   git clone REPO_URL
   ```
-**2. Installs the dependencies**
-  ```
-  npm install
-  ```
-**3. Preliminary operations**
+**2. Preliminary operations**
 
 - Admin user email
   - replace `your_emailaddress@domain.com` with your own email address in `amplify/backend/boostrap/adminuser/parameters.json`
@@ -38,6 +34,11 @@ Static pre redered photo-sharing web app to share publicly your pictures without
 - Image resize
   - The application resizes images using the `sharp` library packaged as Lambda Layer
   - The layer is deployed in `eu-west-1` AWS Region (from ) so you must deploy the application in this AWS Region. If you plan to deploy to a different Region, follow [this tutorial](https://aws.amazon.com/blogs/compute/using-lambda-layers-to-simplify-your-development-process) to create a sharp layer in that region and then update the layer arn in  `amplify/backend/function/S3TriggeraXXXX/S3TriggeraXXXX-cloudformation-template.json`
+
+**3. Installs the dependencies**
+  ```
+  npm install
+  ```
 
 
 **4. Deploy the stack to your AWS account**
