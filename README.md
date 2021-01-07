@@ -1,8 +1,7 @@
-# Less than a cup of coffee per month photo-sharing website
+# Photo-sharing website
 
 Static pre redered photo-sharing website to share publicly your pictures without needing to run or maintain servers
 
-![](assets/out.gif)
 
 ## The architecture
 
@@ -20,11 +19,17 @@ Static pre redered photo-sharing website to share publicly your pictures without
 - A static website  -> publicly accesible web app
 - An admin web application  --> password protected web appplication (reactJs web application) used to generate the static website on demand
 
+In the video bellow you can see how both works
+
+![](assets/out.gif)
+
+You have a [youtube version](https://www.youtube.com/watch?v=nm4GbKUhm9U&ab_channel=ManBehindLens) of this video in higher resolution.
+
 ## Instructions
 
 **1. Clone the repository**
   ```
-  git clone REPO_URL
+  git clone https://github.com/cornelcroi/photo-sharing-website.git
   ```
 **2. Preliminary operations**
 
