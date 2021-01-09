@@ -19,12 +19,15 @@ You have a [youtube version](https://www.youtube.com/watch?v=nm4GbKUhm9U&ab_chan
 ![](assets/photo_sharing_architecture.png)
 
 
-## Prerequisites
+
+## Deployment
+
+### Prerequisites
 - [Create an AWS account](https://aws.amazon.com/fr/premiumsupport/knowledge-center/create-and-activate-aws-account/)
 - [Install the Amplify CLI](https://docs.amplify.aws/cli/start/install#install-the-amplify-cli)
 - [Install npm](https://www.npmjs.com/get-npm)
 
-## Deployment
+### Instructions
 
 **1. Clone the repository**
   ```
