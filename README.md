@@ -1,17 +1,17 @@
 # Photo-sharing website
 
-Static pre redered photo-sharing website to share publicly your pictures without needing to run or maintain servers
+Static pre-rendered photo-sharing website to share publicly your pictures without needing to run or maintain servers
 
 ## Concept
 
-- A static website  -> publicly accesible web app
-- An admin web application  --> password protected web appplication (reactJs web application) used to generate the static website on demand
+- A static website - publicly accessible web app
+- An admin web application - password protected web application (React.js web application) used to generate the static website on demand
 
-In the video bellow you can see how both works
+In the video below you can see how both works:
 
 ![](assets/photo_sharing_demo.gif)
 
-You have a [youtube version](https://www.youtube.com/watch?v=nm4GbKUhm9U&ab_channel=ManBehindLens) of this video in higher resolution.
+You have a [YouTube version](https://www.youtube.com/watch?v=nm4GbKUhm9U&ab_channel=ManBehindLens) of this video in higher resolution.
 
 
 ## Architecture
@@ -61,16 +61,15 @@ You have a [youtube version](https://www.youtube.com/watch?v=nm4GbKUhm9U&ab_chan
     ```
     amplify publish
     ```
+
 Enjoy !
-
-
 
 ## Key points
 
-  - the reactJs web application to allow authenticated users to create albums, upload photos and stored them in S3 and metadata in DynamoDB
+  - the React.js web application to allow authenticated users to create albums, upload photos and stored them in S3 and metadata in DynamoDB
   - a AWS Lambda generates the static files using html templates and using data stored in DynamoDB
   - the application built using AWS Amplify
-  - full-stack ReactJs Application developped using AWS Amplify
+  - full-stack React.js Application developed using AWS Amplify
   - there is a single admin user created at first deployment 
   - a AWS Lambda automatically creates photo thumbnails
   - Amazon Rekognition is used to automatically detects relevant labels for each uploaded photo and display these labels on album gallery page
@@ -92,7 +91,7 @@ Enjoy !
   ```
   - amplify selected hosting option is S3 with CloudFront using HTTPS
     - the default  CloudFront distribution points to the root folder of hosting S3 bucket
-    - the supplimentary CloudFront distribution points to `/website` subfolder in the hosting S3 Bucket (where the static website sits)
+    - the supplementary CloudFront distribution points to `/website` subfolder in the hosting S3 Bucket (where the static website sits)
 
 
 
@@ -111,13 +110,13 @@ Enjoy !
 
 - The  [AWS Amplify JavaScript library](https://docs.amplify.aws/), to connect our front end to cloud resources
 - [Amazon Cognito](https://aws.amazon.com/cognito/), to handle admin sign up authorization
-- [Amazon Simple Storage Service (S3)](https://aws.amazon.com/s3/), to store and serve as many photos as I wish to upload,, to **host the reactjs app** assets for our app and to host the **static generated website**
+- [Amazon Simple Storage Service (S3)](https://aws.amazon.com/s3/), to store and serve as many photos as I wish to upload,, to **host the React.js app** assets for our app and to host the **static generated website**
 - [Amazon CloudFront](https://aws.amazon.com/fr/cloudfront/), to store and serve as many photos as our users care to upload, and to host the static assets for our app
 
 - [Amazon DynamoDB](https://aws.amazon.com/dynamodb/), to provide millisecond response times to API queries for album and photo data
 - [AWS AppSync](https://aws.amazon.com/appsync/), to host a GraphQL API for our front end
 - [AWS Lambda](https://aws.amazon.com/lambda/), to **create photo thumbnails** asynchronously in the cloud & to **generate the static website** on demand
-- [Amazon Rekognition](https://aws.amazon.com/rekognition/), to detect 5 labels for each uploaded photo
+- [Amazon Rekognition](https://aws.amazon.com/rekognition/), to detect labels for each uploaded photo
    
 
 ## Costs
