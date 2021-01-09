@@ -2,18 +2,6 @@
 
 Static pre redered photo-sharing website to share publicly your pictures without needing to run or maintain servers
 
-
-## The architecture
-
-![](assets/photo_sharing_architecture.png)
-
-
-## Prerequisites
-- [Create an AWS account](https://aws.amazon.com/fr/premiumsupport/knowledge-center/create-and-activate-aws-account/)
-- [Install the Amplify CLI](https://docs.amplify.aws/cli/start/install#install-the-amplify-cli)
-- [Configure Amplify](https://docs.amplify.aws/cli/start/install#configure-the-amplify-cli)
-- [Install npm](https://www.npmjs.com/get-npm)
-
 ## Concept
 
 - A static website  -> publicly accesible web app
@@ -25,7 +13,18 @@ In the video bellow you can see how both works
 
 You have a [youtube version](https://www.youtube.com/watch?v=nm4GbKUhm9U&ab_channel=ManBehindLens) of this video in higher resolution.
 
-## Instructions
+
+## Architecture
+
+![](assets/photo_sharing_architecture.png)
+
+
+## Prerequisites
+- [Create an AWS account](https://aws.amazon.com/fr/premiumsupport/knowledge-center/create-and-activate-aws-account/)
+- [Install the Amplify CLI](https://docs.amplify.aws/cli/start/install#install-the-amplify-cli)
+- [Install npm](https://www.npmjs.com/get-npm)
+
+## Deployment
 
 **1. Clone the repository**
   ```
