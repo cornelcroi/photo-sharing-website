@@ -4,8 +4,8 @@ Static pre-rendered photo-sharing website to share publicly your pictures withou
 
 ## Concept
 
-- A static website -  publicly accessible web app,
-- An admin web application -  password protected web application (React.js web application) used to generate the static website on demand.
+- A static website - publicly accessible web app,
+- An admin web application - password protected web application (React.js web application) used to generate the static website on demand.
 
 The below YouTube video shows how everything works:
 
@@ -17,11 +17,11 @@ The below YouTube video shows how everything works:
 ![](assets/photo_sharing_architecture.png)
 
 1. CloudFront distribution with `/` path is S3 bucket as the origin
-2. CloudFront distribution with  `/website` path in S3 bucket as the origin (the static website static source code)
+2. CloudFront distribution with `/website` path in S3 bucket as the origin (the static website static source code)
 3. S3 Bucket which holds the all the static resources (html, css, javascript and images)
 4. S3 Bucket with the initial uploaded pictures
 5. AWS Lambda used to generate the static website's HTML source code
-6. AWS Lambda used to generate thumbnails and to detect detect relevant labels for uploaded photos using Amazon Rekognition
+6. AWS Lambda used to generate thumbnails and to detect relevant labels for uploaded photos using Amazon Rekognition
 7. Amazon Cognito to provide an authentication for admin user
 
 
@@ -45,7 +45,7 @@ The below YouTube video shows how everything works:
 
 - Image resize
   - The application resizes images using the `sharp` library packaged as Lambda Layer,
-  - The layer is deployed in `eu-west-1` AWS Region (from ) so you must deploy the application in this AWS Region. If you plan to deploy to a different Region, follow [this tutorial](https://aws.amazon.com/blogs/compute/using-lambda-layers-to-simplify-your-development-process) to create a sharp layer in that region and then update the layer arn in  `amplify/backend/function/S3TriggeraXXXX/S3TriggeraXXXX-cloudformation-template.json`.
+  - The layer is deployed in `eu-west-1` AWS Region so you must deploy the application in this AWS Region. If you plan to deploy to a different Region, follow [this tutorial](https://aws.amazon.com/blogs/compute/using-lambda-layers-to-simplify-your-development-process) to create a sharp layer in that region and then update the layer arn in  `amplify/backend/function/S3TriggeraXXXX/S3TriggeraXXXX-cloudformation-template.json`.
 
 **3. Installs the dependencies**
   ```
@@ -96,7 +96,7 @@ Enjoy !
 
 
 
-## Advantages of pre rendered static website ?
+## Advantages of pre-rendered static website
 
 - pre-rendered static HTML of static sites loads much faster than the pages on a dynamic site. Fast websites are really important for a good user experience, and also for boosting your site in search engine rankings,
 - static site generators reduce site complexity. That, in turn, improves speed and reliability, and smooths the developer experience,
@@ -106,18 +106,19 @@ Enjoy !
 - better SEO,
 - good caching.
 
+I used this repository to build my own website [ManBehindLens.com](https://manbehindlens.com).
 
  ## Tools
 
-- The  [AWS Amplify JavaScript library](https://docs.amplify.aws/), to connect our front end to cloud resources
-- [Amazon Cognito](https://aws.amazon.com/cognito/), to handle admin sign up authorization
-- [Amazon Simple Storage Service (S3)](https://aws.amazon.com/s3/), to store and serve as many photos as I wish to upload,, to **host the React.js app** assets for our app and to host the **static generated website**
-- [Amazon CloudFront](https://aws.amazon.com/fr/cloudfront/), to store and serve as many photos as our users care to upload, and to host the static assets for our app
+- [AWS Amplify JavaScript library](https://docs.amplify.aws/) to connect our front end to cloud resources
+- [Amazon Cognito](https://aws.amazon.com/cognito/) to handle admin sign up authorization
+- [Amazon Simple Storage Service (S3)](https://aws.amazon.com/s3/) to store and serve as many photos as I wish to upload,, to **host the React.js app** assets for our app and to host the **static generated website**
+- [Amazon CloudFront](https://aws.amazon.com/fr/cloudfront/) to store and serve as many photos as our users care to upload, and to host the static assets for our app
 
-- [Amazon DynamoDB](https://aws.amazon.com/dynamodb/), to provide millisecond response times to API queries for album and photo data
-- [AWS AppSync](https://aws.amazon.com/appsync/), to host a GraphQL API for our front end
-- [AWS Lambda](https://aws.amazon.com/lambda/), to **create photo thumbnails** asynchronously in the cloud & to **generate the static website** on demand
-- [Amazon Rekognition](https://aws.amazon.com/rekognition/), to detect 5 labels for each uploaded photo
+- [Amazon DynamoDB](https://aws.amazon.com/dynamodb/) to provide millisecond response times to API queries for album and photo data
+- [AWS AppSync](https://aws.amazon.com/appsync/) to host a GraphQL API for our front end
+- [AWS Lambda](https://aws.amazon.com/lambda/) to **create photo thumbnails** asynchronously in the cloud & to **generate the static website** on demand
+- [Amazon Rekognition](https://aws.amazon.com/rekognition/) to detect 5 labels for each uploaded photo
    
 
 ## Costs
