@@ -4,14 +4,13 @@ Static pre-rendered photo-sharing website to share publicly your pictures withou
 
 ## Concept
 
-- A static website  -> publicly accessible web app
-- An admin web application password protected web application (React.js web application) used to generate the static website on demand
+- A static website -  publicly accessible web app
+- An admin web application -  password protected web application (React.js web application) used to generate the static website on demand
 
-In the video bellow you can see how both works
+In the video bellow you can see how both works:
 
-![](assets/photo_sharing_demo.gif)
+[![How ManBehindLens.com is made | Pre rendered static photo-sharing website](assets/youtube_thumnbail.jpg)](https://youtu.be/5_B92oE9vpQ)
 
-You have a [YouTube version](https://www.youtube.com/watch?v=nm4GbKUhm9U&ab_channel=ManBehindLens) of this video in higher resolution.
 
 
 ## Architecture
