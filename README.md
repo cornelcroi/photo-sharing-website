@@ -16,8 +16,8 @@ The below YouTube video shows how everything works:
 
 ![](assets/photo_sharing_architecture.png)
 
-1 - points to the root folder of hosting S3 bucket,
-2 - points to `/website` subfolder in the hosting S3 Bucket (where the static website sits).
+1. points to the root folder of hosting S3 bucket,
+2. points to `/website` subfolder in the hosting S3 Bucket (where the static website sits).
 
 
 ## Deployment
