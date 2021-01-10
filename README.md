@@ -76,7 +76,7 @@ Enjoy !
   - React.js application built using AWS Amplify,
   - there is a single admin user created at first deployment,
   - the static website (with html template files) is generated on demand by a AWS Lambda,
-  - 4 html templates are used to generate the static website,
+  - 4 html template files are used to generate the static website,
   ```
     /albums-gallery-template.html                                       <-- template for an album gallery page
     /albums-template.html                                               <-- template for list of albums page
