@@ -1,22 +1,20 @@
 # Photo-sharing website
 
-Static pre-rendered photo-sharing website to share publicly your pictures without needing to run or maintain servers
+Static pre-rendered photo-sharing website to share publicly your pictures without needing to run or maintain servers.
 
 ## Concept
 
-- A static website -  publicly accessible web app
-- An admin web application -  password protected web application (React.js web application) used to generate the static website on demand
+- A static website -  publicly accessible web app,
+- An admin web application -  password protected web application (React.js web application) used to generate the static website on demand.
 
-In the video bellow you can see how both works:
+The below YouTube video shows how everything works:
 
 [![How ManBehindLens.com is made | Pre rendered static photo-sharing website](assets/youtube_thumnbail.jpg)](https://youtu.be/5_B92oE9vpQ)
-
 
 
 ## Architecture
 
 ![](assets/photo_sharing_architecture.png)
-
 
 
 ## Deployment
@@ -38,8 +36,8 @@ In the video bellow you can see how both works:
   - replace `your_emailaddress@domain.com` with your own email address in `amplify/backend/boostrap/adminuser/parameters.json`
 
 - Image resize
-  - The application resizes images using the `sharp` library packaged as Lambda Layer
-  - The layer is deployed in `eu-west-1` AWS Region (from ) so you must deploy the application in this AWS Region. If you plan to deploy to a different Region, follow [this tutorial](https://aws.amazon.com/blogs/compute/using-lambda-layers-to-simplify-your-development-process) to create a sharp layer in that region and then update the layer arn in  `amplify/backend/function/S3TriggeraXXXX/S3TriggeraXXXX-cloudformation-template.json`
+  - The application resizes images using the `sharp` library packaged as Lambda Layer,
+  - The layer is deployed in `eu-west-1` AWS Region (from ) so you must deploy the application in this AWS Region. If you plan to deploy to a different Region, follow [this tutorial](https://aws.amazon.com/blogs/compute/using-lambda-layers-to-simplify-your-development-process) to create a sharp layer in that region and then update the layer arn in  `amplify/backend/function/S3TriggeraXXXX/S3TriggeraXXXX-cloudformation-template.json`.
 
 **3. Installs the dependencies**
   ```
@@ -66,16 +64,16 @@ Enjoy !
 
 ## Key points
 
-  - the React.js web application to allow authenticated users to create albums, upload photos and stored them in S3 and metadata in DynamoDB
-  - a AWS Lambda generates the static files using html templates and using data stored in DynamoDB
-  - the application built using AWS Amplify
-  - full-stack React.js Application developed using AWS Amplify
-  - there is a single admin user created at first deployment 
-  - a AWS Lambda automatically creates photo thumbnails
-  - Amazon Rekognition is used to automatically detects relevant labels for each uploaded photo and display these labels on album gallery page
-  - static website (with html template files) is generated on demand by a AWS Lambda
-  - static website sits in `./public/website` folder
-  - there a 4 html templates
+  - the React.js web application to allow authenticated users to create albums, upload photos and stored them in S3 and metadata in DynamoDB,
+  - a AWS Lambda generates the static files using html templates and using data stored in DynamoDB,
+  - the application built using AWS Amplify,
+  - full-stack React.js Application developed using AWS Amplify,
+  - there is a single admin user created at first deployment,
+  - a AWS Lambda automatically creates photo thumbnails,
+  - Amazon Rekognition is used to automatically detects relevant labels for each uploaded photo and display these labels on album gallery page,
+  - static website (with html template files) is generated on demand by a AWS Lambda,
+  - static website sits in `./public/website` folder,
+  - there a 4 html templates,
   ```
     /albums-gallery-template.html                                       <-- template for an album gallery page
     /albums-template.html                                               <-- template for list of albums page
@@ -90,20 +88,20 @@ Enjoy !
     </div>
   ```
   - amplify selected hosting option is S3 with CloudFront using HTTPS
-    - the default  CloudFront distribution points to the root folder of hosting S3 bucket
-    - the supplementary CloudFront distribution points to `/website` subfolder in the hosting S3 Bucket (where the static website sits)
+    - the default  CloudFront distribution points to the root folder of hosting S3 bucket,
+    - the supplementary CloudFront distribution points to `/website` subfolder in the hosting S3 Bucket (where the static website sits).
 
 
 
 ## Advantages of pre rendered static website ?
 
-- pre-rendered static HTML of static sites loads much faster than the pages on a dynamic site. Fast websites are really important for a good user experience, and also for boosting your site in search engine rankings.
-- static site generators reduce site complexity. That, in turn, improves speed and reliability, and smooths the developer experience.
-- you don’t have to worry about database-toppling traffic spikes.
-- you can host your site with a content delivery network that scales with your site’s traffic.
-- lower costs
-- better SEO
-- good caching
+- pre-rendered static HTML of static sites loads much faster than the pages on a dynamic site. Fast websites are really important for a good user experience, and also for boosting your site in search engine rankings,
+- static site generators reduce site complexity. That, in turn, improves speed and reliability, and smooths the developer experience,
+- you don’t have to worry about database-toppling traffic spikes,
+- you can host your site with a content delivery network that scales with your site’s traffic,
+- lower costs,
+- better SEO,
+- good caching.
 
 
  ## Tools
@@ -120,6 +118,7 @@ Enjoy !
    
 
 ## Costs
+
 Less than a cup of coffee per month
 
 ## Credits
