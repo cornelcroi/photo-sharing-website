@@ -16,6 +16,9 @@ The below YouTube video shows how everything works:
 
 ![](assets/photo_sharing_architecture.png)
 
+1 - points to the root folder of hosting S3 bucket,
+2 - points to `/website` subfolder in the hosting S3 Bucket (where the static website sits).
+
 
 ## Deployment
 
@@ -88,8 +91,6 @@ Enjoy !
     </div>
   ```
   - amplify selected hosting option is S3 with CloudFront using HTTPS
-    - the default  CloudFront distribution points to the root folder of hosting S3 bucket,
-    - the supplementary CloudFront distribution points to `/website` subfolder in the hosting S3 Bucket (where the static website sits).
 
 
 
