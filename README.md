@@ -72,13 +72,10 @@ Enjoy !
 
 ## Key points
 
-  - the React.js web application to allow authenticated users to create albums, upload photos and stored them in S3 and metadata in DynamoDB,
-  - a AWS Lambda generates the static files using html templates and using data stored in DynamoDB,
-  - the application built using AWS Amplify,
-  - full-stack React.js Application developed using AWS Amplify,
+  - AWS Lambda generates the static files using html templates and data stored in DynamoDB,
+  - React.js application built using AWS Amplify,
   - there is a single admin user created at first deployment,
-  - static website (with html template files) is generated on demand by a AWS Lambda,
-  - static website sits in `./public/website` folder,
+  - the static website (with html template files) is generated on demand by a AWS Lambda,
   - there a 4 html templates,
   ```
     /albums-gallery-template.html                                       <-- template for an album gallery page
