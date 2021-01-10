@@ -9,7 +9,7 @@ Static pre-rendered photo-sharing website to share publicly your pictures withou
 
 The below YouTube video shows how everything works:
 
-[![How ManBehindLens.com is made | Pre rendered static photo-sharing website](assets/youtube_thumnbail.jpg)](https://youtu.be/5_B92oE9vpQ)
+[![How ManBehindLens.com is made | Pre rendered static photo-sharing website](assets/youtube_thumnbail.png)](https://youtu.be/5_B92oE9vpQ)
 
 
 ## Architecture
