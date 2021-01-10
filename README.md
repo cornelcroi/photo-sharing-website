@@ -16,8 +16,13 @@ The below YouTube video shows how everything works:
 
 ![](assets/photo_sharing_architecture.png)
 
-1. points to the root folder of hosting S3 bucket,
-2. points to `/website` subfolder in the hosting S3 Bucket (where the static website sits).
+1. CloudFront distribution with `/` path is S3 bucket as the origin
+2. CloudFront distribution with  `/website` path in S3 bucket as the origin (the static website static source code)
+3. S3 Bucket which holds the all the static resources (html, css, javascript and images)
+4. S3 Bucket with the initial uploaded pictures
+5. AWS Lambda used to generate the static website's HTML source code
+6. AWS Lambda used to generate thumbnails and to detect detect relevant labels for uploaded photos using Amazon Rekognition
+7. Amazon Cognito to provide an authentication for admin user
 
 
 ## Deployment
@@ -72,8 +77,6 @@ Enjoy !
   - the application built using AWS Amplify,
   - full-stack React.js Application developed using AWS Amplify,
   - there is a single admin user created at first deployment,
-  - a AWS Lambda automatically creates photo thumbnails,
-  - Amazon Rekognition is used to automatically detects relevant labels for each uploaded photo and display these labels on album gallery page,
   - static website (with html template files) is generated on demand by a AWS Lambda,
   - static website sits in `./public/website` folder,
   - there a 4 html templates,
@@ -90,7 +93,6 @@ Enjoy !
       <div>{ALBUM_PHOTOS} photos · {ALBUM_DATE}</div>
     </div>
   ```
-  - amplify selected hosting option is S3 with CloudFront using HTTPS
 
 
 
