@@ -4,25 +4,14 @@ Static pre-rendered photo-sharing website to share publicly your pictures withou
 
 ## Concept
 
-- A static pre-rendered website - publicly accessible web app
-- An admin web application - password protected web application (React.js web application) used to generate the static website on demand
+- A static website  -> publicly accessible web app
+- An admin web application password protected web application (React.js web application) used to generate the static website on demand
 
-In the video below you can see how both works:
+In the video bellow you can see how both works
 
-[![How ManBehindLens.com is made | Pre rendered static photo-sharing website](assets/youtube_thumnbail.jpg)](https://youtu.be/5_B92oE9vpQ)
-
+![](assets/photo_sharing_demo.gif)
 
 You have a [YouTube version](https://www.youtube.com/watch?v=nm4GbKUhm9U&ab_channel=ManBehindLens) of this video in higher resolution.
-
-## Advantages of pre-rendered static website
-
-- pre-rendered static HTML of static sites loads much faster than the pages on a dynamic site. Fast websites are really important for a good user experience, and also for boosting your site in search engine rankings.
-- static site generators reduce site complexity. That, in turn, improves speed and reliability, and smooths the developer experience.
-- you don’t have to worry about database-toppling traffic spikes.
-- you can host your site with a content delivery network that scales with your site’s traffic.
-- lower costs
-- better SEO
-- good caching
 
 
 ## Architecture
@@ -72,8 +61,9 @@ You have a [YouTube version](https://www.youtube.com/watch?v=nm4GbKUhm9U&ab_chan
     ```
     amplify publish
     ```
-
 Enjoy !
+
+
 
 ## Key points
 
@@ -106,6 +96,15 @@ Enjoy !
 
 
 
+## Advantages of pre rendered static website ?
+
+- pre-rendered static HTML of static sites loads much faster than the pages on a dynamic site. Fast websites are really important for a good user experience, and also for boosting your site in search engine rankings.
+- static site generators reduce site complexity. That, in turn, improves speed and reliability, and smooths the developer experience.
+- you don’t have to worry about database-toppling traffic spikes.
+- you can host your site with a content delivery network that scales with your site’s traffic.
+- lower costs
+- better SEO
+- good caching
 
 
  ## Tools
@@ -118,7 +117,7 @@ Enjoy !
 - [Amazon DynamoDB](https://aws.amazon.com/dynamodb/), to provide millisecond response times to API queries for album and photo data
 - [AWS AppSync](https://aws.amazon.com/appsync/), to host a GraphQL API for our front end
 - [AWS Lambda](https://aws.amazon.com/lambda/), to **create photo thumbnails** asynchronously in the cloud & to **generate the static website** on demand
-- [Amazon Rekognition](https://aws.amazon.com/rekognition/), to detect labels for each uploaded photo
+- [Amazon Rekognition](https://aws.amazon.com/rekognition/), to detect 5 labels for each uploaded photo
    
 
 ## Costs
