@@ -16,7 +16,7 @@ The below YouTube video shows how everything works:
 
 ![](assets/photo_sharing_architecture.png)
 
-1. CloudFront distribution with `/` path is S3 bucket as the origin
+1. CloudFront distribution with `/` path in S3 bucket as the origin
 2. CloudFront distribution with `/website` path in S3 bucket as the origin (the static website static source code)
 3. S3 Bucket which holds the all the static resources (html, css, javascript and images)
 4. S3 Bucket with the initial uploaded pictures
