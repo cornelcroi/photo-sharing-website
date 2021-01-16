@@ -68,6 +68,7 @@ The below YouTube video shows how everything works:
     ```
 Enjoy !
 
+> :warning: You may need to wait a couple of hours after the first deployment so the DNS of the S3 bucket to be propagated!
 
 
 ## Key points
