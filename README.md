@@ -68,7 +68,7 @@ The below YouTube video shows how everything works:
     ```
 Enjoy !
 
-> :warning: You may need to wait a couple of hours after the first deployment so the DNS of the S3 bucket to be propagated!
+> :warning: You may need to wait a couple of hours after the first deployment so the DNS name of the S3 bucket to be propagated! (if you cannot log in after the deploiment using the temporary password received by email, this must be it, just wait before trying again, there is nothing wrong with the code)
 
 
 ## Key points
