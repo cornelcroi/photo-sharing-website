@@ -45,7 +45,7 @@ The below YouTube video shows how everything works:
 
 - Image resize
   - The application resizes images using the `sharp` library packaged as Lambda Layer,
-  - The layer is deployed in `eu-west-1` AWS Region so you must deploy the application in this AWS Region. If you plan to deploy to a different Region, follow [this tutorial](https://aws.amazon.com/blogs/compute/using-lambda-layers-to-simplify-your-development-process) to create a sharp layer in that region and then update the layer arn in  `amplify/backend/function/S3TriggeraXXXX/S3TriggeraXXXX-cloudformation-template.json`.
+  - Create a sharp layer. Follow [this tutorial](https://aws.amazon.com/blogs/compute/using-lambda-layers-to-simplify-your-development-process) to create a sharp layer in your desired region and then update the layer arn in  `amplify/backend/function/S3TriggeraXXXX/S3TriggeraXXXX-cloudformation-template.json`.
 
 **3. Installs the dependencies**
   ```
@@ -117,7 +117,7 @@ I used this repository to build my own website [ManBehindLens.com](https://manbe
 - [AWS AppSync](https://aws.amazon.com/appsync/) to host a GraphQL API for our front end
 - [AWS Lambda](https://aws.amazon.com/lambda/) to **create photo thumbnails** asynchronously in the cloud & to **generate the static website** on demand
 - [Amazon Rekognition](https://aws.amazon.com/rekognition/) to detect 5 labels for each uploaded photo
-   
+
 
 ## Costs
 

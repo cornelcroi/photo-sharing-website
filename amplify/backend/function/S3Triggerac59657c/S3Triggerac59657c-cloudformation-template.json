@@ -106,7 +106,7 @@
         "Layers": [
           {
             "Fn::Sub": [
-              "arn:aws:lambda:eu-west-1:502686283826:layer:sharp:7",
+              "YOUR_LAYER_ARN_HERE",
               {
                 "region": {
                   "Ref": "AWS::Region"
