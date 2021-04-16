@@ -1,9 +1,9 @@
 {
-    "authphotosharing84970f75UserPoolId": {  
+    "authphotosharing84970f75UserPoolId": {
         "Fn::GetAtt": [
             "authphotosharing84970f75",
             "Outputs.UserPoolId"
         ]
     },
-    "emailaddress": "cornel.croitoru@gmail.com"
+    "emailaddress": ""
 }

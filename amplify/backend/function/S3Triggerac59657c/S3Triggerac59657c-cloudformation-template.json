@@ -20,6 +20,12 @@
     "hostingS3AndCloudFrontHostingBucketName": {
       "Type": "String",
       "Default": "hostingS3AndCloudFrontHostingBucketName"
+    },
+    "deploymentBucketName": {
+      "Type": "String"
+    },
+    "s3Key": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -87,11 +93,15 @@
             "Arn"
           ]
         },
-        "Runtime": "nodejs10.x",
+        "Runtime": "nodejs12.x",
         "Timeout": "25",
         "Code": {
-          "S3Bucket": "amplify-photosharing-dev-201546-deployment",
-          "S3Key": "amplify-builds/S3Triggerac59657c-54315a4a5a692f426833-build.zip"
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": {
+            "Ref": "s3Key"
+          }
         },
         "Layers": [
           {
